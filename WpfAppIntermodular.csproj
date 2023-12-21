@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="btn.jpg" />
+    <None Remove="btn.png" />
+    <None Remove="cover-removebg-preview.png" />
+    <None Remove="cover.png" />
+    <None Remove="font\Montserrat-Regular.ttf" />
+    <None Remove="logo_hotel.jpg" />
+    <None Remove="logo_sin_fondo.png" />
+    <None Remove="logo_sin_fondo2-removebg-preview.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="font\Montserrat-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="btn.jpg" />
+    <Resource Include="btn.png" />
+    <Resource Include="cover-removebg-preview.png" />
+    <Resource Include="cover.png" />
+    <Resource Include="logo_hotel.jpg" />
+    <Resource Include="logo_sin_fondo.png" />
+    <Resource Include="logo_sin_fondo2-removebg-preview.png" />
+  </ItemGroup>
+
+</Project>

@@ -27,7 +27,7 @@
 
                 <Label Content="Password" FontSize="16" />
                 <TextBox BorderThickness="1" Height="30" FontSize="18" BorderBrush="LightGray"  Padding="2"/>
-                <Button Width="55" Height="30" Background="#8563C4" Margin="0,15,280,0">
+                <Button Width="55" Height="30" Background="#8563C4" Margin="0,15,280,0" Click="Button_Click">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Template">

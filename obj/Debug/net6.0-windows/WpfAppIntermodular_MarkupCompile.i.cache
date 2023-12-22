@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\kain\source\repos\WpfAppIntermodular\App.xaml
-11407045341
+3-274134031
 
-5-150707834
+7-183133870
 194-1617825143
-MainWindow.xaml;
+Home.xaml;MainWindow.xaml;RegistroEmpleado.xaml;
 
-False
+True
 

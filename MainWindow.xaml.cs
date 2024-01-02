@@ -24,5 +24,13 @@ namespace WpfAppIntermodular
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Home home= new Home();
+            home.Show();
+            this.Close();
+
+        }
     }
 }

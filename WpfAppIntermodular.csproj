@@ -13,9 +13,13 @@
     <None Remove="cover-removebg-preview.png" />
     <None Remove="cover.png" />
     <None Remove="font\Montserrat-Regular.ttf" />
+    <None Remove="habitacion.png" />
     <None Remove="logo_hotel.jpg" />
+    <None Remove="logo_hotel_sin_fondo.png" />
     <None Remove="logo_sin_fondo.png" />
     <None Remove="logo_sin_fondo2-removebg-preview.png" />
+    <None Remove="perfil.png" />
+    <None Remove="perfilMuestra.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,9 +33,13 @@
     <Resource Include="btn.png" />
     <Resource Include="cover-removebg-preview.png" />
     <Resource Include="cover.png" />
+    <Resource Include="habitacion.png" />
     <Resource Include="logo_hotel.jpg" />
+    <Resource Include="logo_hotel_sin_fondo.png" />
     <Resource Include="logo_sin_fondo.png" />
     <Resource Include="logo_sin_fondo2-removebg-preview.png" />
+    <Resource Include="perfil.png" />
+    <Resource Include="perfilMuestra.jpg" />
   </ItemGroup>
 
 </Project>

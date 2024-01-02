@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\kain\source\repos\WpfAppIntermodular\App.xaml
-3-274134031
+8-1478442639
 
-5-1265595593
+10-2061164225
 194-1617825143
-Home.xaml;MainWindow.xaml;RegistroEmpleado.xaml;
+EditarHabitacion.xaml;Home.xaml;HomeHabitacion.xaml;HomeUsuarios.xaml;MainWindow.xaml;PerfilUsuario.xaml;RegistroEmpleado.xaml;RegistroUsuario.xaml;
 
 False
 

@@ -7,21 +7,51 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="EditarHabitacion.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Home.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="HomeHabitacion.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="HomeUsuarios.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PerfilUsuario.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="RegistroEmpleado.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="RegistroUsuario.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="EditarHabitacion.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Home.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HomeHabitacion.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HomeUsuarios.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="PerfilUsuario.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="RegistroEmpleado.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="RegistroUsuario.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

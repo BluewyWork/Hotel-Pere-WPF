@@ -18,6 +18,8 @@
     <None Remove="logo_hotel_sin_fondo.png" />
     <None Remove="logo_sin_fondo.png" />
     <None Remove="logo_sin_fondo2-removebg-preview.png" />
+    <None Remove="perfil.png" />
+    <None Remove="perfilMuestra.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +38,8 @@
     <Resource Include="logo_hotel_sin_fondo.png" />
     <Resource Include="logo_sin_fondo.png" />
     <Resource Include="logo_sin_fondo2-removebg-preview.png" />
+    <Resource Include="perfil.png" />
+    <Resource Include="perfilMuestra.jpg" />
   </ItemGroup>
 
 </Project>

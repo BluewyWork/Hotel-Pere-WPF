@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppIntermodular"
-        mc:Ignorable="d" FontFamily="Montserrat"
-        Title="RegistroEmpleado" Height="700" Width="550">
+        mc:Ignorable="d" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" 
+        FontFamily="Montserrat" Title="Registro Empleado" Height="700" Width="550">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
@@ -42,10 +42,10 @@
                 </StackPanel>
             </StackPanel>
         </Border>
-        <DockPanel Grid.Row="2">
-             <Button  x:Name="Atras" HorizontalAlignment="Right"  Margin="20 5 20 10" Padding="10 0 10 0" 
+        <DockPanel Grid.Row="2" Margin="40 0 40 0">
+             <Button  x:Name="Atras" HorizontalAlignment="Right"  Margin="0 5 20 10" Padding="10 0 10 0" 
                     Height="30" FontSize="10" Foreground="White"  BorderBrush="Transparent" Width="130"
-                    Background="Red" BorderThickness="2" VerticalAlignment="Center" Content="Atras"  >
+                    Background="Red" BorderThickness="2" VerticalAlignment="Center" Content="Atras" Click="Atras_Click"  >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="13"/>
@@ -53,7 +53,7 @@
 
                 </Button.Resources>
             </Button>
-            <Button  x:Name="btnRegistrarEmpleado" HorizontalAlignment="Right"  Margin="0 5 20 10" Padding="10 0 10 0" 
+            <Button  x:Name="btnRegistrarEmpleado" HorizontalAlignment="Right"  Margin="0 5 0 10" Padding="10 0 10 0" 
                     Height="30" FontSize="10" Foreground="White" Width="130" BorderBrush="Transparent" 
                     Background="#35B697" BorderThickness="2" VerticalAlignment="Center" Content="Registrar empleado" >
                 <Button.Resources>

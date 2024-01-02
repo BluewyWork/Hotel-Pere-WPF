@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppIntermodular"
-        mc:Ignorable="d" ResizeMode="NoResize" FontFamily="Montserrat"
-        Title="Hotel Pere Maria" Height="500" Width="850">
+        mc:Ignorable="d" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        FontFamily="Montserrat" Title="Hotel Pere Maria" Height="500" Width="850">
     <Grid RenderTransformOrigin="0.544,0.501">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />

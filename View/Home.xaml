@@ -29,7 +29,7 @@
             </Grid.ColumnDefinitions>
             <DockPanel Grid.ColumnSpan="2">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="/logo_hotel_sin_fondo.png" Width="200px"></Image>
+                    <Image Source="../logo_hotel_sin_fondo.png" Width="200px"></Image>
                 </StackPanel>
                 <Button x:Name="Usuarios" Height="20" Content="Usuarios" BorderBrush="Transparent" Margin="25"
                         Background="Transparent" Foreground="#FFCCCCCC" HorizontalAlignment="Left" Click="Usuarios_Click" ></Button>
@@ -43,7 +43,7 @@
                         <MenuItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="N.Usuario" Foreground="#FFCCCCCC" Margin="0 5 0 0"/>
-                                <Image Height="25" Source="/perfil.png" Margin="10 0 0 10"/>
+                                <Image Height="25" Source="../perfil.png" Margin="10 0 0 10"/>
                             </StackPanel>
                         </MenuItem.Header>
 
@@ -125,7 +125,7 @@
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" FontFamily="Montserrat" Foreground="#35B697" FontSize="30" FontWeight="Bold" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:</Label>
                 <DockPanel  Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
-                    <Image Source="/habitacion.png" Width="60"></Image>
+                    <Image Source="../habitacion.png" Width="60"></Image>
                     <StackPanel Margin="15 15 75 15">
                         <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Habitación Doble</TextBlock>
                         <TextBlock  Margin="0 5 0 0" FontSize="10" Foreground="#68EB9C" HorizontalAlignment="Center">36e/noche</TextBlock>
@@ -143,7 +143,7 @@
                 </DockPanel>
                 <Label Grid.Row="0" FontFamily="Montserrat" Foreground="#35B697" FontSize="30" FontWeight="Bold" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:</Label>
                 <DockPanel  Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
-                    <Image Source="/habitacion.png" Width="60"></Image>
+                    <Image Source="../habitacion.png" Width="60"></Image>
                     <StackPanel Margin="15 15 75 15">
                         <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Habitación Doble</TextBlock>
                         <TextBlock  Margin="0 5 0 0" FontSize="10" Foreground="#68EB9C" HorizontalAlignment="Center">36e/noche</TextBlock>
@@ -161,7 +161,7 @@
                 </DockPanel>
                 <Label Grid.Row="0" FontFamily="Montserrat" Foreground="#35B697" FontSize="30" FontWeight="Bold" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:</Label>
                 <DockPanel  Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
-                    <Image Source="/habitacion.png" Width="60"></Image>
+                    <Image Source="../habitacion.png" Width="60"></Image>
                     <StackPanel Margin="15 15 75 15">
                         <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Habitación Doble</TextBlock>
                         <TextBlock  Margin="0 5 0 0" FontSize="10" Foreground="#68EB9C" HorizontalAlignment="Center">36e/noche</TextBlock>
@@ -179,7 +179,7 @@
                 </DockPanel>
                 
                 <DockPanel  Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="75">
-                    <Image Source="/habitacion.png" Width="60"></Image>
+                    <Image Source="../habitacion.png" Width="60"></Image>
                     <StackPanel Margin="15 15 75 15">
                         <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Habitación Doble</TextBlock>
                         <TextBlock  Margin="0 5 0 0" FontSize="10" Foreground="#68EB9C" HorizontalAlignment="Center">36e/noche</TextBlock>

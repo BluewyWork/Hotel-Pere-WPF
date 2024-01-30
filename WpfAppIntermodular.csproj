@@ -42,4 +42,8 @@
     <Resource Include="perfilMuestra.jpg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 </Project>

@@ -7,51 +7,51 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="EditarHabitacion.xaml.cs">
+    <Compile Update="View\EditarHabitacion.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Home.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="HomeHabitacion.xaml.cs">
+    <Compile Update="View\HomeHabitacion.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="HomeUsuarios.xaml.cs">
+    <Compile Update="View\HomeUsuarios.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="PerfilUsuario.xaml.cs">
+    <Compile Update="View\PerfilUsuario.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="RegistroEmpleado.xaml.cs">
+    <Compile Update="View\RegistroEmpleado.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="RegistroUsuario.xaml.cs">
+    <Compile Update="View\RegistroUsuario.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="EditarHabitacion.xaml">
+    <Page Update="View\EditarHabitacion.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Home.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="HomeHabitacion.xaml">
+    <Page Update="View\HomeHabitacion.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="HomeUsuarios.xaml">
+    <Page Update="View\HomeUsuarios.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainWindow.xaml">
+    <Page Update="View\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="PerfilUsuario.xaml">
+    <Page Update="View\PerfilUsuario.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="RegistroEmpleado.xaml">
+    <Page Update="View\RegistroEmpleado.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="RegistroUsuario.xaml">
+    <Page Update="View\RegistroUsuario.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

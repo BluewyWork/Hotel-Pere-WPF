@@ -14,7 +14,7 @@
 
         <StackPanel Margin="-10,0,10,0" Grid.ColumnSpan="2" >
 
-            <Image Grid.Column="0" Source="/logo_hotel.jpg" Margin="0,0,319,0"
+            <Image Grid.Column="0" Source="../logo_hotel.jpg" Margin="0,0,319,0"
                       Height="189" Width="470"  Stretch="Fill"/>
 
             <StackPanel Width="350" Height="250" Margin="0 40 330 0" HorizontalAlignment="Center">
@@ -67,6 +67,6 @@
             </StackPanel>
         </StackPanel>
 
-        <Image Source="/cover.png"  Grid.Column="1" Margin="28,0,-21,0" />
+        <Image Source="../cover.png"  Grid.Column="1" Margin="28,0,-21,0" />
     </Grid>
 </Window>

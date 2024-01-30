@@ -29,7 +29,7 @@
             </Grid.ColumnDefinitions>
             <DockPanel Grid.ColumnSpan="2">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="/logo_hotel_sin_fondo.png" Width="200px"></Image>
+                    <Image Source="../logo_hotel_sin_fondo.png" Width="200px"></Image>
                 </StackPanel>
                 <Button Content="Usuarios" BorderBrush="Transparent" Margin="25"
                         Background="Transparent" Foreground="#FFCCCCCC" HorizontalAlignment="Left" ></Button>
@@ -42,7 +42,7 @@
                         <MenuItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="N.Usuario" Foreground="#FFCCCCCC" Margin="0 5 0 0"/>
-                                <Image Height="25" Source="/perfil.png" Margin="10 0 0 10"/>
+                                <Image Height="25" Source="../perfil.png" Margin="10 0 0 10"/>
                             </StackPanel>
                         </MenuItem.Header>
 
@@ -117,7 +117,7 @@
                 <Label Grid.Row="0" FontFamily="Montserrat" Foreground="#35B697" FontSize="30" 
                        FontWeight="Bold" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:</Label>
                 <DockPanel  Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
-                    <Image Source="/perfilMuestra.jpg" Width="100">
+                    <Image Source="../perfilMuestra.jpg" Width="100">
                         <Image.Clip>
                             <EllipseGeometry RadiusX="30" RadiusY="30" Center="50,30"/>
                         </Image.Clip>
@@ -147,7 +147,7 @@
 
                 </DockPanel>
                 <DockPanel  Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
-                    <Image Source="/perfilMuestra.jpg" Width="100">
+                    <Image Source="../perfilMuestra.jpg" Width="100">
                         <Image.Clip>
                             <EllipseGeometry RadiusX="30" RadiusY="30" Center="50,30"/>
                         </Image.Clip>
@@ -177,7 +177,7 @@
 
                 </DockPanel>
                 <DockPanel  Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
-                    <Image Source="/perfilMuestra.jpg" Width="100">
+                    <Image Source="../perfilMuestra.jpg" Width="100">
                         <Image.Clip>
                             <EllipseGeometry RadiusX="30" RadiusY="30" Center="50,30"/>
                         </Image.Clip>
@@ -207,7 +207,7 @@
 
                 </DockPanel>
                 <DockPanel  Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
-                    <Image Source="/perfilMuestra.jpg" Width="100">
+                    <Image Source="../perfilMuestra.jpg" Width="100">
                         <Image.Clip>
                             <EllipseGeometry RadiusX="30" RadiusY="30" Center="50,30"/>
                         </Image.Clip>

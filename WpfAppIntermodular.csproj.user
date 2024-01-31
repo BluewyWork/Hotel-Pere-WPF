@@ -30,6 +30,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="rsc\Style.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\EditarHabitacion.xaml">
       <SubType>Designer</SubType>
     </Page>

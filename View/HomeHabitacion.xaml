@@ -61,7 +61,7 @@
             </Grid.ColumnDefinitions>
             <Grid>
                 <StackPanel HorizontalAlignment="Left"  Orientation="Vertical" VerticalAlignment="Center" Height="436" Width="297" Margin="10,0,0,0">
-                    <Label  Margin ="0 10 0 0" FontSize="30" FontWeight="Bold" Foreground="#35B697" >Buscador:</Label>
+                    <Label  Margin ="0 10 0 0" Style="{StaticResource LabelTitulo}" >Buscador:</Label>
                     <StackPanel Orientation="Vertical" Margin="0 30 0 0">
                         <Label>Número de Habitación</Label>
                         <ComboBox Width="150" Margin="5 5 0 0" HorizontalAlignment="Left">
@@ -120,7 +120,7 @@
                     <RowDefinition Height="93*"></RowDefinition>
                     <RowDefinition Height="93*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" FontFamily="Montserrat" Foreground="#35B697" FontSize="30" FontWeight="Bold" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:</Label>
+                <Label Grid.Row="0" Style="{StaticResource LabelTitulo}" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:</Label>
                 <DockPanel  Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
                     <Image Source="../habitacion.png" Width="60"></Image>
                     <StackPanel Margin="15 15 75 15">

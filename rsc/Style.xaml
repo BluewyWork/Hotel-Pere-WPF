@@ -1,0 +1,91 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Estilo para el TextBoxMain -->
+    <Style TargetType="TextBox" x:Key="TBMain">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="LightGray" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Padding" Value="2" />
+    </Style>
+
+    <!-- Estilo para el botónMain -->
+    <Style TargetType="Button" x:Key="ButtonMain">
+        <Setter Property="Width" Value="55" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Background" Value="#8563C4" />
+        <Setter Property="Margin" Value="0,15,280,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}"
+                                BorderBrush="Black" BorderThickness="1"
+                                CornerRadius="25">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="5" ShadowDepth="2" Opacity="0.8"/>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Effect" Value="{x:Null}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!-- Estilo para los botones home -->
+    <Style x:Key="ButtonStyleHeader" TargetType="Button">
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#FFCCCCCC"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="25"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Recurso de estilo para el botones -->
+    <Style x:Key="ButtonStyle" TargetType="Button">
+        <Setter Property="Margin" Value="0 5 0 0"/>
+        <Setter Property="Padding" Value="0 10 0 10"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="90"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Background" Value="#35B697"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="13">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- Recurso de estilo para etiquetas titulo -->
+    <Style x:Key="LabelTitulo" TargetType="Label">
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="#35B697"/>
+    </Style>
+    
+
+</ResourceDictionary>

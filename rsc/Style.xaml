@@ -87,5 +87,24 @@
         <Setter Property="Foreground" Value="#35B697"/>
     </Style>
     
+    <!-- Recurso de estilo para el botón "EditarUsuario" -->
+    <Style x:Key="EditarUsuarioButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="25"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Content" Value="&#x270E;"/>
+        <Setter Property="FontFamily" Value="Symbols Nerd Font"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#35B697" CornerRadius="15">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
 </ResourceDictionary>

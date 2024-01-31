@@ -49,5 +49,10 @@ namespace WpfAppIntermodular
             mainWindow.Show();
             this.Close();
         }
+
+        private void Reservar(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

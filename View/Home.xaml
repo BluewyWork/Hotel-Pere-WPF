@@ -31,12 +31,10 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <Image Source="../logo_hotel_sin_fondo.png" Width="200px"></Image>
                 </StackPanel>
-                <Button x:Name="Usuarios" Height="20" Content="Usuarios" BorderBrush="Transparent" Margin="25"
-                        Background="Transparent" Foreground="#FFCCCCCC" HorizontalAlignment="Left" Click="Usuarios_Click" ></Button>
-                <Button Content="Reservas" Height="20" BorderBrush="Transparent" Margin="25"
-                        Background="Transparent" Foreground="#FFCCCCCC" HorizontalAlignment="Left" ></Button>
-                <Button x:Name="Habitaciones" Height="20" Content="Habitaciones" BorderBrush="Transparent" Margin="25"
-                        Background="Transparent" Foreground="#FFCCCCCC" HorizontalAlignment="Left" Click="Habitaciones_Click" ></Button>
+                <Button x:Name="Usuarios" Style="{StaticResource ButtonStyleHeader}"  Content="Usuarios"  Margin="25"
+                        Click="Usuarios_Click" ></Button>
+                <Button Style="{StaticResource ButtonStyleHeader}" Content="Reservas" ></Button>
+                <Button Style="{StaticResource ButtonStyleHeader}" Content="Habitaciones" x:Name="Habitaciones"  Click="Habitaciones_Click" ></Button>
 
                 <Menu Width="180" Background="Transparent" Margin="100 35 0 0">
                     <MenuItem>
@@ -60,8 +58,8 @@
                 <ColumnDefinition Width="307*"></ColumnDefinition>
                 <ColumnDefinition Width="493*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel HorizontalAlignment="Left"  Orientation="Vertical" VerticalAlignment="Center" Height="436" Width="297" Margin="10,0,0,0">
-                <Label  Margin ="0 10 0 0" FontSize="30" FontWeight="Bold" Foreground="#35B697" >Buscador:</Label>
+            <StackPanel  HorizontalAlignment="Left"  Orientation="Vertical" VerticalAlignment="Center" Height="436" Width="297" Margin="10,0,0,0">
+                <Label Style="{StaticResource LabelTitulo}" Margin ="0 10 0 0">Buscador:</Label>
                 <DockPanel Margin ="0 15 0 0">
                     <Label>Fecha de Entrada</Label>
                     <Label HorizontalAlignment="Center">Fecha de Salida</Label>
@@ -96,17 +94,10 @@
                     <Label>Precio Noche</Label>
                     <Slider Margin="5 0 0 0" Minimum="0" Maximum="1000" Value="1"></Slider>
                 </StackPanel>
-                <DockPanel Grid.Column="2"  Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40 15 20 10" >
-                    <Button Margin="0 10 0 0" Width="80" Foreground="White"
-                            BorderBrush="Transparent" Background="#35B697" Content="Buscar"  >
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="13"/>
-                            </Style>
-
-                        </Button.Resources>
+                <DockPanel  Grid.Column="2"  Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40 15 20 10" >
+                    <Button Style="{StaticResource ButtonStyle}" Margin="0 10 0 0" Content="Buscar"  >
                     </Button>
-                    <Button Margin="30 10 0 0" Padding="0" Height="30" Width="80" HorizontalAlignment="Left" Background="Transparent" BorderBrush="#35B697" BorderThickness="2" VerticalAlignment="Center" Content="Limpiar"  >
+                    <Button Style="{StaticResource ButtonStyle}" Margin="30 10 0 0" Foreground="#35B697" FontWeight="Bold" Background="Transparent" BorderBrush="#35B697"  Content="Limpiar"  >
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="13"/>
@@ -130,14 +121,7 @@
                         <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Habitación Doble</TextBlock>
                         <TextBlock  Margin="0 5 0 0" FontSize="10" Foreground="#68EB9C" HorizontalAlignment="Center">36e/noche</TextBlock>
                     </StackPanel>
-                    <Button  Margin="0 5 0 0" Padding="10 0 10 0" Height="30" FontSize="10" Foreground="White"  
-                             HorizontalAlignment="Left" BorderBrush="Transparent" Background="#35B697" BorderThickness="2" VerticalAlignment="Center" Content="Reservar habitación"  >
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="13"/>
-                            </Style>
-
-                        </Button.Resources>
+                    <Button Style="{StaticResource ButtonStyle}"  Margin="0 5 0 0" Padding="10 0 10 0" Width="130"  Content="Reservar Habitación" Click="Reservar">
                     </Button>
 
                 </DockPanel>
@@ -149,7 +133,7 @@
                         <TextBlock  Margin="0 5 0 0" FontSize="10" Foreground="#68EB9C" HorizontalAlignment="Center">36e/noche</TextBlock>
                     </StackPanel>
                     <Button  Margin="0 5 0 0" Padding="10 0 10 0" Height="30" FontSize="10" Foreground="White"  
-                             HorizontalAlignment="Left" BorderBrush="Transparent" Background="#35B697" BorderThickness="2" VerticalAlignment="Center" Content="Reservar habitación"  >
+                             HorizontalAlignment="Left" BorderBrush="Transparent" Background="#35B697" BorderThickness="2" VerticalAlignment="Center" Content="Reservar habitación">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="13"/>
@@ -159,7 +143,7 @@
                     </Button>
 
                 </DockPanel>
-                <Label Grid.Row="0" FontFamily="Montserrat" Foreground="#35B697" FontSize="30" FontWeight="Bold" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:</Label>
+                <Label Grid.Row="0" Style="{StaticResource LabelTitulo}" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:</Label>
                 <DockPanel  Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
                     <Image Source="../habitacion.png" Width="60"></Image>
                     <StackPanel Margin="15 15 75 15">

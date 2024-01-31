@@ -25,7 +25,35 @@ namespace WpfAppIntermodular.ViewModels
                 }
             }
         }
+        private string _email;
+      
 
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                if (_email != value)
+                {
+                    _email = value;
+                    OnPropertyChanged(nameof(Email));
+                }
+            }
+        }
+        private string _password;
+
+        public string Password
+        {
+            get { return _password; }
+            set
+            {
+                if (_password != value)
+                {
+                    _password = value;
+                    OnPropertyChanged(nameof(Email));
+                }
+            }
+        }
         private ICommand loginCommand;
 
         public ICommand LoginCommand
@@ -54,13 +82,13 @@ namespace WpfAppIntermodular.ViewModels
         {
 
                 apiService = new ApiService();
-            MessageBox.Show(Usuario.Email.ToString());    
-            
-                await apiService.AutenticarUsuarioAsync(Usuario.Email, Usuario.Password);
-                Console.WriteLine($"Iniciando sesión con: {Usuario.Email} - {Usuario?.Password}");
-            
-                
-            
+      
+                await apiService.AutenticarUsuarioAsync(Email, Password);
+                Console.WriteLine($"Iniciando sesión con: {Email} - {Password}");
+            MessageBox.Show(Email.ToString());
+
+
+
         }
 
 

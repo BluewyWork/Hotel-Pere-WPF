@@ -21,11 +21,11 @@
                 </StackPanel>
                 <Label Content="Email" FontSize="16"/>
                 <TextBox x:Name="TbLogEmail" Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"
-                         Text="{Binding UsuarioModel.Email, UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label Content="Password" FontSize="16" />
                 <TextBox x:Name="TbLogPass" Style="{StaticResource TBMain}"
-                         Text="{Binding UsuarioModel.Password, UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Style="{StaticResource ButtonMain}" Command="{Binding LoginCommand}" >
                     <Button.Content>
                         <Grid>

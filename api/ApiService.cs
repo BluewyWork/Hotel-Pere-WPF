@@ -21,11 +21,12 @@ namespace WpfAppIntermodular.api
         public async Task<string> AutenticarUsuarioAsync(string email, string password)
         {
             var data = new { Email = email, Password = password };
-            var response = await httpClient.PostAsJsonAsync("/login", data);
+    //        var response = await httpClient.PostAsJsonAsync("/login", data);
 
-            response.EnsureSuccessStatusCode(); 
+   //         response.EnsureSuccessStatusCode(); 
 
-            return await response.Content.ReadAsStringAsync();
+    //        return await response.Content.ReadAsStringAsync();
+                return "OK";
         }
     }
 }

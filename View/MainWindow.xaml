@@ -20,11 +20,13 @@
                     <TextBlock Margin="10 0 0 0" FontWeight="Bold"  FontSize="16" FontFamily="Montserrat" Foreground="#8563C4"><Run Text="Acceso"/></TextBlock>
                 </StackPanel>
                 <Label Content="Email" FontSize="16"/>
-                <TextBox Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
+                <TextBox x:Name="TbLogEmail" Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"
+                         Text="{Binding UsuarioModel.Email, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label Content="Password" FontSize="16" />
-                <TextBox Style="{StaticResource TBMain}"/>
-                <Button Style="{StaticResource ButtonMain}" Click="Button_Click">
+                <TextBox x:Name="TbLogPass" Style="{StaticResource TBMain}"
+                         Text="{Binding UsuarioModel.Password, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Style="{StaticResource ButtonMain}" Command="{Binding LoginCommand}" >
                     <Button.Content>
                         <Grid>
                             <Path Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center"

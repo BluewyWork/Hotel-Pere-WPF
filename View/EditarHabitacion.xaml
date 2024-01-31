@@ -22,7 +22,7 @@
             <RowDefinition Height="403*"></RowDefinition>
             <RowDefinition Height="64*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Image Source="logo_hotel_sin_fondo.png" ></Image>
+        <Image Source="../logo_hotel_sin_fondo.png" ></Image>
         <Border Grid.Row="1" Margin="40,20" Background="White" CornerRadius="30">
             <StackPanel HorizontalAlignment="Center">
                 <StackPanel Margin="0 25 0 0">

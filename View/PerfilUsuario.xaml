@@ -24,48 +24,34 @@
             <RowDefinition Height="64*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Image Source="logo_hotel_sin_fondo.png" ></Image>
+        <Image Source="../logo_hotel_sin_fondo.png" ></Image>
 
         <Border Grid.Row="1" Margin="40,20" Background="White" CornerRadius="30">
             <StackPanel>
                 <StackPanel Margin="40,20">
                     <Label Content="Nombre" FontSize="16"/>
-                    <TextBox Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
+                    <TextBox Style="{StaticResource TextBoxForm}" Padding="2"/>
                 </StackPanel>
                 <StackPanel Margin="40,20">
                     <Label Content="Apellidos" FontSize="16"/>
-                    <TextBox Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
+                    <TextBox  Style="{StaticResource TextBoxForm}" Padding="2"/>
                 </StackPanel>
                 <StackPanel Margin="40,20">
                     <Label Content="Email" FontSize="16"/>
-                    <TextBox Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
+                    <TextBox Style="{StaticResource TextBoxForm}" Padding="2" />
                 </StackPanel>
                 <StackPanel Margin="40,20">
                     <Label Content="Teléfono" FontSize="16"/>
-                    <TextBox Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
+                    <TextBox Style="{StaticResource TextBoxForm}" Padding="2"/>
                 </StackPanel>
             </StackPanel>
         </Border>
 
         <DockPanel Grid.Row="2" Margin="40 0 40 0">
-            <Button  x:Name="Atras" Margin="5 0 0 0" Height="30" FontSize="12" DockPanel.Dock="Left"
-                     Foreground="White"  BorderBrush="Transparent" Width="130"
-                    Background="Red" BorderThickness="2" VerticalAlignment="Center" Content="Atras" Click="Atras_Click"  >
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="13"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-
-            <Button  x:Name="Guardar" Margin="190 0 0 0" FontSize="12" Foreground="White" Width="130" Height="30" BorderBrush="Transparent" 
-                    Background="#35B697" BorderThickness="2" Content="Guardar" >
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="13"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+            <Button Style="{StaticResource ButtonStyle}"  x:Name="Atras" Margin="5 0 0 0"  DockPanel.Dock="Left"
+                     Width="130" Background="Red" Content="Atras" Click="Atras_Click" />
+            <Button Style="{StaticResource ButtonStyle}"  x:Name="Guardar" Margin="190 0 0 0" Width="130" Content="Guardar" />
+           
         </DockPanel>
 
     </Grid>

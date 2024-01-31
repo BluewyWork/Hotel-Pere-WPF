@@ -21,48 +21,32 @@
             <RowDefinition Height="403*"></RowDefinition>
             <RowDefinition Height="64*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Image Source="logo_hotel_sin_fondo.png" ></Image>
+        <Image Source="../logo_hotel_sin_fondo.png" ></Image>
         <Border Grid.Row="1" Margin="40,20" Background="White" CornerRadius="30">
             <StackPanel>
                 <StackPanel Margin="40,20">
                     <Label Content="Nombre" FontSize="16"/>
-                    <TextBox Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
+                    <TextBox Padding="2" Style="{StaticResource TextBoxForm}"/>
                 </StackPanel>
                 <StackPanel Margin="40,20">
                     <Label Content="Apellidos" FontSize="16"/>
-                    <TextBox Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
+                    <TextBox Padding="2" Style="{StaticResource TextBoxForm}"/>
                 </StackPanel>
                 <StackPanel Margin="40,20">
                     <Label Content="Email" FontSize="16"/>
-                    <TextBox Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
+                    <TextBox Padding="2" Style="{StaticResource TextBoxForm}"/>
                 </StackPanel>
                 <StackPanel Margin="40,20">
                     <Label Content="Teléfono" FontSize="16"/>
-                    <TextBox Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
+                    <TextBox Padding="2" Style="{StaticResource TextBoxForm}"/>
                 </StackPanel>
             </StackPanel>
         </Border>
         <DockPanel Grid.Row="2" Margin="40 0 40 0">
-            <Button  x:Name="Atras" HorizontalAlignment="Right"  Margin="0 5 20 10" Padding="10 0 10 0" 
-                    Height="30" FontSize="10" Foreground="White"  BorderBrush="Transparent" Width="130"
-                    Background="Red" BorderThickness="2" VerticalAlignment="Center" Content="Atras" Click="Atras_Click"  >
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="13"/>
-                    </Style>
-
-                </Button.Resources>
-            </Button>
-            <Button  x:Name="btnRegistrarEmpleado" HorizontalAlignment="Right"  Margin="0 5 0 10" Padding="10 0 10 0" 
-                    Height="30" FontSize="10" Foreground="White" Width="130" BorderBrush="Transparent" 
-                    Background="#35B697" BorderThickness="2" VerticalAlignment="Center" Content="Registrar Usuario" >
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="13"/>
-                    </Style>
-
-                </Button.Resources>
-            </Button>
+            <Button  Style="{StaticResource ButtonStyle}" x:Name="Atras" HorizontalAlignment="Right"  Margin="0 5 20 10"
+                     Padding="10 0 10 0" Width="130" Background="Red" Content="Atras" Click="Atras_Click" />
+            <Button Style="{StaticResource ButtonStyle}" x:Name="btnRegistrarEmpleado" HorizontalAlignment="Right" 
+                    Margin="0 5 0 10" Padding="10 0 10 0" Width="130" Content="Registrar Usuario" />
         </DockPanel>
     </Grid>
 </Window>

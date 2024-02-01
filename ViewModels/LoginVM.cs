@@ -68,24 +68,26 @@ namespace WpfAppIntermodular.ViewModels
             }
         }
 
+        private MainWindow xd;
 
-
-        public LoginVM()
+        public LoginVM(MainWindow mainWindow)
         {
-
+            xd = mainWindow;
         }
 
         private async void Login()
         {
-
             apiService = new ApiService();
-
-            await apiService.AutenticarUsuarioAsync(Email, Password);
+            string token =await apiService.AutenticarUsuarioAsync(Email, Password);
             Console.WriteLine($"Iniciando sesión con: {Email} - {Password}");
-            MessageBox.Show(Email.ToString());
-
             Settings1.Default.AccessToken = "rstenaoen";
             Settings1.Default.RefreshToken = "artnirtn";
+            if(token!= null)
+            {
+               Home home= new Home();
+               home.Show();
+                xd.Close();
+            }
         }
 
 

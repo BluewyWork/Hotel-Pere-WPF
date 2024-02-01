@@ -7,6 +7,12 @@ namespace WpfAppIntermodular.rsc
     {
         private readonly Action execute;
         private readonly Func<bool> canExecute;
+        private Action<bool, string, int, double, int, string> insertRoom;
+
+        public RelayCommand(Action<bool, string, int, double, int, string> insertRoom)
+        {
+            this.insertRoom = insertRoom;
+        }
 
         public RelayCommand(Action execute, Func<bool> canExecute = null)
         {

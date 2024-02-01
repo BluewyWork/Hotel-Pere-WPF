@@ -27,57 +27,37 @@
             <StackPanel HorizontalAlignment="Center">
                 <StackPanel Margin="0 25 0 0">
                     <Label>Número de Habitación</Label>
-                    <ComboBox Width="170" HorizontalAlignment="Left" Margin="5 0 0 0" >
-                        <ComboBoxItem Background="White" IsSelected="True">101</ComboBoxItem>
-                        <ComboBoxItem Background="White">102</ComboBoxItem>
-                        <ComboBoxItem Background="White">103</ComboBoxItem>
-                    </ComboBox>
+                    <ComboBox ItemsSource="{Binding RoomNumberOptions}" SelectedItem="{Binding SelectedRoomNumber}" />
                 </StackPanel>
                 <StackPanel Margin="0 25 0 0">
-                    <Label>Caracteristicas</Label>
-                    <StackPanel Margin="5 0 0 0">
-                        <DockPanel Margin="0 10 0 0">
-                            <CheckBox>Cama sencilla</CheckBox>
-                            <CheckBox Margin="10 0 0 0">Cama Doble</CheckBox>
-                        </DockPanel>
-                        <DockPanel Margin="0 10 0 0">
-                            <CheckBox>Cuna</CheckBox>
-                            <CheckBox Margin="75 0 0 0">Sofá</CheckBox>
-                        </DockPanel>
-                    </StackPanel>
+                    <Label>Numero de camas</Label>
+                    <ComboBox ItemsSource="{Binding BedOptions}" SelectedItem="{Binding SelectedNumberOfBeds}" />
                 </StackPanel>
                 <StackPanel Margin="0 25 0 0">
                     <Label HorizontalAlignment="Left">¿Reservada?</Label>
                     <DockPanel Margin="5 0 0 0">
-                        <RadioButton IsChecked="True" >Si</RadioButton>
-                        <RadioButton Margin="10 0 0 0" IsChecked="False" >No</RadioButton>
+                        <RadioButton GroupName="Reservada" Content="Si" IsChecked="{Binding Reservada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <RadioButton GroupName="Reservada" Content="No" IsChecked="{Binding NoReservada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </DockPanel>
                 </StackPanel>
                 <StackPanel Margin="0 25 0 0">
+                    <Label Content="Precio por noche"/>
+                    <TextBox Margin="0 0 0 10" Text="{Binding PrecioNoche, StringFormat={}{0:N2}, UpdateSourceTrigger=PropertyChanged}" />
+                    <Slider Minimum="0" Maximum="200" Value="{Binding PrecioNoche, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+                <StackPanel Margin="0 25 0 0">
                     <Label Content="Observaciones"></Label>
-                    <TextBox Height="75" TextWrapping="Wrap" AcceptsReturn="True" Margin="5 0 0 0"
+                    <TextBox Height="45" Text="{Binding Descripcion, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" AcceptsReturn="True" Margin="5 0 0 0"
                              VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
                 </StackPanel>
             </StackPanel>
         </Border>
         <DockPanel Grid.Row="2" Margin="40 0 40 0">
-            <Button  x:Name="Atras" HorizontalAlignment="Right"  Margin="0 5 0 10" Padding="10 0 10 0" 
-                    Height="30" FontSize="10" Foreground="White"  BorderBrush="Transparent" Width="130"
-                    Background="Red" BorderThickness="2" VerticalAlignment="Center" Content="Atras" Click="Atras_Click"  >
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="13"/>
-                    </Style>
-                </Button.Resources>
+            <Button Style="{StaticResource ButtonStyle}" x:Name="Atras" HorizontalAlignment="Right"  Margin="0 5 0 10" Padding="10 0 10 0" 
+                    Background="Red" Width="130" Content="Atras" Click="Atras_Click"  >
             </Button>
-            <Button  x:Name="btnRegistrarEmpleado" HorizontalAlignment="Right"  Margin="0 5 0 10" Padding="10 0 10 0" 
-                    Height="30" FontSize="10" Foreground="White" Width="130" BorderBrush="Transparent" 
-                    Background="#35B697" BorderThickness="2" VerticalAlignment="Center" Content="Guardar" >
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="13"/>
-                    </Style>
-                </Button.Resources>
+            <Button Style="{StaticResource ButtonStyle}" Command="{Binding InsertRoomCommand}" x:Name="btnRegistrarHabitacion" HorizontalAlignment="Right"  Margin="0 5 0 10" Padding="10 0 10 0" 
+                    Width="130" Content="Guardar" >
             </Button>
         </DockPanel>
     </Grid>

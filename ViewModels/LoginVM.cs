@@ -26,7 +26,7 @@ namespace WpfAppIntermodular.ViewModels
             }
         }
         private string _email;
-      
+
 
         public string Email
         {
@@ -68,20 +68,20 @@ namespace WpfAppIntermodular.ViewModels
             }
         }
 
-       
+
 
         public LoginVM()
         {
-            
+
         }
 
         private async void Login()
         {
 
-                apiService = new ApiService();
-      
-                await apiService.AutenticarUsuarioAsync(Email, Password);
-                Console.WriteLine($"Iniciando sesión con: {Email} - {Password}");
+            apiService = new ApiService();
+
+            await apiService.AutenticarUsuarioAsync(Email, Password);
+            Console.WriteLine($"Iniciando sesión con: {Email} - {Password}");
             MessageBox.Show(Email.ToString());
         }
 

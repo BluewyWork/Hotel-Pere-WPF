@@ -18,41 +18,14 @@ namespace WpfAppIntermodular.api
         public ApiService()
         {
             httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://localHost:8000/api");
+            httpClient.BaseAddress = new Uri("http://localHost:8000/api/");
         }
 
         public async Task<string> AutenticarUsuarioAsync(string email, string password)
-        {
-            try
-            {
-                var data = new { Email = email, Password = password };
-                HttpResponseMessage response = await httpClient.PostAsJsonAsync("/client/login", data);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseData = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine($"Respuesta exitosa: {responseData}");
-                }
-                else
-                {
-                    Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
-                }
-
-                string token = await response.Content.ReadAsStringAsync();
-
-                return token;
-            }
-            catch (HttpRequestException ex)
-            {
-                Console.WriteLine($"Error al autenticar usuario: {ex.Message}");
-                throw; 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error inesperado al autenticar usuario: {ex.Message}");
-                throw;
-            }
-
+        {   var data =  new {email, password};
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync("employee/login", data);
+            string token = await response.Content.ReadAsStringAsync();
+            return token;
         }
 
        
@@ -61,8 +34,7 @@ namespace WpfAppIntermodular.api
         {
             var data = new { reserved, section, number, pricePerNight, beds, image };
             var response = await httpClient.PostAsJsonAsync("admin/rooms/", data);
-            //response.EnsureSuccessStatusCode(); 
-            //return await response.Content.ReadAsStringAsync();
+    
             return "OK";
         }
 

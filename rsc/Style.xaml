@@ -113,6 +113,4 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
     </Style>
-
-
 </ResourceDictionary>

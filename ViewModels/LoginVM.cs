@@ -83,6 +83,9 @@ namespace WpfAppIntermodular.ViewModels
                 await apiService.AutenticarUsuarioAsync(Email, Password);
                 Console.WriteLine($"Iniciando sesión con: {Email} - {Password}");
             MessageBox.Show(Email.ToString());
+
+            Settings1.Default.AccessToken = "rstenaoen";
+            Settings1.Default.RefreshToken = "artnirtn";
         }
 
 

@@ -68,9 +68,6 @@ namespace WpfAppIntermodular.ViewModels
             }
         }
 
-
-        private ICommand canLoginCommand;
-
        
 
         public LoginVM()
@@ -86,9 +83,6 @@ namespace WpfAppIntermodular.ViewModels
                 await apiService.AutenticarUsuarioAsync(Email, Password);
                 Console.WriteLine($"Iniciando sesión con: {Email} - {Password}");
             MessageBox.Show(Email.ToString());
-
-
-
         }
 
 

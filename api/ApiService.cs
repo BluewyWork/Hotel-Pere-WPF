@@ -15,18 +15,27 @@ namespace WpfAppIntermodular.api
         public ApiService()
         {
             httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://localHost:3000/api/");
+            httpClient.BaseAddress = new Uri("http://localHost:8000/api/");
         }
 
         public async Task<string> AutenticarUsuarioAsync(string email, string password)
         {
             var data = new { Email = email, Password = password };
-    //        var response = await httpClient.PostAsJsonAsync("/login", data);
+          //var response = await httpClient.PostAsJsonAsync("/login", data);
+          //response.EnsureSuccessStatusCode(); 
+          //return await response.Content.ReadAsStringAsync();
+            return "OK";
+        }
 
-   //         response.EnsureSuccessStatusCode(); 
-
-    //        return await response.Content.ReadAsStringAsync();
-                return "OK";
+       
+        public async Task<string> InsertRoomApi(bool reserved, string? section, int number, double pricePerNight,
+            int beds,  string? image)
+        {
+            var data = new { reserved, section, number, pricePerNight, beds, image };
+            var response = await httpClient.PostAsJsonAsync("admin/rooms/", data);
+            //response.EnsureSuccessStatusCode(); 
+            //return await response.Content.ReadAsStringAsync();
+            return "OK";
         }
     }
 }

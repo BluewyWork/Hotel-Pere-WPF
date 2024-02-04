@@ -1,8 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
-using WpfAppIntermodular.api;
-using WpfAppIntermodular.Models;
+using wpfappintermodular.api;
 using WpfAppIntermodular.rsc;
 
 namespace WpfAppIntermodular.ViewModels

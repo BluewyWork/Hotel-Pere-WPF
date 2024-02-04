@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using WpfAppIntermodular.api;
+using wpfappintermodular.api;
 using WpfAppIntermodular.Models;
 using WpfAppIntermodular.rsc;
 
@@ -12,6 +12,7 @@ namespace WpfAppIntermodular.ViewModels
     {
         private UsuarioModel _usuario;
         private ApiService apiService;
+        private MainWindow mw;
 
         public UsuarioModel Usuario
         {
@@ -68,25 +69,19 @@ namespace WpfAppIntermodular.ViewModels
             }
         }
 
-        private MainWindow xd;
-
         public LoginVM(MainWindow mainWindow)
         {
-            xd = mainWindow;
+            mw = mainWindow;
         }
 
         private async void Login()
         {
             apiService = new ApiService();
-            string token =await apiService.AutenticarUsuarioAsync(Email, Password);
-            Console.WriteLine($"Iniciando sesión con: {Email} - {Password}");
-            Settings1.Default.AccessToken = "rstenaoen";
-            Settings1.Default.RefreshToken = "artnirtn";
-            if(token!= null)
+            if( await apiService.AutenticarUsuarioAsync(Email, Password))
             {
-               Home home= new Home();
-               home.Show();
-                xd.Close();
+                Home home = new Home();
+                home.Show();
+                mw.Close();
             }
         }
 

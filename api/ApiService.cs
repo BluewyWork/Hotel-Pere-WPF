@@ -1,49 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Markup;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using WpfAppIntermodular;
 using WpfAppIntermodular.Models;
-using System.Net.Http.Json;
 
-namespace WpfAppIntermodular.api
+namespace wpfappintermodular.api
 {
     public class ApiService
     {
-        private readonly HttpClient httpClient;
+        private readonly HttpClient _httpClient;
+        private readonly string cokie;
 
         public ApiService()
         {
-            httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://localHost:8000/api/");
+            _httpClient = new HttpClient();
+            _httpClient.BaseAddress = new Uri("http://localhost:8000");
         }
 
-        public async Task<string> AutenticarUsuarioAsync(string email, string password)
-        {   var data =  new {email, password};
-            HttpResponseMessage response = await httpClient.PostAsJsonAsync("employee/login", data);
-            string token = await response.Content.ReadAsStringAsync();
-            return token;
+        public async Task<bool> AutenticarUsuarioAsync(string email, string password)
+        {
+            var data = new { email, password };
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/auth/employee/login", data);
+            string jwtCookie = response.Headers.GetValues("Set-Cookie").FirstOrDefault();
+            string[] cookies = jwtCookie.Split(';');
+            Settings1.Default.JWTTokenCookie = cookies[0];
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+            return false;
         }
 
-       
-        public async Task<string> InsertRoomApi(bool reserved, string? section, int number, double pricePerNight,
-            int beds,  string? image)
+        public async Task<bool> InsertRoomApi(bool reserved, string section, int number, double pricePerNight, int beds, string image)
         {
             var data = new { reserved, section, number, pricePerNight, beds, image };
-            var response = await httpClient.PostAsJsonAsync("admin/rooms/", data);
-    
-            return "OK";
+            var response = await _httpClient.PostAsJsonAsync("admin/rooms", data);
+            var responseCode = response.EnsureSuccessStatusCode();
+            return responseCode.IsSuccessStatusCode;
         }
 
-        public async Task<List<HabitacionModel>> BuscarHabitacionesAsync()
+        /*public async Task<List<HabitacionModel>> BuscarHabitacionesAsync()
         {
-            var response = await httpClient.GetAsync("/client/rooms");
-            List<HabitacionModel> habitaciones = await response.Content.ReadFromJsonAsync<List<HabitacionModel>>();
-            return habitaciones;
+            var response = await _httpClient.GetAsync("/api/admin/room/");
+            if(response.IsSuccessStatusCode)
+            {
+                List<HabitacionModel> habitaciones = await response.Content.ReadAsAsync<List<HabitacionModel>>();
+                return habitaciones;
+            }         
+        }*/
 
+        public async Task<List<HabitacionModel>> MostrarHabitacionesApiAsync()
+        {
+            _httpClient.BaseAddress = new Uri("http://localhost:8000/api/admin/room");
+            _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+            var response = await _httpClient.GetAsync("");
+            string responseBody = await response.Content.ReadAsStringAsync();
+            dynamic result = JObject.Parse(responseBody);
+            JArray habitacionesArray = result.data;
+            List<HabitacionModel> habitaciones = JsonConvert.DeserializeObject<List<HabitacionModel>>(habitacionesArray.ToString());
+            return habitaciones;
         }
     }
 }

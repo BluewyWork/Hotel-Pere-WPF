@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using WpfAppIntermodular.api;
+
+using wpfappintermodular.api;
 using WpfAppIntermodular.Models;
 using WpfAppIntermodular.rsc;
 
@@ -27,7 +23,7 @@ namespace WpfAppIntermodular.ViewModels
                 OnPropertyChanged(nameof(Habitaciones));
             }
         }
-        private ICommand buscarCommand;
+        /*private ICommand buscarCommand;
 
         public ICommand BuscarCommand
         {
@@ -39,13 +35,13 @@ namespace WpfAppIntermodular.ViewModels
                 }
                 return buscarCommand;
             }
-        }
+        }*/
         public HomeHabitacionVM()
         {
-
+            
         }
 
-        private async void BuscarHabitacion()
+        /*private async void BuscarHabitacion()
         {
             try
             {
@@ -58,7 +54,7 @@ namespace WpfAppIntermodular.ViewModels
 
             }
 
-        }
+        }*/
 
        
 

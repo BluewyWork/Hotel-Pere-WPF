@@ -108,77 +108,26 @@
             </StackPanel>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="53*"></RowDefinition>
-                    <RowDefinition Height="93*"></RowDefinition>
-                    <RowDefinition Height="93*"></RowDefinition>
-                    <RowDefinition Height="93*"></RowDefinition>
-                    <RowDefinition Height="93*"></RowDefinition>
+                    <RowDefinition Height="34*"></RowDefinition>
+                    <RowDefinition Height="191*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" FontFamily="Montserrat" Foreground="#35B697" FontSize="30" FontWeight="Bold" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:</Label>
-                <DockPanel  Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
-                    <Image Source="../habitacion.png" Width="60"></Image>
-                    <StackPanel Margin="15 15 75 15">
-                        <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Habitación Doble</TextBlock>
-                        <TextBlock  Margin="0 5 0 0" FontSize="10" Foreground="#68EB9C" HorizontalAlignment="Center">36e/noche</TextBlock>
-                    </StackPanel>
-                    <Button Style="{StaticResource ButtonStyle}"  Margin="0 5 0 0" Padding="10 0 10 0" Width="130"  Content="Reservar Habitación" Click="Reservar">
-                    </Button>
-
-                </DockPanel>
-                <Label Grid.Row="0" FontFamily="Montserrat" Foreground="#35B697" FontSize="30" FontWeight="Bold" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:</Label>
-                <DockPanel  Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
-                    <Image Source="../habitacion.png" Width="60"></Image>
-                    <StackPanel Margin="15 15 75 15">
-                        <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Habitación Doble</TextBlock>
-                        <TextBlock  Margin="0 5 0 0" FontSize="10" Foreground="#68EB9C" HorizontalAlignment="Center">36e/noche</TextBlock>
-                    </StackPanel>
-                    <Button  Margin="0 5 0 0" Padding="10 0 10 0" Height="30" FontSize="10" Foreground="White"  
-                             HorizontalAlignment="Left" BorderBrush="Transparent" Background="#35B697" BorderThickness="2" VerticalAlignment="Center" Content="Reservar habitación">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="13"/>
-                            </Style>
-
-                        </Button.Resources>
-                    </Button>
-
-                </DockPanel>
-                <Label Grid.Row="0" Style="{StaticResource LabelTitulo}" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:</Label>
-                <DockPanel  Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
-                    <Image Source="../habitacion.png" Width="60"></Image>
-                    <StackPanel Margin="15 15 75 15">
-                        <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Habitación Doble</TextBlock>
-                        <TextBlock  Margin="0 5 0 0" FontSize="10" Foreground="#68EB9C" HorizontalAlignment="Center">36e/noche</TextBlock>
-                    </StackPanel>
-                    <Button  Margin="0 5 0 0" Padding="10 0 10 0" Height="30" FontSize="10" Foreground="White"  
-                             HorizontalAlignment="Left" BorderBrush="Transparent" Background="#35B697" BorderThickness="2" VerticalAlignment="Center" Content="Reservar habitación"  >
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="13"/>
-                            </Style>
-
-                        </Button.Resources>
-                    </Button>
-
-                </DockPanel>
-
-                <DockPanel  Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="75">
-                    <Image Source="../habitacion.png" Width="60"></Image>
-                    <StackPanel Margin="15 15 75 15">
-                        <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Habitación Doble</TextBlock>
-                        <TextBlock  Margin="0 5 0 0" FontSize="10" Foreground="#68EB9C" HorizontalAlignment="Center">36e/noche</TextBlock>
-                    </StackPanel>
-                    <Button  Margin="0 5 0 0" Padding="10 0 10 0" Height="30" FontSize="10" Foreground="White"  
-                             HorizontalAlignment="Left" BorderBrush="Transparent" Background="#35B697" BorderThickness="2" VerticalAlignment="Center" Content="Reservar habitación"  >
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="13"/>
-                            </Style>
-
-                        </Button.Resources>
-                    </Button>
-
-                </DockPanel>
+                <ListBox Grid.Row="1" ItemsSource="{Binding HabitacionesHome}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel Width="413" Height="100">
+                                <Image Source="{Binding Image}" Width="60"/>
+                                <StackPanel Margin="15 15 75 15">
+                                    <DockPanel Width="100">
+                                        <TextBlock Margin="0 5 0 0" HorizontalAlignment="Center" Text="{Binding Section}" TextWrapping="Wrap"/>
+                                    </DockPanel>
+                                    <TextBlock Margin="0 5 0 0" FontSize="10" Foreground="#68EB9C" HorizontalAlignment="Center" Text="{Binding PricePerNight}"/>
+                                </StackPanel>
+                                <Button Style="{StaticResource ButtonStyle}" Width="100" Margin="0 5 0 0" Padding="10 0 10 0" Content="Editar habitación"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Grid>
         </Grid>
     </Grid>

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using WpfAppIntermodular.api;
+using wpfappintermodular.api;
 using WpfAppIntermodular.Models;
 using WpfAppIntermodular.rsc;
 
@@ -12,6 +12,12 @@ namespace WpfAppIntermodular.ViewModels
     {
         private UsuarioModel _usuario;
         private ApiService apiService;
+        private MainWindow mw;
+
+        public LoginVM(MainWindow mainWindow)
+        {
+            mw = mainWindow;
+        }
 
         public UsuarioModel Usuario
         {
@@ -26,7 +32,7 @@ namespace WpfAppIntermodular.ViewModels
             }
         }
         private string _email;
-      
+
 
         public string Email
         {
@@ -40,6 +46,7 @@ namespace WpfAppIntermodular.ViewModels
                 }
             }
         }
+
         private string _password;
 
         public string Password
@@ -54,38 +61,40 @@ namespace WpfAppIntermodular.ViewModels
                 }
             }
         }
-        private ICommand loginCommand;
 
-        public ICommand LoginCommand
+        private ICommand camposLoginCommand;
+
+        public ICommand CamposLoginCommand
         {
             get
             {
-                if (loginCommand == null)
+                if (camposLoginCommand == null)
                 {
-                    loginCommand = new RelayCommand(Login);
+                    camposLoginCommand = new RelayCommand(CamposLogin);
                 }
-                return loginCommand;
+                return camposLoginCommand;
             }
         }
-
-       
-
-        public LoginVM()
+        private void CamposLogin()
         {
-            
+            if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
+            {
+                MessageBox.Show("Debe rellenar todos los campos","Error");
+            }
+            else
+            {
+                Login();
+            }
         }
-
         private async void Login()
         {
-
-                apiService = new ApiService();
-      
-                await apiService.AutenticarUsuarioAsync(Email, Password);
-                Console.WriteLine($"Iniciando sesión con: {Email} - {Password}");
-            MessageBox.Show(Email.ToString());
-
-            Settings1.Default.AccessToken = "rstenaoen";
-            Settings1.Default.RefreshToken = "artnirtn";
+            apiService = new ApiService();
+            if( await apiService.AutenticarUsuarioAsync(Email, Password))
+            {
+                Home home = new Home();
+                home.Show();
+                mw.Close();
+            }
         }
 
 

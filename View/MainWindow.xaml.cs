@@ -24,15 +24,9 @@ namespace WpfAppIntermodular
         public MainWindow()
         {
             InitializeComponent();
-            DataContext= new LoginVM();
+            DataContext= new LoginVM(this);
         }
 
-       /* private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Home home= new Home();
-            home.Show();
-            this.Close();
 
-        }*/
     }
 }

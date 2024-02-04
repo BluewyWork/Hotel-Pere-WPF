@@ -1,6 +1,6 @@
 ﻿
 using System.Windows;
-
+using WpfAppIntermodular.ViewModels;
 
 namespace WpfAppIntermodular
 {
@@ -12,6 +12,7 @@ namespace WpfAppIntermodular
         public Home()
         {
             InitializeComponent();
+            DataContext= new HomeVM();
         }
 
         private void Usuarios_Click(object sender, RoutedEventArgs e)

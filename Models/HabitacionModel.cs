@@ -4,83 +4,98 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace WpfAppIntermodular.Models
 {
     public class HabitacionModel : INotifyPropertyChanged
     {
-        public int? _numero;
-        public string? _descripcion;
-        public double? _precioNoche;
-        public bool? _reservada;
-        public string? _imagen;
-        public int? _camas;
+        public int? _number;
+        public string? _section;
+        public double? _pricePerNight;
+        public bool? _reserved;
+        //public BitmapImage _image;
+        public int? _beds;
 
         public HabitacionModel() { }
 
-        public int? Camas
+        public int? Beds
         {
-            get { return _camas; }
+            get { return _beds; }
             set
             {
-                if (_camas != value)
+                if (_beds != value)
                 {
-                    _camas = value;
-                    OnPropertyChanged(nameof(Numero));
-                }
-            }
-        }
-        public int? Numero
-        {
-            get { return _numero; }
-            set
-            {
-                if (_numero != value)
-                {
-                    _numero = value;
-                    OnPropertyChanged(nameof(Numero));
+                    _beds = value;
+                    OnPropertyChanged(nameof(Beds));
                 }
             }
         }
 
-        public double? PrecioNoche
+        /*public BitmapImage Image
         {
-            get { return _precioNoche; }
+            get { return _image; }
             set
             {
-                if (_precioNoche != value)
+                if (_image != value)
                 {
-                    _precioNoche = value;
-                    OnPropertyChanged(nameof(PrecioNoche));
+                    _image = value;
+                }
+            }
+        }*/
+
+        public int? Number
+        {
+            get { return _number; }
+            set
+            {
+                if (_number != value)
+                {
+                    _number = value;
+                    OnPropertyChanged(nameof(Number));
                 }
             }
         }
 
-        public string? Descripcion
+        public double? PricePerNight
         {
-            get { return _descripcion; }
+            get { return _pricePerNight; }
             set
             {
-                if (_descripcion != value)
+                if (_pricePerNight != value)
                 {
-                    _descripcion = value;
-                    OnPropertyChanged(nameof(Descripcion));
+                    _pricePerNight = value;
+                    OnPropertyChanged(nameof(_pricePerNight));
                 }
             }
         }
 
-        public bool? Reservada
+        public string? Section
         {
-            get { return _reservada; }
+            get { return _section; }
             set
             {
-                if (!_reservada != value)
+                if (_section != value)
                 {
-                    _reservada = value;
-                    OnPropertyChanged(nameof(Reservada));
+                    _section = value;
+                    OnPropertyChanged(nameof(Section));
                 }
             }
         }
+
+        public bool? Reserved
+        {
+            get { return _reserved; }
+            set
+            {
+                if (_reserved != value)
+                {
+                    _reserved = value;
+                    OnPropertyChanged(nameof(Reserved));
+                }
+            }
+        }
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

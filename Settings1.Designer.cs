@@ -46,5 +46,17 @@ namespace WpfAppIntermodular {
                 this["RefreshToken"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string JWTTokenCookie {
+            get {
+                return ((string)(this["JWTTokenCookie"]));
+            }
+            set {
+                this["JWTTokenCookie"] = value;
+            }
+        }
     }
 }

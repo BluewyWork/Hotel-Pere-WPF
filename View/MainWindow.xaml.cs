@@ -26,5 +26,7 @@ namespace WpfAppIntermodular
             InitializeComponent();
             DataContext= new LoginVM(this);
         }
+
+
     }
 }

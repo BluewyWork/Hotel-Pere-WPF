@@ -14,6 +14,11 @@ namespace WpfAppIntermodular.ViewModels
         private ApiService apiService;
         private MainWindow mw;
 
+        public LoginVM(MainWindow mainWindow)
+        {
+            mw = mainWindow;
+        }
+
         public UsuarioModel Usuario
         {
             get { return _usuario; }
@@ -41,6 +46,7 @@ namespace WpfAppIntermodular.ViewModels
                 }
             }
         }
+
         private string _password;
 
         public string Password
@@ -55,25 +61,31 @@ namespace WpfAppIntermodular.ViewModels
                 }
             }
         }
-        private ICommand loginCommand;
 
-        public ICommand LoginCommand
+        private ICommand camposLoginCommand;
+
+        public ICommand CamposLoginCommand
         {
             get
             {
-                if (loginCommand == null)
+                if (camposLoginCommand == null)
                 {
-                    loginCommand = new RelayCommand(Login);
+                    camposLoginCommand = new RelayCommand(CamposLogin);
                 }
-                return loginCommand;
+                return camposLoginCommand;
             }
         }
-
-        public LoginVM(MainWindow mainWindow)
+        private void CamposLogin()
         {
-            mw = mainWindow;
+            if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
+            {
+                MessageBox.Show("Debe rellenar todos los campos","Error");
+            }
+            else
+            {
+                Login();
+            }
         }
-
         private async void Login()
         {
             apiService = new ApiService();

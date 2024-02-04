@@ -25,7 +25,7 @@
                 <Label Content="Password" FontSize="16" />
                 <TextBox x:Name="TbLogPass"  Style="{StaticResource TBMain}"
                          Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
-                <Button Style="{StaticResource ButtonMain}" Command="{Binding LoginCommand}" >
+                <Button Style="{StaticResource ButtonMain}" Command="{Binding CamposLoginCommand}" >
                     <Button.Content>
                         <Grid>
                             <Path Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center"

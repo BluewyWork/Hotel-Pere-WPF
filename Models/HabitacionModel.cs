@@ -14,7 +14,7 @@ namespace WpfAppIntermodular.Models
         public string? _section;
         public double? _pricePerNight;
         public bool? _reserved;
-        public BitmapImage _image;
+        //public BitmapImage _image;
         public int? _beds;
 
         public HabitacionModel() { }
@@ -32,7 +32,7 @@ namespace WpfAppIntermodular.Models
             }
         }
 
-        public BitmapImage Image
+        /*public BitmapImage Image
         {
             get { return _image; }
             set
@@ -42,7 +42,8 @@ namespace WpfAppIntermodular.Models
                     _image = value;
                 }
             }
-        }
+        }*/
+
         public int? Number
         {
             get { return _number; }

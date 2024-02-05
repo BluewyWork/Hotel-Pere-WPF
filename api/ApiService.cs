@@ -43,10 +43,12 @@ namespace wpfappintermodular.api
           
         }
 
-        public async Task<bool> InsertRoomApi(bool reserved, string section, int number, double pricePerNight, int beds, string image)
+        public async Task<bool> UpdateRoomApi(bool reserved, string section, int number, double pricePerNight, int beds, string image)
         {
             var data = new { reserved, section, number, pricePerNight, beds, image };
-            var response = await _httpClient.PostAsJsonAsync("admin/rooms", data);
+            _httpClient.BaseAddress = new Uri("http://localhost:8000/api/admin/room");
+            _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+            var response = await _httpClient.PutAsJsonAsync("", data);
             var responseCode = response.EnsureSuccessStatusCode();
             return responseCode.IsSuccessStatusCode;
         }

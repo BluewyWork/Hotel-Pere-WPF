@@ -13,6 +13,8 @@ namespace WpfAppIntermodular.ViewModels
         private UsuarioModel _usuario;
         private ApiService apiService;
         private MainWindow mw;
+        private string _email;
+        private string _password;
 
         public LoginVM(MainWindow mainWindow)
         {
@@ -31,7 +33,7 @@ namespace WpfAppIntermodular.ViewModels
                 }
             }
         }
-        private string _email;
+       
 
 
         public string Email
@@ -47,7 +49,7 @@ namespace WpfAppIntermodular.ViewModels
             }
         }
 
-        private string _password;
+        
 
         public string Password
         {

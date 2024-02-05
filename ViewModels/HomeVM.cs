@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -6,7 +7,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using wpfappintermodular.api;
 using WpfAppIntermodular.Models;
-
+using WpfAppIntermodular.rsc;
 
 namespace WpfAppIntermodular.ViewModels
 {
@@ -14,6 +15,16 @@ namespace WpfAppIntermodular.ViewModels
     {
         private ObservableCollection<HabitacionModel> _habitacionesHome;
         private ApiService apiService;
+        private HabitacionModel _habitacionSeleccionada;
+        private Home ventana;
+        public ICommand EditarHabitacionCommand { get; }
+
+        public HomeVM(Home ventana)
+        {
+            MostrarHabitaciones();
+            EditarHabitacionCommand = new RelayCommand(EditarHabitacion, () => HabitacionSeleccionada != null);
+            this.ventana = ventana;
+        }
 
         public ObservableCollection<HabitacionModel> HabitacionesHome
         {
@@ -24,9 +35,30 @@ namespace WpfAppIntermodular.ViewModels
                 OnPropertyChanged(nameof(HabitacionesHome));
             }
         }
-        public HomeVM()
+        public HabitacionModel HabitacionSeleccionada
         {
-            MostrarHabitaciones();
+            get { return _habitacionSeleccionada; }
+            set
+            {
+                if (_habitacionSeleccionada != value)
+                {
+                    _habitacionSeleccionada = value;
+                    OnPropertyChanged(nameof(HabitacionSeleccionada));
+                }
+            }
+        }
+
+        private void EditarHabitacion()
+        {
+          
+            EditarHabitacion editarHabitacion= new EditarHabitacion(HabitacionSeleccionada);
+            ventana.Close();
+            editarHabitacion.Show();
+        }
+
+        private async void BuscarHabitacion()
+        {
+
         }
 
         private async void MostrarHabitaciones()
@@ -40,9 +72,7 @@ namespace WpfAppIntermodular.ViewModels
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al buscar habitaciones: {ex.Message}");
-
             }
-
         }
 
 

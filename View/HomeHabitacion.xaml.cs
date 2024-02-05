@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfAppIntermodular.Models;
 using WpfAppIntermodular.ViewModels;
 
 namespace WpfAppIntermodular
@@ -26,11 +27,7 @@ namespace WpfAppIntermodular
             DataContext= new HomeHabitacionVM();
         }
 
-        private void EditarHabitacion_Click(object sender, RoutedEventArgs e)
-        {
-            EditarHabitacion  editarHabitacion = new EditarHabitacion();
-            editarHabitacion.ShowDialog();
-        }
+       
 
         private void Usuarios_Click(object sender, RoutedEventArgs e)
         {

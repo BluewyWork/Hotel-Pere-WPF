@@ -12,7 +12,7 @@ namespace WpfAppIntermodular
         public Home()
         {
             InitializeComponent();
-            DataContext= new HomeVM();
+            DataContext= new HomeVM(this);
         }
 
         private void Usuarios_Click(object sender, RoutedEventArgs e)

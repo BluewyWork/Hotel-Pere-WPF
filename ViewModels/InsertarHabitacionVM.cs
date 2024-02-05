@@ -1,8 +1,12 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 using wpfappintermodular.api;
+using WpfAppIntermodular.Models;
 using WpfAppIntermodular.rsc;
+
 
 namespace WpfAppIntermodular.ViewModels
 {
@@ -14,15 +18,16 @@ namespace WpfAppIntermodular.ViewModels
         private double? _precioNoche;
         private string? _descripcion;
         private bool? _reservada;
-        private bool _noReservada;
+        private bool? _noReservada;
+        private int? _selectedNumberOfBeds;
+        private int? _selectedRoomNumber;
+        private EditarHabitacion ventana;
+        public ICommand UpdateRoomCommand { get; }
 
-        private int _selectedNumberOfBeds;
-        private int _selectedRoomNumber;
+        public int[] BedOptions { get; }
+        public List<int> RoomNumberOptions { get; } 
 
-        public int[] BedOptions { get; } = { 1, 2, 3, 4 };
-        public int[] RoomNumberOptions { get; } = { 101, 102, 103, 104 };
-
-        public int SelectedNumberOfBeds
+        public int? SelectedNumberOfBeds
         {
             get { return _selectedNumberOfBeds; }
             set
@@ -35,7 +40,7 @@ namespace WpfAppIntermodular.ViewModels
             }
         }
 
-        public int SelectedRoomNumber
+        public int? SelectedRoomNumber
         {
             get { return _selectedRoomNumber; }
             set
@@ -101,7 +106,7 @@ namespace WpfAppIntermodular.ViewModels
         }
         
 
-        public bool NoReservada
+        public bool? NoReservada
         {
             get { return _noReservada; }
             set
@@ -127,42 +132,50 @@ namespace WpfAppIntermodular.ViewModels
             }
         }
 
-        private ICommand insertRoomCommand;
-
-        public ICommand InsertRoomCommand
+        public InsertarHabitacionVM(HabitacionModel habitacionSeleccionada, EditarHabitacion ventana)        
         {
-            get
+            this.ventana = ventana;
+            UpdateRoomCommand = new RelayCommand(UpdateRoom);
+            List<int> listaNumeros= new List<int>();
+            for (int i=1; i<20; i++)
             {
-                if (insertRoomCommand == null)
-                {
-                    insertRoomCommand = new RelayCommand(InsertRoom);
-                }
-                return insertRoomCommand;
+                listaNumeros.Add(i);
             }
+        
+            if(habitacionSeleccionada!=null)
+            {
+                SelectedRoomNumber = habitacionSeleccionada.Number;
+                BedOptions = new int[] { 1, 2, 3 };
+                Reservada = habitacionSeleccionada.Reserved;
+                NoReservada = !habitacionSeleccionada.Reserved;
+                SelectedNumberOfBeds = habitacionSeleccionada.Beds;
+                RoomNumberOptions = listaNumeros;
+                PrecioNoche = habitacionSeleccionada.PricePerNight;
+                Descripcion = habitacionSeleccionada.Section;
+            }
+           
+           
         }
 
-        public InsertarHabitacionVM()
-        {
-            SelectedRoomNumber = 101; 
-            BedOptions = new int[] { 1, 2, 3 };
-            NoReservada = true;
-            SelectedNumberOfBeds = 1;
-            RoomNumberOptions = new int[] { 101, 102, 103, 104 };
-            PrecioNoche = 0;
-        }
-
-        private async void InsertRoom()
+        private async void UpdateRoom()
         {
             apiService = new ApiService();
-
-            await apiService.InsertRoomApi(
-                Reservada ?? false,
+            
+            bool actualizada = await apiService.UpdateRoomApi(
+                (bool)Reservada,
                 Descripcion,
-                SelectedRoomNumber,
+                (int)SelectedRoomNumber,
                 Math.Round(PrecioNoche ?? 0, 2),
-                SelectedNumberOfBeds,
+                SelectedNumberOfBeds?? 1,
                 "urlImagen"
             );
+            if (actualizada)
+            {
+                Home home = new Home();
+                home.Show();
+                ventana.Close();
+                
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -114,9 +114,10 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <DockPanel Margin="0 20 0 0" HorizontalAlignment="Right" Width="250">
+                    <DockPanel Margin="0 20 0 0" HorizontalAlignment="Right" Width="350">
+                        <Button  Style="{StaticResource ButtonStyle}"  Margin="0 0 0 0" Background="red" Command="{Binding DeleteCommand}" Width="120"  Content="Eliminar habitación"/> 
                         <Button  Style="{StaticResource ButtonStyle}"  Margin="10 0 0 0" Background="Orchid" Command="{Binding EditarHabitacionCommand}" Width="100"  Content="Editar habitación"/>
-                        <Button  Style="{StaticResource ButtonStyle}" Margin="0 0 10 0" HorizontalAlignment="Right" Command="{Binding CrearHabitacionCommand}" Width="100"  Content="Crear habitación"/>
+                        <Button  Style="{StaticResource ButtonStyle}" Margin="0 0 10 0" HorizontalAlignment="Right" Command="{Binding CreateRoomCommand}" Width="100"  Content="Crear habitación"/>
                     </DockPanel>
                     
                 </StackPanel>

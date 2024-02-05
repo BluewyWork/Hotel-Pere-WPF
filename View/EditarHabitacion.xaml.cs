@@ -29,6 +29,11 @@ namespace WpfAppIntermodular
             InitializeComponent();
             DataContext = new InsertarHabitacionVM(habitacionSeleccionada,this);
         }
+        public EditarHabitacion()
+        {
+            InitializeComponent();
+            DataContext = new InsertarHabitacionVM(this);
+        }
 
         private void Atras_Click(object sender, RoutedEventArgs e)
         {

@@ -46,19 +46,26 @@ namespace wpfappintermodular.api
         public async Task<bool> UpdateRoomApi(bool reserved, string section, int number, double pricePerNight, int beds, string image)
         {
             var data = new { reserved, section, number, pricePerNight, beds, image };
-            _httpClient.BaseAddress = new Uri("http://localhost:8000/api/admin/room");
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
-            var response = await _httpClient.PutAsJsonAsync("", data);
+            var response = await _httpClient.PutAsJsonAsync("/api/admin/room", data);
             var responseCode = response.EnsureSuccessStatusCode();
-            return responseCode.IsSuccessStatusCode;
+            if (responseCode.IsSuccessStatusCode)
+            {
+                MessageBox.Show("La habitación se ha actualizado correctamente", "Ok");
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("La habitación no se ha podido actualizar", "Error");
+                return false;
+            }
         }
 
-        public async Task<List<HabitacionModel>> BuscarHabitacionesAsync()
+        public async Task<List<HabitacionModel>> MostrarHabitacionesApiAsync()
         {
             List<HabitacionModel> habitaciones= new List<HabitacionModel>();
-            _httpClient.BaseAddress = new Uri("http://localhost:8000/api/admin/room");
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
-            var response = await _httpClient.GetAsync("");
+            var response = await _httpClient.GetAsync("/api/admin/room");
             if(response.IsSuccessStatusCode)
             {
                 string responseBody = await response.Content.ReadAsStringAsync();
@@ -69,19 +76,46 @@ namespace wpfappintermodular.api
             }
             else
             {
+                MessageBox.Show("Error al mostrar las habitaciones ", "Error");
                 return habitaciones;
             }         
         }
 
-        public async Task<List<HabitacionModel>> MostrarHabitacionesApiAsync()
+        public async Task<bool> CreateRoomApi( string section, int number, double pricePerNight, int beds, string image)
+        {
+            var data = new {  number, section, pricePerNight, beds, image };
+            _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+            var response = await _httpClient.PostAsJsonAsync("/api/admin/room", data);
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("La habitacion se ha creado correctamente", "Ok");
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Error al crear la habitacion", "Error");
+                return false;
+            }          
+        }
+
+        public async Task <bool> DeleteRoomApi(int number)
         {
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
-            var response = await _httpClient.GetAsync("/api/admin/room");
-            string responseBody = await response.Content.ReadAsStringAsync();
-            dynamic result = JObject.Parse(responseBody);
-            JArray habitacionesArray = result.data;
-            List<HabitacionModel> habitaciones = JsonConvert.DeserializeObject<List<HabitacionModel>>(habitacionesArray.ToString());
-            return habitaciones;
+            var response = await _httpClient.DeleteAsync($"/api/admin/room/{number}");
+            return response.IsSuccessStatusCode;
         }
+
+        /* public async Task<List<HabitacionModel>> BuscarHabitacionApiAsync(HabitacionModel habitacion)
+         {
+             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+             var response = await _httpClient.GetAsync("/api/admin/room");
+             string responseBody = await response.Content.ReadAsStringAsync();
+             dynamic result = JObject.Parse(responseBody);
+             JArray habitacionesArray = result.data;
+             List<HabitacionModel> habitaciones = JsonConvert.DeserializeObject<List<HabitacionModel>>(habitacionesArray.ToString());
+             return habitaciones;
+         }*/
+
+
     }
 }

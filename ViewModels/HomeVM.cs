@@ -1,9 +1,10 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
+﻿using DocumentFormat.OpenXml.Drawing.Diagrams;
+using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-
+using System.Windows;
 using System.Windows.Input;
 using wpfappintermodular.api;
 using WpfAppIntermodular.Models;
@@ -18,11 +19,15 @@ namespace WpfAppIntermodular.ViewModels
         private HabitacionModel _habitacionSeleccionada;
         private Home ventana;
         public ICommand EditarHabitacionCommand { get; }
+        public ICommand DeleteCommand { get; }
+        public ICommand CreateRoomCommand { get; }
 
         public HomeVM(Home ventana)
         {
             MostrarHabitaciones();
             EditarHabitacionCommand = new RelayCommand(EditarHabitacion, () => HabitacionSeleccionada != null);
+            DeleteCommand = new RelayCommand(DeleteRoom, () => HabitacionSeleccionada != null);
+            CreateRoomCommand = new RelayCommand(CreateRoom);
             this.ventana = ventana;
         }
 
@@ -61,6 +66,25 @@ namespace WpfAppIntermodular.ViewModels
 
         }
 
+        private async void DeleteRoom()
+        {
+            if (HabitacionSeleccionada != null)
+            {
+                int number = (int)HabitacionSeleccionada.Number;
+                apiService = new ApiService();
+                bool borrada = await apiService.DeleteRoomApi(number);
+                if (borrada)
+                {
+                    HabitacionesHome.Remove(HabitacionSeleccionada);
+                    MessageBox.Show("La habitacion se ha eliminado correctamente", "Ok");
+                }
+                else
+                {
+                    MessageBox.Show("No se ha podido eleminar", "Error");
+                }
+            }
+        }
+
         private async void MostrarHabitaciones()
         {
             try
@@ -73,6 +97,12 @@ namespace WpfAppIntermodular.ViewModels
             {
                 Console.WriteLine($"Error al buscar habitaciones: {ex.Message}");
             }
+        }
+        private async void CreateRoom()
+        {
+            EditarHabitacion editarHabitacion = new EditarHabitacion();
+            ventana.Close();
+            editarHabitacion.Show();
         }
 
 

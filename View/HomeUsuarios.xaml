@@ -62,21 +62,21 @@
                 <DockPanel Margin="0 10">
                     <StackPanel Margin="10,10" Width="100">
                         <Label Content="Nombre" FontSize="16"/>
-                        <TextBox Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
+                        <TextBox x:Name="NameTextBox" Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
                     </StackPanel>
                     <StackPanel Margin="10,10" Width="Auto">
                         <Label Content="Apellidos" FontSize="16"/>
-                        <TextBox Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
+                        <TextBox x:Name="SurnameTextBox" Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
                     </StackPanel>
                 </DockPanel>
                 <StackPanel Margin="10,20" Width="Auto">
                     <Label Content="Email" FontSize="16"/>
-                    <TextBox Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
+                    <TextBox x:Name="EmailTextBox" Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
                 </StackPanel>
 
                 <DockPanel  Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40 10 20 10" >
                     <Button Margin="0 10 0 0"  Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" 
-                             Content="Buscar"  >
+                             Content="Buscar" Click="Button_Click"  >
                     </Button>
                     <Button Style="{StaticResource ButtonStyle}" FontWeight="Bold" Margin="30 10 0 0" Foreground="#35B697" Background="Transparent" BorderBrush="#35B697" Content="Limpiar"  >
                     </Button>
@@ -90,114 +90,44 @@
                     <RowDefinition Height="93*"></RowDefinition>
                     <RowDefinition Height="93*"></RowDefinition>
                 </Grid.RowDefinitions>
+
                 <Label Grid.Row="0" FontFamily="Montserrat" Foreground="#35B697" FontSize="30" 
-                       FontWeight="Bold" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:</Label>
-                <DockPanel  Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
-                    <Image Source="../perfilMuestra.jpg" Width="100">
-                        <Image.Clip>
-                            <EllipseGeometry RadiusX="30" RadiusY="30" Center="50,30"/>
-                        </Image.Clip>
-                    </Image>
-                    <StackPanel Margin="20 15 75 15">
-                        <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Nombre</TextBlock>
-                        <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Apellidos</TextBlock>
-                    </StackPanel>
-                    <Button x:Name="EditarUsuario" Style="{StaticResource EditarUsuarioButtonStyle}"  Margin="-40 5 70 0" Click="EditarUsuario_Click">
-                        
-                    </Button>
+                       FontWeight="Bold" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:
+                </Label>
 
-                    <Button Style="{StaticResource ButtonStyle}" Content="Ver Historial"/>
-                </DockPanel>
-                <DockPanel  Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
-                    <Image Source="../perfilMuestra.jpg" Width="100">
-                        <Image.Clip>
-                            <EllipseGeometry RadiusX="30" RadiusY="30" Center="50,30"/>
-                        </Image.Clip>
-                    </Image>
-                    <StackPanel Margin="20 15 75 15">
-                        <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Nombre</TextBlock>
-                        <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Apellidos</TextBlock>
-                    </StackPanel>
-                    <Button Width="25"  Height="25" Content="&#x270E;" FontFamily="Symbols Nerd Font" FontSize="12" Foreground="White" Margin="-40 5 70 0">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Background="#35B697" CornerRadius="15">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                <ListBox x:Name="ListBoxCustomers" Grid.Row="0" Grid.Column="0" Margin="0,0,0,10" Grid.RowSpan="4">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel Grid.ColumnSpan="2">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Image Source="../logo_hotel_sin_fondo.png" Width="200px"></Image>
+                                </StackPanel>
 
-                    <Button  Margin="0 5 0 0" Padding="10 0 10 0" Height="30" FontSize="10" Foreground="White"  
-                             HorizontalAlignment="Left" BorderBrush="Transparent" Background="#35B697" BorderThickness="2" VerticalAlignment="Center" Content="Ver Historial"  >
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="13"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
+                                <Button Style="{StaticResource ButtonStyleHeader}" Content="Usuarios"/>
+                                <Button Style="{StaticResource ButtonStyleHeader}" Content="Reservas" x:Name="Reserva" Click="Reserva_Click"/>
+                                <Button Style="{StaticResource ButtonStyleHeader}" Content="Habitaciones" x:Name="Habitaciones" Click="Habitaciones_Click"/>
 
-                </DockPanel>
-                <DockPanel  Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
-                    <Image Source="../perfilMuestra.jpg" Width="100">
-                        <Image.Clip>
-                            <EllipseGeometry RadiusX="30" RadiusY="30" Center="50,30"/>
-                        </Image.Clip>
-                    </Image>
-                    <StackPanel Margin="20 15 75 15">
-                        <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Nombre</TextBlock>
-                        <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Apellidos</TextBlock>
-                    </StackPanel>
-                    <Button Width="25"  Height="25" Content="&#x270E;" FontFamily="Symbols Nerd Font" FontSize="12" Foreground="White" Margin="-40 5 70 0">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Background="#35B697" CornerRadius="15">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                                <Menu Width="180" Background="Transparent" Margin="100 35 0 0">
+                                    <MenuItem>
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <!-- TODO: Binding -->
+                                                <TextBlock Text="N.Usuario" Foreground="#FFCCCCCC" Margin="0 5 0 0"/>
+                                                <Image Height="25" Source="../perfil.png" Margin="10 0 0 10"/>
+                                            </StackPanel>
+                                        </MenuItem.Header>
 
-                    <Button  Margin="0 5 0 0" Padding="10 0 10 0" Height="30" FontSize="10" Foreground="White"  
-                             HorizontalAlignment="Left" BorderBrush="Transparent" Background="#35B697" BorderThickness="2" VerticalAlignment="Center" Content="Ver Historial"  >
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="13"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-
-                </DockPanel>
-                <DockPanel  Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Width="413" Height="76">
-                    <Image Source="../perfilMuestra.jpg" Width="100">
-                        <Image.Clip>
-                            <EllipseGeometry RadiusX="30" RadiusY="30" Center="50,30"/>
-                        </Image.Clip>
-                    </Image>
-                    <StackPanel Margin="20 15 75 15">
-                        <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Nombre</TextBlock>
-                        <TextBlock  Margin="0 5 0 0" HorizontalAlignment="Center">Apellidos</TextBlock>
-                    </StackPanel>
-                    <Button Width="25"  Height="25" Content="&#x270E;" FontFamily="Symbols Nerd Font" FontSize="12" Foreground="White" Margin="-40 5 70 0">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Background="#35B697" CornerRadius="15">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-
-                    <Button  Margin="0 5 0 0" Padding="10 0 10 0" Height="30" FontSize="10" Foreground="White"  
-                             HorizontalAlignment="Left" BorderBrush="Transparent" Background="#35B697" BorderThickness="2" VerticalAlignment="Center" Content="Ver Historial"  >
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="13"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-
-                </DockPanel>
+                                        <!-- TODO: Implement Functionality -->
+                                        <MenuItem Header="Editar Perfil" Click="Editar_Click"/>
+                                        <MenuItem Header="Crear Usuario" Click="CrearUsuario_Click"/>
+                                        <MenuItem Header="Crear Empleado" Click="CrearEmpleado_Click"/>
+                                        <MenuItem Header="Cerrar Sesión" Click="Cerrar_Click"/>
+                                    </MenuItem>
+                                </Menu>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Grid>
         </Grid>
     </Grid>

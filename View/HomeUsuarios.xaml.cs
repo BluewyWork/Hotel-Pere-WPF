@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfAppIntermodular.Models;
+using WpfAppIntermodular.ViewModels;
 
 namespace WpfAppIntermodular
 {
@@ -19,9 +21,35 @@ namespace WpfAppIntermodular
     /// </summary>
     public partial class HomeUsuarios : Window
     {
+        
+
+        HomeUsuariosVM homeUsuariosVM;
         public HomeUsuarios()
         {
             InitializeComponent();
+            
+
+            homeUsuariosVM = new HomeUsuariosVM(this);
+            DataContext = homeUsuariosVM;
+
+            ListBoxCustomers.ItemsSource = GenerateUsers(10);
+        }
+
+        public List<UsuarioModel> GenerateUsers(int count)
+        {
+            List<UsuarioModel> users = new List<UsuarioModel>();
+            for (int i = 0; i < count; i++)
+            {
+                UsuarioModel user = new UsuarioModel
+                {
+                    Email = $"user{i}@example.com",
+                    Password = $"password{i}",
+                    Name = $"User{i}",
+                    Admin = i % 2 == 0 ? true : false
+                };
+                users.Add(user);
+            }
+            return users;
         }
 
         private void Habitaciones_Click(object sender, RoutedEventArgs e)
@@ -64,6 +92,75 @@ namespace WpfAppIntermodular
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (
+                !string.IsNullOrEmpty(NameTextBox.Text) ||
+                !string.IsNullOrEmpty(SurnameTextBox.Text) ||
+                !string.IsNullOrEmpty(EmailTextBox.Text)
+                )
+            {
+                // At least one field is not empty
+                if (!string.IsNullOrEmpty(NameTextBox.Text) &&
+                    !string.IsNullOrEmpty(SurnameTextBox.Text) &&
+                    !string.IsNullOrEmpty(EmailTextBox.Text))
+                {
+                    // All three fields are not empty, do something
+                }
+                else if (!string.IsNullOrEmpty(NameTextBox.Text) &&
+                         !string.IsNullOrEmpty(SurnameTextBox.Text))
+                {
+                    // Name and Surname are filled, do something
+                }
+                else if (!string.IsNullOrEmpty(NameTextBox.Text) &&
+                         !string.IsNullOrEmpty(EmailTextBox.Text))
+                {
+                    // Name and Email are filled, do something
+                }
+                else if (!string.IsNullOrEmpty(SurnameTextBox.Text) &&
+                         !string.IsNullOrEmpty(EmailTextBox.Text))
+                {
+                    // Surname and Email are filled, do something
+                }
+                else if (!string.IsNullOrEmpty(NameTextBox.Text))
+                {
+                    // Only Name is filled, do something
+                    ListBoxCustomers.ItemsSource = FilterByName(GenerateUsers(10), NameTextBox.Text);
+
+                }
+                else if (!string.IsNullOrEmpty(SurnameTextBox.Text))
+                {
+                    // Only Surname is filled, do something
+                }
+                else if (!string.IsNullOrEmpty(EmailTextBox.Text))
+                {
+                    // Only Email is filled, do something
+                }
+            }
+            else
+            {
+                // None of the fields are filled
+            }
+        }
+
+        // Filter by email
+        public static List<UsuarioModel> FilterByEmail(List<UsuarioModel> usuarios, string email)
+        {
+            return usuarios.Where(u => u.Email == email).ToList();
+        }
+
+        // Filter by password
+        public static List<UsuarioModel> FilterByPassword(List<UsuarioModel> usuarios, string password)
+        {
+            return usuarios.Where(u => u.Password == password).ToList();
+        }
+
+        // Filter by name
+        public static List<UsuarioModel> FilterByName(List<UsuarioModel> usuarios, string name)
+        {
+            return usuarios.Where(u => u.Name == name).ToList();
         }
     }
 }

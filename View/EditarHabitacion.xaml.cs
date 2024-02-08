@@ -37,6 +37,8 @@ namespace WpfAppIntermodular
 
         private void Atras_Click(object sender, RoutedEventArgs e)
         {
+            Home home= new Home();
+            home.Show();
             this.Close();
         }
     }

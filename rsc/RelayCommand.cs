@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace WpfAppIntermodular.rsc
@@ -8,10 +9,16 @@ namespace WpfAppIntermodular.rsc
         private readonly Action execute;
         private readonly Func<bool> canExecute;
         private Action<bool, string, int, double, int, string> insertRoom;
+        private Func<Task> buscar;
 
         public RelayCommand(Action<bool, string, int, double, int, string> insertRoom)
         {
             this.insertRoom = insertRoom;
+        }
+
+        public RelayCommand(Func<Task> buscar)
+        {
+            this.buscar = buscar;
         }
 
         public RelayCommand(Action execute, Func<bool> canExecute = null)

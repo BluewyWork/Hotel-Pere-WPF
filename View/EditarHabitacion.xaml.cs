@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfAppIntermodular.Models;
+using WpfAppIntermodular.ViewModels;
 
 namespace WpfAppIntermodular
 {
@@ -19,13 +22,23 @@ namespace WpfAppIntermodular
     /// </summary>
     public partial class EditarHabitacion : Window
     {
+        private HabitacionModel habitacionSeleccionada;
+
+        public EditarHabitacion(HabitacionModel habitacionSeleccionada)
+        {
+            InitializeComponent();
+            DataContext = new InsertarHabitacionVM(habitacionSeleccionada,this);
+        }
         public EditarHabitacion()
         {
             InitializeComponent();
+            DataContext = new InsertarHabitacionVM(this);
         }
 
         private void Atras_Click(object sender, RoutedEventArgs e)
         {
+            Home home= new Home();
+            home.Show();
             this.Close();
         }
     }

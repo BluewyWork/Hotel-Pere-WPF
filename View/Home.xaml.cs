@@ -1,33 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using WpfAppIntermodular.ViewModels;
 
 namespace WpfAppIntermodular
 {
     /// <summary>
-    /// Lógica de interacción para HomeHabitacion.xaml
+    /// Lógica de interacción para Home.xaml
     /// </summary>
-    public partial class HomeHabitacion : Window
+    public partial class Home : Window
     {
-        public HomeHabitacion()
+        public Home()
         {
             InitializeComponent();
-        }
-
-        private void EditarHabitacion_Click(object sender, RoutedEventArgs e)
-        {
-            EditarHabitacion  editarHabitacion = new EditarHabitacion();
-            editarHabitacion.ShowDialog();
+            DataContext= new HomeVM(this);
         }
 
         private void Usuarios_Click(object sender, RoutedEventArgs e)
@@ -37,10 +22,10 @@ namespace WpfAppIntermodular
             this.Close();
         }
 
-        private void Reserva_Click(object sender, RoutedEventArgs e)
+        private void Habitaciones_Click(object sender, RoutedEventArgs e)
         {
-            Home home = new Home();
-            home.Show();
+            HomeHabitacion homeHabitacion = new HomeHabitacion();
+            homeHabitacion.Show();
             this.Close();
         }
 
@@ -54,16 +39,17 @@ namespace WpfAppIntermodular
             RegistroUsuario registro = new RegistroUsuario();
             registro.ShowDialog();
         }
-        private void Editar_Click(object sender, RoutedEventArgs e)
-        {
-            PerfilUsuario perfil = new PerfilUsuario();
-            perfil.ShowDialog();
-        }
+
         private void Cerrar_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
+        }
+        private void Editar_Click(object sender, RoutedEventArgs e)
+        {
+            PerfilUsuario perfil = new PerfilUsuario();
+            perfil.ShowDialog();
         }
     }
 }

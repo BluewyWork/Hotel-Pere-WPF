@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfAppIntermodular.ViewModels;
 
 namespace WpfAppIntermodular
 {
@@ -23,14 +24,9 @@ namespace WpfAppIntermodular
         public MainWindow()
         {
             InitializeComponent();
+            DataContext= new LoginVM(this);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Home home= new Home();
-            home.Show();
-            this.Close();
 
-        }
     }
 }

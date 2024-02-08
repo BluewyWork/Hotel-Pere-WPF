@@ -108,9 +108,7 @@
 
     <!-- Recurso de estilo para el TextBox Formulario -->
     <Style x:Key="TextBoxForm" TargetType="TextBox">
-        <Setter Property="Height" Value="30"/>
         <Setter Property="FontSize" Value="16"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="LightGray"/>
+        
     </Style>
 </ResourceDictionary>

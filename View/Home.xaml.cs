@@ -39,21 +39,17 @@ namespace WpfAppIntermodular
             RegistroUsuario registro = new RegistroUsuario();
             registro.ShowDialog();
         }
-        private void Editar_Click(object sender, RoutedEventArgs e)
-        {
-            PerfilUsuario perfil = new PerfilUsuario();
-            perfil.ShowDialog();
-        }
+
         private void Cerrar_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
         }
-
-        private void Reservar(object sender, RoutedEventArgs e)
+        private void Editar_Click(object sender, RoutedEventArgs e)
         {
-
+            PerfilUsuario perfil = new PerfilUsuario();
+            perfil.ShowDialog();
         }
     }
 }

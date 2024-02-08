@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -39,13 +39,12 @@ namespace wpfappintermodular.api
             {
                 MessageBox.Show("Las credenciales no son correctas", "Error");
                 return false;
-            }
-          
+            }          
         }
 
         public async Task<bool> UpdateRoomApi(bool reserved, string section, int number, double pricePerNight, int beds, string image)
         {
-            var data = new { reserved, section, number, pricePerNight, beds, image };
+            var data = new { number, section, pricePerNight, reserved, image, beds };
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
             var response = await _httpClient.PutAsJsonAsync("/api/admin/room", data);
             var responseCode = response.EnsureSuccessStatusCode();
@@ -81,21 +80,27 @@ namespace wpfappintermodular.api
             }         
         }
 
-        public async Task<bool> CreateRoomApi( string section, int number, double pricePerNight, int beds, string image)
+        public async Task<bool> CreateRoomApi( string section, int number, 
+            double pricePerNight, int beds, string image, bool reserved)
         {
-            var data = new {  number, section, pricePerNight, beds, image };
-            _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
-            var response = await _httpClient.PostAsJsonAsync("/api/admin/room", data);
-            if (response.IsSuccessStatusCode)
-            {
-                MessageBox.Show("La habitacion se ha creado correctamente", "Ok");
-                return true;
-            }
-            else
-            {
-                MessageBox.Show("Error al crear la habitacion", "Error");
-                return false;
-            }          
+                var data = new { number, section, pricePerNight, reserved, image, beds };
+                _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+                var response = await _httpClient.PostAsJsonAsync("/api/admin/room", data);
+   
+            MessageBox.Show(response.ToString());
+                if (!response.StatusCode.Equals("422"))
+                {
+
+                    MessageBox.Show("La habitacion se ha creado correctamente", "Ok");
+                    return true;
+                }
+                else
+                {
+                    
+                    MessageBox.Show("Error al crear la habitacion, numero duplicado", "Error");
+                    return false;
+                }
+              
         }
 
         public async Task <bool> DeleteRoomApi(int number)
@@ -103,6 +108,35 @@ namespace wpfappintermodular.api
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
             var response = await _httpClient.DeleteAsync($"/api/admin/room/{number}");
             return response.IsSuccessStatusCode;
+        }
+
+        public async Task <List<HabitacionModel>> BuscarHabitaciones(bool? reservadaBuscador, double? precioBuscador, int? camasBuscador)
+        {
+            HttpClient h = new HttpClient();
+            string longurl = _httpClient.BaseAddress+"api/admin/room/search?";
+            var uriBuilder = new UriBuilder(longurl);
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+            if (camasBuscador != null) { query["bed"] = camasBuscador.ToString(); }
+            if(reservadaBuscador != null) { query["reserved"] = reservadaBuscador.ToString().ToLower(); }
+            if(precioBuscador != null) { query["price"] = precioBuscador.ToString();}   
+            uriBuilder.Query = query.ToString();
+            longurl = uriBuilder.ToString();
+            List<HabitacionModel> habitaciones = new List<HabitacionModel>();
+            h.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+            var response = await h.GetAsync(longurl);
+            if (response.IsSuccessStatusCode)
+            {
+                string responseBody = await response.Content.ReadAsStringAsync();
+                dynamic result = JObject.Parse(responseBody);
+                JArray habitacionesArray = result.data;
+                habitaciones = JsonConvert.DeserializeObject<List<HabitacionModel>>(habitacionesArray.ToString());
+                return habitaciones;
+            }
+            else 
+            { 
+                return habitaciones;
+            }
+
         }
 
         /* public async Task<List<HabitacionModel>> BuscarHabitacionApiAsync(HabitacionModel habitacion)
@@ -115,7 +149,5 @@ namespace wpfappintermodular.api
              List<HabitacionModel> habitaciones = JsonConvert.DeserializeObject<List<HabitacionModel>>(habitacionesArray.ToString());
              return habitaciones;
          }*/
-
-
     }
 }

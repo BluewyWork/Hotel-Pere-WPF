@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfAppIntermodular"
+        xmlns:local="clr-namespace:WpfAppIntermodular.rsc"
         mc:Ignorable="d" FontFamily="Montserrat" FontSize="15"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
         Title="Editar Habitación" Height="700" Width="450">
@@ -25,26 +25,65 @@
         <Image Source="../logo_hotel_sin_fondo.png" ></Image>
         <Border Grid.Row="1" Margin="40,20" Background="White" CornerRadius="30">
             <StackPanel HorizontalAlignment="Center">
-                <StackPanel Margin="0 25 0 0">
+                <StackPanel Margin="0 25 0 0" Width="200">
                     <Label>Número de Habitación</Label>
-                    <ComboBox ItemsSource="{Binding RoomNumberOptions}" SelectedItem="{Binding SelectedRoomNumber}" />
+                    <TextBox Style="{StaticResource TextBoxForm}" IsEnabled="{Binding IsEnable}">
+                        <TextBox.Text>
+                            <Binding Path="SelectedRoomNumber" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <local:ValidateEntero/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <AdornerDecorator>
+                                    <StackPanel Margin="5" VerticalAlignment="Center">
+                                        <Border BorderThickness="2" BorderBrush="red" Margin="-2 0 64 0">
+                                            <AdornedElementPlaceholder x:Name="adorner"/>
+                                        </Border>
+                                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="red" Margin="-25 0 0 0"/>
+                                    </StackPanel>
+                                </AdornerDecorator>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
                 </StackPanel>
                 <StackPanel Margin="0 25 0 0">
                     <Label>Numero de camas</Label>
                     <ComboBox ItemsSource="{Binding BedOptions}" SelectedItem="{Binding SelectedNumberOfBeds}" />
                 </StackPanel>
                 <StackPanel Margin="0 25 0 0">
-                    <Label HorizontalAlignment="Left">¿Reservada?</Label>
                     <DockPanel Margin="5 0 0 0">
-                        <RadioButton GroupName="Reservada" Content="Si" IsChecked="{Binding Reservada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        <RadioButton GroupName="Reservada" Content="No" IsChecked="{Binding NoReservada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <CheckBox  Content="¿Reservada?" IsChecked="{Binding Reservada, UpdateSourceTrigger=PropertyChanged}" />
                     </DockPanel>
                 </StackPanel>
                 <StackPanel Margin="0 25 0 0">
                     <Label Content="Precio por noche"/>
-                    <TextBox Margin="0 0 0 10" Text="{Binding PrecioNoche, StringFormat={}{0:N2}, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Margin="0 0 0 10">
+                        <TextBox.Text>
+                            <Binding Path="PrecioNoche" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" StringFormat="{}{0:N2}">
+                                <Binding.ValidationRules>
+                                    <local:ValidateDecimal/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <StackPanel>
+                                    <Border BorderThickness="2" BorderBrush="red" Margin="-2 0 64 0">
+                                        <AdornedElementPlaceholder/>
+                                    </Border>
+                                    <TextBlock Text="{Binding [0].ErrorContent}" Foreground="red" Margin="-25 30 0 0"/>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
                     <Slider Minimum="0" Maximum="200" Value="{Binding PrecioNoche, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
+                <!--<StackPanel>
+                    <ComboBox ItemsSource="{Binding RoomImages}" SelectedItem="{Binding Image}" ></ComboBox>
+                </StackPanel>-->
                 <StackPanel Margin="0 25 0 0">
                     <Label Content="Observaciones"></Label>
                     <TextBox Height="45" Text="{Binding Descripcion, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" AcceptsReturn="True" Margin="5 0 0 0"

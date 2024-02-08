@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Drawing.Diagrams;
-using DocumentFormat.OpenXml.Wordprocessing;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,20 +15,29 @@ namespace WpfAppIntermodular.ViewModels
     {
         private ObservableCollection<HabitacionModel> _habitacionesHome;
         private ApiService apiService;
+        private bool? _reservadaBuscador = false;
+        private int? _camasBuscador;
+        private int[] _camasDisponibles= {1,2,3};
+        private double? _precioNocheBuscador;
+ 
         private HabitacionModel _habitacionSeleccionada;
         private Home ventana;
         public ICommand EditarHabitacionCommand { get; }
         public ICommand DeleteCommand { get; }
         public ICommand CreateRoomCommand { get; }
+        public ICommand BuscarCommand { get; }
+        public ICommand LimpiarCommand { get; }
 
         public HomeVM(Home ventana)
         {
             MostrarHabitaciones();
             EditarHabitacionCommand = new RelayCommand(EditarHabitacion, () => HabitacionSeleccionada != null);
             DeleteCommand = new RelayCommand(DeleteRoom, () => HabitacionSeleccionada != null);
+            BuscarCommand = new RelayCommand(Buscar);
+            LimpiarCommand = new RelayCommand(Limpiar);
             CreateRoomCommand = new RelayCommand(CreateRoom);
             this.ventana = ventana;
-        }
+        }      
 
         public ObservableCollection<HabitacionModel> HabitacionesHome
         {
@@ -40,6 +48,7 @@ namespace WpfAppIntermodular.ViewModels
                 OnPropertyChanged(nameof(HabitacionesHome));
             }
         }
+
         public HabitacionModel HabitacionSeleccionada
         {
             get { return _habitacionSeleccionada; }
@@ -52,18 +61,60 @@ namespace WpfAppIntermodular.ViewModels
                 }
             }
         }
-
-        private void EditarHabitacion()
+        public bool? ReservadaBuscador
         {
-          
+            get { return _reservadaBuscador; }
+            set
+            {
+                if (_reservadaBuscador != value)
+                {
+                    _reservadaBuscador = value;
+                    OnPropertyChanged(nameof(ReservadaBuscador));
+                }
+            }
+        }
+        
+        public int? CamasBuscador
+        {
+            get { return _camasBuscador; }
+            set
+            {
+                if (_camasBuscador != value)
+                {
+                    _camasBuscador = value;
+                    OnPropertyChanged(nameof(CamasBuscador));
+                }
+            }
+        }
+        public int[]? CamasDisponibles
+        {
+            get { return _camasDisponibles; }
+            set
+            {
+                if (_camasDisponibles != value)
+                {
+                    _camasDisponibles = value;
+                    OnPropertyChanged(nameof(CamasDisponibles));
+                }
+            }
+        }
+        public double? PrecioNocheBuscador
+        {
+            get { return _precioNocheBuscador; }
+            set
+            {
+                if (_precioNocheBuscador != value)
+                {
+                    _precioNocheBuscador = value;
+                    OnPropertyChanged(nameof(PrecioNocheBuscador));
+                }
+            }
+        }
+        private void EditarHabitacion()
+        {      
             EditarHabitacion editarHabitacion= new EditarHabitacion(HabitacionSeleccionada);
             ventana.Close();
             editarHabitacion.Show();
-        }
-
-        private async void BuscarHabitacion()
-        {
-
         }
 
         private async void DeleteRoom()
@@ -104,8 +155,25 @@ namespace WpfAppIntermodular.ViewModels
             ventana.Close();
             editarHabitacion.Show();
         }
+        private void Limpiar()
+        {
+            CamasBuscador = null;
+            PrecioNocheBuscador = null;
+            ReservadaBuscador= false;          
+        }
 
-
+        private async void Buscar()
+        {
+            try
+            {
+                List<HabitacionModel> habitaciones = await apiService.BuscarHabitaciones(ReservadaBuscador,PrecioNocheBuscador,CamasBuscador);
+                HabitacionesHome = new ObservableCollection<HabitacionModel>(habitaciones);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al buscar habitaciones: {ex.Message}");
+            }             
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Media.Imaging;
 
 namespace WpfAppIntermodular.Models
 {
     public class HabitacionModel : INotifyPropertyChanged
     {
-        public int? _number;
-        public string? _section;
-        public double? _pricePerNight;
-        public bool? _reserved;
-        //public BitmapImage _image;
-        public int? _beds;
+        private int? _number;
+        private string? _section;
+        private double? _pricePerNight;
+        private bool? _reserved;
+        //private BitmapImage? _image;
+        //private string? _image64;
+        private int? _beds;
+        private string? _reservado;
 
         public HabitacionModel() { }
 
@@ -32,7 +31,7 @@ namespace WpfAppIntermodular.Models
             }
         }
 
-        /*public BitmapImage Image
+        /*public BitmapImage? Image
         {
             get { return _image; }
             set
@@ -40,6 +39,20 @@ namespace WpfAppIntermodular.Models
                 if (_image != value)
                 {
                     _image = value;
+                    OnPropertyChanged(nameof(Beds));
+                }
+            }
+        }
+
+        public string? Image64
+        {
+            get { return _image64; }
+            set
+            {
+                if (_image64 != value)
+                    OnPropertyChanged(nameof(Beds));
+                {
+                    _image64 = value;
                 }
             }
         }*/
@@ -83,6 +96,19 @@ namespace WpfAppIntermodular.Models
             }
         }
 
+        public string? Reservado
+        {
+            get { return _reservado; }
+            set
+            {
+                if (_reservado != value)
+                {
+                    _reservado = value;
+                    OnPropertyChanged(nameof(Section));
+                }
+            }
+        }
+
         public bool? Reserved
         {
             get { return _reserved; }
@@ -93,8 +119,24 @@ namespace WpfAppIntermodular.Models
                     _reserved = value;
                     OnPropertyChanged(nameof(Reserved));
                 }
+                
             }
         }
+        /*public void ConvertirImagenDesdeBase64()
+        {
+            byte[] imageBytes = Convert.FromBase64String(Image64);
+
+            using (MemoryStream ms = new MemoryStream(imageBytes))
+            {
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = ms;
+                bitmapImage.EndInit();
+
+                Image = bitmapImage;
+            }
+        }*/
 
 
         public event PropertyChangedEventHandler? PropertyChanged;

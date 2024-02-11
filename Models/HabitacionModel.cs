@@ -1,7 +1,5 @@
-﻿using System;
+﻿
 using System.ComponentModel;
-using System.IO;
-using System.Windows.Media.Imaging;
 
 namespace WpfAppIntermodular.Models
 {
@@ -11,8 +9,7 @@ namespace WpfAppIntermodular.Models
         private string? _section;
         private double? _pricePerNight;
         private bool? _reserved;
-        //private BitmapImage? _image;
-        //private string? _image64;
+        private string? _image;
         private int? _beds;
         private string? _reservado;
 
@@ -31,7 +28,7 @@ namespace WpfAppIntermodular.Models
             }
         }
 
-        /*public BitmapImage? Image
+        public string? Image
         {
             get { return _image; }
             set
@@ -39,23 +36,10 @@ namespace WpfAppIntermodular.Models
                 if (_image != value)
                 {
                     _image = value;
-                    OnPropertyChanged(nameof(Beds));
+                    OnPropertyChanged(nameof(Image));
                 }
             }
         }
-
-        public string? Image64
-        {
-            get { return _image64; }
-            set
-            {
-                if (_image64 != value)
-                    OnPropertyChanged(nameof(Beds));
-                {
-                    _image64 = value;
-                }
-            }
-        }*/
 
         public int? Number
         {
@@ -119,25 +103,9 @@ namespace WpfAppIntermodular.Models
                     _reserved = value;
                     OnPropertyChanged(nameof(Reserved));
                 }
-                
+
             }
         }
-        /*public void ConvertirImagenDesdeBase64()
-        {
-            byte[] imageBytes = Convert.FromBase64String(Image64);
-
-            using (MemoryStream ms = new MemoryStream(imageBytes))
-            {
-                BitmapImage bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.StreamSource = ms;
-                bitmapImage.EndInit();
-
-                Image = bitmapImage;
-            }
-        }*/
-
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -145,8 +113,8 @@ namespace WpfAppIntermodular.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
-
 }
+
+
 

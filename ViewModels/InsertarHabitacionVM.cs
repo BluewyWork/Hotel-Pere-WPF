@@ -14,22 +14,20 @@ namespace WpfAppIntermodular.ViewModels
     {
         private ApiService apiService;
         private int? _numero;
-        //private string? _imagen;
         private double? _precioNoche;
         private string? _descripcion;
         private bool? _reservada;
         private bool? _isEnable;
-        //private string[]? _roomImages = { "Sencilla", "Doble", "Suite" };
         private int? _selectedNumberOfBeds;
         private int? _selectedRoomNumber;
         private EditarHabitacion ventana;
         public ICommand UpdateRoomCommand { get; }
         public ICommand CreateRoomCommand { get; }
         public ICommand SaveCommand { get; }
-       
+
 
         public int[] BedOptions { get; }
-        public List<int> RoomNumberOptions { get; } 
+        public List<int> RoomNumberOptions { get; }
 
         public int? SelectedNumberOfBeds
         {
@@ -43,18 +41,6 @@ namespace WpfAppIntermodular.ViewModels
                 }
             }
         }
-        /*public string[]? RoomImages
-        {
-            get { return _roomImages; }
-            set
-            {
-                if (_roomImages != value)
-                {
-                    _roomImages = value;
-                    OnPropertyChanged(nameof(RoomImages));
-                }
-            }
-        } */      
 
         public int? SelectedRoomNumber
         {
@@ -108,19 +94,6 @@ namespace WpfAppIntermodular.ViewModels
             }
         }
 
-       /* public string? Imagen
-        {
-            get { return _imagen; }
-            set
-            {
-                if (_imagen != value)
-                {
-                    _imagen = value;
-                    OnPropertyChanged(nameof(Imagen));
-                }
-            }
-        }*/
-        
         public bool? IsEnable
         {
             get { return _isEnable; }
@@ -154,29 +127,28 @@ namespace WpfAppIntermodular.ViewModels
             for (int i = 1; i < 20; i++)
             {
                 listaNumeros.Add(i);
-            }           
-                SelectedRoomNumber = 1;
-                BedOptions = new int[] { 1, 2, 3 };
-                Reservada = false;
-                SelectedNumberOfBeds = 1;
-                RoomNumberOptions = listaNumeros;
-                PrecioNoche = 0;
-                Descripcion = string.Empty;
-                IsEnable = true;
+            }
+            SelectedRoomNumber = 1;
+            BedOptions = new int[] { 1, 2, 3 };
+            Reservada = false;
+            SelectedNumberOfBeds = 1;
+            RoomNumberOptions = listaNumeros;
+            PrecioNoche = 0;
+            Descripcion = string.Empty;
+            IsEnable = true;
         }
 
-
-        public InsertarHabitacionVM(HabitacionModel habitacionSeleccionada, EditarHabitacion ventana)        
+        public InsertarHabitacionVM(HabitacionModel habitacionSeleccionada, EditarHabitacion ventana)
         {
             this.ventana = ventana;
             SaveCommand = new RelayCommand(UpdateRoom);
-            List<int> listaNumeros= new List<int>();
-            for (int i=1; i<20; i++)
+            List<int> listaNumeros = new List<int>();
+            for (int i = 1; i < 20; i++)
             {
                 listaNumeros.Add(i);
             }
-        
-            if(habitacionSeleccionada!=null)
+
+            if (habitacionSeleccionada != null)
             {
                 SelectedRoomNumber = habitacionSeleccionada.Number;
                 BedOptions = new int[] { 1, 2, 3 };
@@ -186,10 +158,8 @@ namespace WpfAppIntermodular.ViewModels
                 PrecioNoche = habitacionSeleccionada.PricePerNight;
                 Descripcion = habitacionSeleccionada.Section;
                 IsEnable = false;
-            }           
+            }
         }
-
-        
 
         private async void UpdateRoom()
         {
@@ -208,6 +178,7 @@ namespace WpfAppIntermodular.ViewModels
                 }
             }
         }
+
         private async void CreateRoom()
         {
             apiService = new ApiService();
@@ -220,6 +191,7 @@ namespace WpfAppIntermodular.ViewModels
                 ventana.Close();
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)

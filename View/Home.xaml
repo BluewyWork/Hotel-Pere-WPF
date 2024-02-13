@@ -106,7 +106,7 @@
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" FontFamily="Montserrat" Foreground="#35B697" FontSize="30" FontWeight="Bold" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:</Label>
                 <StackPanel Grid.Row="1" >
-                    <ListBox  ItemsSource="{Binding HabitacionesHome}" SelectedItem="{Binding HabitacionSeleccionada}" MaxHeight="400" >
+                    <ListBox  ItemsSource="{Binding HabitacionesHome}" SelectedItem="{Binding HabitacionSeleccionada}" MaxHeight="350" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <DockPanel >

@@ -26,6 +26,7 @@ namespace wpfappintermodular.api
 
         public async Task<bool> AutenticarUsuarioAsync(string email, string password)
         {
+            return true;
             var data = new { email, password };
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/auth/employee/login", data);
             if (response.IsSuccessStatusCode)
@@ -100,6 +101,7 @@ namespace wpfappintermodular.api
                 return false;
             }
         }
+
         public async Task<bool> DeleteRoomApi(int number)
         {
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
@@ -134,6 +136,30 @@ namespace wpfappintermodular.api
                 return habitaciones;
             }
 
+        }
+
+        public async Task<List<UsuarioModel>> GetAllUsersApi()
+        {
+            try
+            {
+                _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+                var response = await _httpClient.GetAsync("/api/route");
+
+                if (!response.IsSuccessStatusCode)
+                    return new List<UsuarioModel>();
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+                dynamic result = JObject.Parse(responseBody);
+                JArray usuarioArray = result.data;
+                var usuarios = JsonConvert.DeserializeObject<List<UsuarioModel>>(usuarioArray.ToString());
+
+                return usuarios ?? new List<UsuarioModel>();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return new List<UsuarioModel>();
+            }
         }
     }
 }

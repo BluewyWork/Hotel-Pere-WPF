@@ -36,10 +36,6 @@
                     <Label Content="Email" FontSize="16"/>
                     <TextBox Padding="2" Style="{StaticResource TextBoxForm}"/>
                 </StackPanel>
-                <StackPanel Margin="40,20">
-                    <Label Content="Teléfono" FontSize="16"/>
-                    <TextBox Padding="2" Style="{StaticResource TextBoxForm}"/>
-                </StackPanel>
             </StackPanel>
         </Border>
         <DockPanel Grid.Row="2" Margin="40 0 40 0">

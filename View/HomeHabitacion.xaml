@@ -99,29 +99,34 @@
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="73*"></RowDefinition>
-                    <RowDefinition Height="377*"></RowDefinition>
+                    <RowDefinition Height="22*"></RowDefinition>
+                    <RowDefinition Height="203*"></RowDefinition>
 
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Style="{StaticResource LabelTitulo}" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:</Label>
-                <ListBox Grid.Row="1" ItemsSource="{Binding Habitaciones}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <DockPanel Width="413" Height="76">
-                                <Image Source="{Binding Imagen}" Width="60"/>
-                                <StackPanel Margin="15 15 75 15">
-                                    <TextBlock Margin="0 5 0 0" HorizontalAlignment="Center" Text="{Binding Descripcion}"/>
-                                    <TextBlock Margin="0 5 0 0" FontSize="10" Foreground="#68EB9C" HorizontalAlignment="Center" Text="{Binding PrecioNoche}"/>
-                                </StackPanel>
-                                <Button Margin="0 5 0 0" Padding="10 0 10 0" Height="30" FontSize="10" Foreground="White"  
-                        HorizontalAlignment="Left" BorderBrush="Transparent" Background="#35B697" BorderThickness="2" VerticalAlignment="Center"
-                        Content="Editar habitación"/>
-                            </DockPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <Label Grid.Row="0" Style="{StaticResource LabelTitulo}" Margin="23,10,-23,77" Grid.RowSpan="2">Resultados:</Label>
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Reservas}" MaxWidth="450" MaxHeight="330" Margin="-27,34,26,38" Grid.RowSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nombre cliente" Binding="{Binding CustomerName}" />
+                        <DataGridTextColumn Header="Correo cliente" Binding="{Binding CustomerEmail}" />
+                        <DataGridTextColumn Header="Nº Hab" Binding="{Binding RoomNumber}" />
+                        <DataGridTextColumn Header="Precio noche" Binding="{Binding PricePerNight}" />
+                        <DataGridTextColumn Header="CheckIn" Binding="{Binding CheckIn}" />
+                        <DataGridTextColumn Header="CheckOut" Binding="{Binding CheckOut}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <DockPanel HorizontalAlignment="Right" Margin="0,316,49,-12" Grid.Row="1" Width="240">
+                    <Button Content="Crear reserva" 
+                            Style="{StaticResource ButtonStyle}" Margin="0 10 10 0" Width="110"/>
+                    <Button Content="Eliminar reserva" 
+                            Style="{StaticResource ButtonStyle}" Margin="0 10 10 0" Width="110" Background="red"/>
+                </DockPanel>
 
             </Grid>
         </Grid>
     </Grid>
-</Window>
+</Window>          
+                   
+                   
+                   
+                   

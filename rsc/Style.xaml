@@ -111,4 +111,8 @@
         <Setter Property="FontSize" Value="16"/>
         
     </Style>
+    <!-- Recurso de estilo para el label de Reservas -->
+    <Style x:Key="labelReservas" TargetType="Label">
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
 </ResourceDictionary>

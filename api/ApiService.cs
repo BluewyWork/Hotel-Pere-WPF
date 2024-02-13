@@ -161,5 +161,15 @@ namespace wpfappintermodular.api
                 return new List<UsuarioModel>();
             }
         }
+
+        public async Task<Boolean> UpdateUser(string name, string surname, string email, string password)
+        {
+            return true;
+        }
+
+        public async Task<Boolean> EliminarUsuario(string email)
+        {
+            return true;
+        }
     }
 }

@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfAppIntermodular.Models;
+using WpfAppIntermodular.ViewModels;
 
 namespace WpfAppIntermodular
 {
@@ -24,6 +26,15 @@ namespace WpfAppIntermodular
             InitializeComponent();
         }
 
+        public PerfilUsuario(UsuarioModel u)
+        {
+            InitializeComponent();
+            VName.Text = u.Name;
+            VSurname.Text = u.Surname;
+            VEmail.Text = u.Email;
+        }
+
+       
         private void Atras_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

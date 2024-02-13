@@ -13,7 +13,21 @@ namespace WpfAppIntermodular.Models
         public string? _email;
         public string? _password;
         public string? _name;
+        public string? _surname;
         public bool? _admin; 
+
+        public string? Surname
+        {
+            get { return _surname; }
+            set
+            {
+                if (_surname != value)
+                {
+                    _surname = value;
+                    OnPropertyChanged(nameof(Surname));
+                }
+            }
+        }
 
         public string? Email
         {

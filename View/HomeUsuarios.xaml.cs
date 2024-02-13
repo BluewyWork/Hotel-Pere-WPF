@@ -32,24 +32,13 @@ namespace WpfAppIntermodular
             homeUsuariosVM = new HomeUsuariosVM(this);
             DataContext = homeUsuariosVM;
 
-            ListBoxCustomers.ItemsSource = GenerateUsers(10);
-        }
-
-        public List<UsuarioModel> GenerateUsers(int count)
-        {
-            List<UsuarioModel> users = new List<UsuarioModel>();
-            for (int i = 0; i < count; i++)
+            List<UsuarioModel> users = new List<UsuarioModel>()
             {
-                UsuarioModel user = new UsuarioModel
-                {
-                    Email = $"user{i}@example.com",
-                    Password = $"password{i}",
-                    Name = $"User{i}",
-                    Admin = i % 2 == 0 ? true : false
-                };
-                users.Add(user);
-            }
-            return users;
+                new UsuarioModel() { Name = "John", Surname = "Doe", Email = "john@example.com", Password = "password1" },
+                new UsuarioModel() { Name = "Jane", Surname = "Smith", Email = "jane@example.com", Password = "password2" },
+            };
+
+            ListBoxCustomers.ItemsSource = users;
         }
 
         private void Habitaciones_Click(object sender, RoutedEventArgs e)
@@ -96,53 +85,65 @@ namespace WpfAppIntermodular
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (
-                !string.IsNullOrEmpty(NameTextBox.Text) ||
-                !string.IsNullOrEmpty(SurnameTextBox.Text) ||
-                !string.IsNullOrEmpty(EmailTextBox.Text)
-                )
+            List<UsuarioModel> users = new List<UsuarioModel>()
+            {
+                new UsuarioModel() { Name = "John", Surname = "Doe", Email = "john@example.com", Password = "password1" },
+                new UsuarioModel() { Name = "Jane", Surname = "Smith", Email = "jane@example.com", Password = "password2" },
+            };
+
+            if (!string.IsNullOrEmpty(NameTextBox.Text) || !string.IsNullOrEmpty(SurnameTextBox.Text) || !string.IsNullOrEmpty(EmailTextBox.Text))
             {
                 // At least one field is not empty
-                if (!string.IsNullOrEmpty(NameTextBox.Text) &&
-                    !string.IsNullOrEmpty(SurnameTextBox.Text) &&
-                    !string.IsNullOrEmpty(EmailTextBox.Text))
+                if (!string.IsNullOrEmpty(NameTextBox.Text) && !string.IsNullOrEmpty(SurnameTextBox.Text) && !string.IsNullOrEmpty(EmailTextBox.Text))
                 {
                     // All three fields are not empty, do something
+                    ListBoxCustomers.ItemsSource = FilterByName(users, NameTextBox.Text)
+                        .Intersect(FilterBySurname(users, SurnameTextBox.Text))
+                        .Intersect(FilterByEmail(users, EmailTextBox.Text))
+                        .ToList();
                 }
-                else if (!string.IsNullOrEmpty(NameTextBox.Text) &&
-                         !string.IsNullOrEmpty(SurnameTextBox.Text))
+                else if (!string.IsNullOrEmpty(NameTextBox.Text) && !string.IsNullOrEmpty(SurnameTextBox.Text))
                 {
                     // Name and Surname are filled, do something
+                    ListBoxCustomers.ItemsSource = FilterByName(users, NameTextBox.Text)
+                        .Intersect(FilterBySurname(users, SurnameTextBox.Text))
+                        .ToList();
                 }
-                else if (!string.IsNullOrEmpty(NameTextBox.Text) &&
-                         !string.IsNullOrEmpty(EmailTextBox.Text))
+                else if (!string.IsNullOrEmpty(NameTextBox.Text) && !string.IsNullOrEmpty(EmailTextBox.Text))
                 {
                     // Name and Email are filled, do something
+                    ListBoxCustomers.ItemsSource = FilterByName(users, NameTextBox.Text)
+                        .Intersect(FilterByEmail(users, EmailTextBox.Text))
+                        .ToList();
                 }
-                else if (!string.IsNullOrEmpty(SurnameTextBox.Text) &&
-                         !string.IsNullOrEmpty(EmailTextBox.Text))
+                else if (!string.IsNullOrEmpty(SurnameTextBox.Text) && !string.IsNullOrEmpty(EmailTextBox.Text))
                 {
                     // Surname and Email are filled, do something
+                    ListBoxCustomers.ItemsSource = FilterBySurname(users, SurnameTextBox.Text)
+                        .Intersect(FilterByEmail(users, EmailTextBox.Text))
+                        .ToList();
                 }
                 else if (!string.IsNullOrEmpty(NameTextBox.Text))
                 {
                     // Only Name is filled, do something
-                    ListBoxCustomers.ItemsSource = FilterByName(GenerateUsers(10), NameTextBox.Text);
-
+                    ListBoxCustomers.ItemsSource = FilterByName(users, NameTextBox.Text);
                 }
                 else if (!string.IsNullOrEmpty(SurnameTextBox.Text))
                 {
                     // Only Surname is filled, do something
+                    ListBoxCustomers.ItemsSource = FilterBySurname(users, SurnameTextBox.Text);
                 }
                 else if (!string.IsNullOrEmpty(EmailTextBox.Text))
                 {
                     // Only Email is filled, do something
+                    ListBoxCustomers.ItemsSource = FilterByEmail(users, EmailTextBox.Text);
                 }
             }
             else
             {
-                // None of the fields are filled
+                MessageBox.Show("At least one of the fields must be filled");
             }
+
         }
 
         // Filter by email
@@ -161,6 +162,25 @@ namespace WpfAppIntermodular
         public static List<UsuarioModel> FilterByName(List<UsuarioModel> usuarios, string name)
         {
             return usuarios.Where(u => u.Name == name).ToList();
+        }
+
+        // Filter by surname
+        public static List<UsuarioModel> FilterBySurname(List<UsuarioModel> usuarios, string surname)
+        {
+            return usuarios.Where(u => u.Surname == surname).ToList();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            // button editar
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            // button eliminar
+            UsuarioModel selectedItem = (UsuarioModel) ListBoxCustomers.SelectedItem;
+
+            
         }
     }
 }

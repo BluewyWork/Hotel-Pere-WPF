@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfAppIntermodular"
+        xmlns:local="clr-namespace:WpfAppIntermodular" xmlns:viewmodels="clr-namespace:WpfAppIntermodular.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:HomeUsuariosVM}"
         mc:Ignorable="d" FontFamily="Montserrat"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
         Title="Home Usuarios" Height="550" Width="800">
@@ -78,9 +78,14 @@
                     <Button Margin="0 10 0 0"  Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" 
                              Content="Buscar" Click="Button_Click"  >
                     </Button>
-                    <Button Style="{StaticResource ButtonStyle}" FontWeight="Bold" Margin="30 10 0 0" Foreground="#35B697" Background="Transparent" BorderBrush="#35B697" Content="Limpiar"  >
-                    </Button>
+                    <Button Style="{StaticResource ButtonStyle}" FontWeight="Bold" Margin="30 10 0 0" Foreground="#35B697" Background="Transparent" BorderBrush="#35B697" Content="Limpiar"  />
+                    
                 </DockPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource ButtonStyle}" FontWeight="Bold" Margin="30 10 0 0" Foreground="#35B697" Background="Transparent" BorderBrush="#35B697" Content="Editar" Command="{Binding EditUserCommand}"  />
+                    <Button Style="{StaticResource ButtonStyle}" FontWeight="Bold" Margin="30 10 0 0" Foreground="#35B697" Background="Transparent" BorderBrush="#35B697" Content="Eliminar" Command="{Binding DeleteUserCommand}"  />
+                </StackPanel>
             </StackPanel>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -95,7 +100,7 @@
                        FontWeight="Bold" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:
                 </Label>
 
-                <ListBox x:Name="ListBoxCustomers" Grid.Row="0" Grid.Column="0" Margin="0,0,0,10" Grid.RowSpan="4">
+                <ListBox x:Name="ListBoxCustomers" Grid.Row="0" Grid.Column="0" Margin="0,0,0,10" Grid.RowSpan="4" SelectedItem="{Binding SelectedUser}" ItemsSource="{Binding CustomerList}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <DockPanel Grid.ColumnSpan="2">

@@ -46,7 +46,7 @@
         <DockPanel Grid.Row="2" Margin="40 0 40 0">
             <Button Style="{StaticResource ButtonStyle}"  x:Name="Atras" Margin="5 0 0 0"  DockPanel.Dock="Left"
                      Width="130" Background="Red" Content="Atras" Click="Atras_Click" />
-            <Button Style="{StaticResource ButtonStyle}"  x:Name="Guardar" Margin="190 0 0 0" Width="130" Content="Guardar" />
+            <Button Style="{StaticResource ButtonStyle}"  x:Name="Guardar" Margin="190 0 0 0" Width="130" Content="Guardar" Command="{Binding GuardarCommand}" />
            
         </DockPanel>
 

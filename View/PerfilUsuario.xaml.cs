@@ -28,6 +28,8 @@ namespace WpfAppIntermodular
 
         public PerfilUsuario(UsuarioModel u)
         {
+            PerfilUsuarioVM r = new PerfilUsuarioVM(this);
+            DataContext = r;
             InitializeComponent();
             VName.Text = u.Name;
             VSurname.Text = u.Surname;

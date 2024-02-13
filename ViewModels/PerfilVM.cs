@@ -9,35 +9,33 @@ namespace WpfAppIntermodular.ViewModels
 {
     class PerfilUsuarioVM : INotifyPropertyChanged
     {
-        private UsuarioModel _user;
         private ApiService apiService;
+        private PerfilUsuario view;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public PerfilUsuarioVM(UsuarioModel user, HomeUsuariosVM homeUsuariosVM)
+        public PerfilUsuarioVM(PerfilUsuario view)
         {
-            _user = user;
-            GuardarCommand = new RelayCommand(Guardar, () => User != null);
+            this.view = view;
+            apiService = new ApiService(); 
+            GuardarCommand = new RelayCommand(Guardar);
         }
 
         public ICommand GuardarCommand { get; }
         public ICommand AtrasCommand { get; }
 
-        public UsuarioModel User
-        {
-            get { return _user; }
-            set
-            {
-                if (_user != value)
-                {
-                    _user = value;
-                    OnPropertyChanged(nameof(User));
-                }
-            }
-        }
-   
+         
         private async void Guardar()
         {
-            await apiService.UpdateUser(User.Name, User.Surname, User.Email, "");
+            System.Windows.MessageBox.Show("EN METODO GUARDAR");
+            bool x = await apiService.UpdateUser(view.VName.Text, view.VSurname.Text, view.VEmail.Text, "");
+            if (x)
+            {
+                System.Windows.MessageBox.Show("TODO BIEN");
+            } else
+            {
+                System.Windows.MessageBox.Show("ALGO FALLO");
+            }
+            
         }
 
    

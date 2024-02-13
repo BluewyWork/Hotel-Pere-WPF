@@ -26,9 +26,18 @@ namespace WpfAppIntermodular.ViewModels
         public ICommand EditUserCommand { get; }
         public ICommand DeleteUserCommand { get; }
 
-        private async void EditUser()
+        private void EditUser()
         {
-            PerfilUsuario p = new PerfilUsuario(SelecteUser);
+            UsuarioModel x = (UsuarioModel)view.ListBoxCustomers.SelectedItem;
+
+            if (x == null)
+            {
+                System.Windows.MessageBox.Show("NULL");
+            }
+
+            System.Windows.MessageBox.Show($"{x.Name}  {x.Email}");
+
+            PerfilUsuario p = new PerfilUsuario(x);
             p.Show();
         }
 
@@ -50,7 +59,7 @@ namespace WpfAppIntermodular.ViewModels
         public HomeUsuariosVM(HomeUsuarios x)
         {
             showUsers();
-            EditUserCommand = new RelayCommand(EditUser, () => SelecteUser != null);
+            EditUserCommand = new RelayCommand(EditUser);
             DeleteUserCommand = new RelayCommand(DeleteUser, () => SelecteUser != null);
             view = x;
         }

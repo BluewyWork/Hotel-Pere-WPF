@@ -5,58 +5,58 @@ using System.ComponentModel;
 
 using wpfappintermodular.api;
 using WpfAppIntermodular.Models;
-using WpfAppIntermodular.rsc;
+
 
 namespace WpfAppIntermodular.ViewModels
 {
     public class HomeHabitacionVM : INotifyPropertyChanged
     {
-        private ObservableCollection<HabitacionModel> _habitaciones;
+        private ObservableCollection<ReservasModel> _reservas;
         private ApiService apiService;
 
-        public ObservableCollection<HabitacionModel> Habitaciones
+        public ObservableCollection<ReservasModel> Reservas
         {
-            get { return _habitaciones; }
+            get { return _reservas; }
             set
             {
-                _habitaciones = value;
-                OnPropertyChanged(nameof(Habitaciones));
+                _reservas = value;
+                OnPropertyChanged(nameof(Reservas));
             }
         }
-        /*private ICommand buscarCommand;
-
-        public ICommand BuscarCommand
-        {
-            get
-            {
-                if (buscarCommand == null)
-                {
-                    buscarCommand = new RelayCommand(BuscarHabitacion);
-                }
-                return buscarCommand;
-            }
-        }*/
         public HomeHabitacionVM()
         {
-            
+            MostrarReservas();
+
         }
 
-        /*private async void BuscarHabitacion()
+        private async void MostrarReservas()
         {
             try
             {
                 apiService = new ApiService();
-                List<HabitacionModel> habitaciones = await apiService.BuscarHabitacionesAsync();
+                List<ReservasModel> reservas = await apiService.MostrarReservasApiAsync();
+                Reservas = new ObservableCollection<ReservasModel>(reservas);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al buscar habitaciones: {ex.Message}");
-
             }
+        }
 
-        }*/
+        /*private ICommand buscarCommand;
 
-       
+public ICommand BuscarCommand
+{
+   get
+   {
+       if (buscarCommand == null)
+       {
+           buscarCommand = new RelayCommand(BuscarHabitacion);
+       }
+       return buscarCommand;
+   }
+}*/
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

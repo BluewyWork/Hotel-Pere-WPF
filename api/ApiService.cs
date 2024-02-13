@@ -26,7 +26,6 @@ namespace wpfappintermodular.api
 
         public async Task<bool> AutenticarUsuarioAsync(string email, string password)
         {
-            return true;
             var data = new { email, password };
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/auth/employee/login", data);
             if (response.IsSuccessStatusCode)
@@ -78,6 +77,26 @@ namespace wpfappintermodular.api
             {
                 MessageBox.Show("Error al mostrar las habitaciones ", "Error");
                 return habitaciones;
+            }
+        }
+
+        public async Task<List<ReservasModel>> MostrarReservasApiAsync()
+        {
+            List<ReservasModel> reservas = new List<ReservasModel>();
+            _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+            var response = await _httpClient.GetAsync("/api/admin/books");
+            if (response.IsSuccessStatusCode)
+            {
+                string responseBody = await response.Content.ReadAsStringAsync();
+                dynamic result = JObject.Parse(responseBody);
+                JArray reservasArray = result.data;
+                reservas = JsonConvert.DeserializeObject<List<ReservasModel>>(reservasArray.ToString());
+                return reservas;
+            }
+            else
+            {
+                MessageBox.Show("Error al mostrar las habitaciones ", "Error");
+                return reservas;
             }
         }
 

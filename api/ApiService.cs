@@ -6,6 +6,7 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WpfAppIntermodular;
@@ -165,11 +166,30 @@ namespace wpfappintermodular.api
         public async Task<Boolean> UpdateUser(string name, string surname, string email, string password)
         {
             return true;
+
+            var data = new {name, surname, email, password};
+            _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+            var response = await _httpClient.PutAsJsonAsync("/api/admin/guest", data);
+            var responseCode = response.EnsureSuccessStatusCode();
+            if (responseCode.IsSuccessStatusCode)
+            {
+                MessageBox.Show("El usuario se ha actualizado correctamente", "Ok");
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("El usuario no se ha podido actualizar", "Error");
+                return false;
+            }
         }
 
         public async Task<Boolean> EliminarUsuario(string email)
         {
             return true;
+
+            _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+            var response = await _httpClient.DeleteAsync($"/api/admin/guest/{email}");
+            return response.IsSuccessStatusCode;
         }
     }
 }

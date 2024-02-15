@@ -141,10 +141,20 @@ namespace wpfappintermodular.api
 
         public async Task<List<UsuarioModel>> GetAllUsersApi()
         {
+
+
+            List<UsuarioModel> users = new List<UsuarioModel>()
+            {
+                new UsuarioModel() { Name = "John", Surname = "Doe", Email = "john@example.com", Password = "password1" },
+                new UsuarioModel() { Name = "Jane", Surname = "Smith", Email = "jane@example.com", Password = "password2" },
+            };
+
+            // return users;
+
             try
             {
                 _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
-                var response = await _httpClient.GetAsync("/api/route");
+                var response = await _httpClient.GetAsync("/api/admin/guestTable/all");
 
                 if (!response.IsSuccessStatusCode)
                     return new List<UsuarioModel>();
@@ -165,7 +175,7 @@ namespace wpfappintermodular.api
 
         public async Task<Boolean> UpdateUser(string name, string surname, string email, string password)
         {
-            return true;
+            // return true;
 
             var data = new {name, surname, email, password};
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
@@ -185,7 +195,7 @@ namespace wpfappintermodular.api
 
         public async Task<Boolean> EliminarUsuario(string email)
         {
-            return true;
+            // return true;
 
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
             var response = await _httpClient.DeleteAsync($"/api/admin/guest/{email}");

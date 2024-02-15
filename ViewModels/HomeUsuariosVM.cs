@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using wpfappintermodular.api;
 using WpfAppIntermodular.Models;
@@ -33,6 +34,7 @@ namespace WpfAppIntermodular.ViewModels
             if (x == null)
             {
                 System.Windows.MessageBox.Show("NULL");
+                return;
             }
 
             System.Windows.MessageBox.Show($"{x.Name}  {x.Email}");
@@ -53,7 +55,15 @@ namespace WpfAppIntermodular.ViewModels
                 return;
             }
 
-            await apiService.EliminarUsuario(SelecteUser.Email);
+            bool xx = await apiService.EliminarUsuario(SelecteUser.Email);
+
+            if (xx)
+            {
+                MessageBox.Show("TODO BIE>N");
+            } else
+            {
+                MessageBox.Show("AlGO FALLO");
+            }
         }
 
         public HomeUsuariosVM(HomeUsuarios x)

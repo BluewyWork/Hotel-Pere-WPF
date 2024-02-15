@@ -28,6 +28,7 @@ namespace WpfAppIntermodular.ViewModels
         {
             System.Windows.MessageBox.Show("EN METODO GUARDAR");
             bool x = await apiService.UpdateUser(view.VName.Text, view.VSurname.Text, view.VEmail.Text, "");
+
             if (x)
             {
                 System.Windows.MessageBox.Show("TODO BIEN");

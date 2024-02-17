@@ -12,6 +12,7 @@ namespace WpfAppIntermodular.Models
         private string _name;
         private bool _admin;
         private string _password;
+        private string? _image;
         private string _confirmPassword;
         private string _email;
 
@@ -24,6 +25,18 @@ namespace WpfAppIntermodular.Models
                 {
                     _name = value;
                     OnPropertyChanged(nameof(Name));
+                }
+            }
+        }
+        public string Image
+        {
+            get { return _image; }
+            set
+            {
+                if (_image != value)
+                {
+                    _image = value;
+                    OnPropertyChanged(nameof(Image));
                 }
             }
         }

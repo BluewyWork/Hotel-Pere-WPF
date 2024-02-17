@@ -14,7 +14,7 @@ namespace WpfAppIntermodular.Models
         public string? _password;
         public string? _name;
         public string? _surname;
-        public bool? _admin; 
+        public string? _image;
 
         public string? Surname
         {
@@ -25,6 +25,18 @@ namespace WpfAppIntermodular.Models
                 {
                     _surname = value;
                     OnPropertyChanged(nameof(Surname));
+                }
+            }
+        }
+        public string? Image
+        {
+            get { return _image; }
+            set
+            {
+                if (_image != value)
+                {
+                    _image = value;
+                    OnPropertyChanged(nameof(Image));
                 }
             }
         }
@@ -67,20 +79,6 @@ namespace WpfAppIntermodular.Models
                 }
             }
         }
-
-        public bool? Admin
-        {
-            get { return _admin; }
-            set
-            {
-                if(!_admin != value)
-                {
-                    _admin = value;
-                    OnPropertyChanged(nameof(Admin));
-                }
-            }
-        }
-
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

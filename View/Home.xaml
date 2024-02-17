@@ -21,7 +21,6 @@
                     <GradientStop Color="#ff84789c" Offset="0.9"/>
                     <GradientStop Color="#ffbeb6ce" Offset="1"/>
                 </LinearGradientBrush>
-
             </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -35,7 +34,6 @@
                         Click="Usuarios_Click" ></Button>
                 <Button Style="{StaticResource ButtonStyleHeader}" Content="Habitaciones" ></Button>
                 <Button Style="{StaticResource ButtonStyleHeader}" Content="Reservas" x:Name="Habitaciones"  Click="Habitaciones_Click" ></Button>
-
                 <Menu Width="180" Background="Transparent" Margin="100 35 0 0">
                     <MenuItem>
                         <MenuItem.Header>

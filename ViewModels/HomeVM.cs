@@ -135,7 +135,6 @@ namespace WpfAppIntermodular.ViewModels
                 }
             }
         }
-
         private async void MostrarHabitaciones()
         {
             try

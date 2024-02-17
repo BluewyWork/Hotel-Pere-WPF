@@ -1,28 +1,32 @@
 ﻿
+using System;
 using System.ComponentModel;
+
+
 
 namespace WpfAppIntermodular.Models
 {
     public class ReservasModel : INotifyPropertyChanged
     {
 
-        private string? _id;
+        private string? __id;
         private string? _customerName;
         private string? _customerEmail;
         private int? _roomNumber;
         private double? _pricePerNight;
-        private string? _checkIn;
-        private string? _checkOut;
+        private DateTime? _checkIn;
+        private DateTime? _checkOut;
         private bool? _reserved;
-        public string? Id
+
+        public string? _Id
         {
-            get { return _id; }
+            get { return __id; }
             set
             {
-                if (_id != value)
+                if (__id != value)
                 {
-                    _id = value;
-                    OnPropertyChanged(nameof(Id));
+                    __id = value;
+                    OnPropertyChanged(nameof(_Id));
                 }
             }
         }
@@ -78,7 +82,7 @@ namespace WpfAppIntermodular.Models
             }
         }
 
-        public string? CheckIn
+        public DateTime? CheckIn
         {
             get { return _checkIn; }
             set
@@ -90,7 +94,7 @@ namespace WpfAppIntermodular.Models
                 }
             }
         }
-        public string? CheckOut
+        public DateTime? CheckOut
         {
             get { return _checkOut; }
             set

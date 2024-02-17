@@ -62,7 +62,7 @@ namespace WpfAppIntermodular.Models
                 if (_pricePerNight != value)
                 {
                     _pricePerNight = value;
-                    OnPropertyChanged(nameof(_pricePerNight));
+                    OnPropertyChanged(nameof(PricePerNight));
                 }
             }
         }

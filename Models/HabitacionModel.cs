@@ -5,15 +5,28 @@ namespace WpfAppIntermodular.Models
 {
     public class HabitacionModel : INotifyPropertyChanged
     {
+        private string _id;
         private int? _number;
-        private string? _section;
+        private string? _description;
         private double? _pricePerNight;
-        private bool? _reserved;
         private string? _image;
         private int? _beds;
-        private string? _reservado;
+        private ReservedDays[] _reservedDays;
 
         public HabitacionModel() { }
+
+        public string? Id
+        {
+            get { return _id; }
+            set
+            {
+                if (_id != value)
+                {
+                    _id = value;
+                    OnPropertyChanged(nameof(Id));
+                }
+            }
+        }
 
         public int? Beds
         {
@@ -67,41 +80,30 @@ namespace WpfAppIntermodular.Models
             }
         }
 
-        public string? Section
+        public string? Description
         {
-            get { return _section; }
+            get { return _description; }
             set
             {
-                if (_section != value)
+                if (_description != value)
                 {
-                    _section = value;
-                    OnPropertyChanged(nameof(Section));
+                    _description = value;
+                    OnPropertyChanged(nameof(Description));
                 }
             }
         }
 
-        public string? Reservado
-        {
-            get { return _reservado; }
-            set
-            {
-                if (_reservado != value)
-                {
-                    _reservado = value;
-                    OnPropertyChanged(nameof(Section));
-                }
-            }
-        }
+        
 
-        public bool? Reserved
+        public ReservedDays[]? ReservedDays
         {
-            get { return _reserved; }
+            get { return _reservedDays; }
             set
             {
-                if (_reserved != value)
+                if (_reservedDays != value)
                 {
-                    _reserved = value;
-                    OnPropertyChanged(nameof(Reserved));
+                    _reservedDays = value;
+                    OnPropertyChanged(nameof(ReservedDays));
                 }
 
             }

@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.OData.Edm;
 using wpfappintermodular.api;
 using WpfAppIntermodular.Models;
 using WpfAppIntermodular.rsc;
@@ -21,12 +22,115 @@ namespace WpfAppIntermodular.ViewModels
         private string? _checkInBuscador;
         private string? _checkOutBuscador;
 
+        private string? _guestname; 
+        private string? _guestsurname;
+        private string? _guestemail;
+        private int? _roomnumber;
+        private double? _pricepernight;
+        private string? _checkin;
+        private string? _checkout;
+
+        public string? GuestName
+        {
+            get { return _guestname; }
+            set
+            {
+                if (_guestname != value)
+                {
+                    _guestname = value;
+                    OnPropertyChanged(nameof(GuestName));
+                }
+            }
+        }   
+
+        public string? GuestSurname
+        {
+            get { return _guestsurname; }
+            set
+            {
+                if (_guestsurname != value)
+                {
+                    _guestsurname = value;
+                    OnPropertyChanged(nameof(GuestSurname));
+                }
+            }
+        }
+
+        public string? GuestEmail
+        {
+            get { return _guestemail; }
+            set
+            {
+                if (_guestemail != value)
+                {
+                    _guestemail = value;
+                    OnPropertyChanged(nameof(GuestEmail));
+                }
+            }
+        }
+
+        public int? RoomNumber
+        {
+            get { return _roomnumber; }
+            set
+            {
+                if (_roomnumber != value)
+                {
+                    _roomnumber = value;
+                    OnPropertyChanged(nameof(RoomNumber));
+                }
+            }
+        }
+
+        public double? PricePerNight
+        {
+            get { return _pricepernight; }
+            set
+            {
+                if (_pricepernight != value)
+                {
+                    _pricepernight = value;
+                    OnPropertyChanged(nameof(PricePerNight));
+                }
+            }
+        }
+
+        public string? CheckIn
+        {
+            get { return _checkin; }
+            set
+            {
+                if (_checkin != value)
+                {
+                    _checkin = value;
+                    OnPropertyChanged(nameof(CheckIn));
+                }
+            }
+        }
+
+        public string? CheckOut
+        {
+            get { return _checkout; }
+            set
+            {
+                if (_checkout != value)
+                {
+                    _checkout = value;
+                    OnPropertyChanged(nameof(CheckOut));
+                }
+            }
+        }
+
+           
+
 
         private HabitacionModel _habitacionSeleccionada;
         private Home ventana;
         public ICommand EditarHabitacionCommand { get; }
         public ICommand DeleteCommand { get; }
         public ICommand CreateRoomCommand { get; }
+
+        public ICommand CreateBookingCommand { get; }
         public ICommand BuscarCommand { get; }
         public ICommand LimpiarCommand { get; }
 
@@ -38,6 +142,7 @@ namespace WpfAppIntermodular.ViewModels
             BuscarCommand = new RelayCommand(Buscar);
             LimpiarCommand = new RelayCommand(Limpiar);
             CreateRoomCommand = new RelayCommand(CreateRoom);
+            CreateBookingCommand = new RelayCommand(CreateBooking);
             this.ventana = ventana;
         }      
 
@@ -167,6 +272,21 @@ namespace WpfAppIntermodular.ViewModels
             EditarHabitacion editarHabitacion = new EditarHabitacion();
             ventana.Close();
             editarHabitacion.Show();
+        }
+
+        public async void CreateBooking()
+        {
+            ReservasModel reserva = new ReservasModel();
+            reserva.GuestName = GuestName;
+            reserva.GuestSurname = GuestSurname;
+            reserva.GuestEmail = GuestEmail;
+            reserva.RoomNumber = RoomNumber;
+            reserva.PricePerNight = PricePerNight;
+            reserva.CheckIn = CheckIn;
+            reserva.CheckOut = CheckOut;
+            apiService = new ApiService();
+           await apiService.GuardarReservaApi(reserva);
+            
         }
         private void Limpiar()
         {

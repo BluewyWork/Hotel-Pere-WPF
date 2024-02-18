@@ -23,13 +23,25 @@ namespace WpfAppIntermodular.ViewModels
         public ICommand EditUserCommand { get; }
         public ICommand DeleteUserCommand { get; }
         public ICommand FilterListCommand { get; }
+        public ICommand LimpiarCommand { get; }
 
         public HomeUsuariosVM()
         {
             ShowEmployee();
             FilterListCommand = new RelayCommand(FilterEmpleados);
-            EditUserCommand = new RelayCommand(EditUser);
-            // DeleteUserCommand = new RelayCommand(DeleteUser, () => SelecteUser != null);
+            LimpiarCommand = new RelayCommand(limparCampos);
+            EditUserCommand = new RelayCommand(EditUser, () => EmpleadoSelecionado != null);
+            DeleteUserCommand = new RelayCommand(DeleteUser, () => EmpleadoSelecionado != null);
+        }
+
+        private void limparCampos()
+        {
+            SearchName = null;
+            SearchSurname = null;
+            SearchEmail = null;
+
+
+
         }
 
         public void EditUser()

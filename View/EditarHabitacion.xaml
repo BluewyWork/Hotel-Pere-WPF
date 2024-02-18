@@ -54,11 +54,6 @@
                     <ComboBox ItemsSource="{Binding BedOptions}" SelectedItem="{Binding SelectedNumberOfBeds}" />
                 </StackPanel>
                 <StackPanel Margin="0 25 0 0">
-                    <DockPanel Margin="5 0 0 0">
-                        <CheckBox  Content="¿Reservada?" IsChecked="{Binding Reservada, UpdateSourceTrigger=PropertyChanged}" />
-                    </DockPanel>
-                </StackPanel>
-                <StackPanel Margin="0 25 0 0">
                     <Label Content="Precio por noche"/>
                     <TextBox Margin="0 0 0 10">
                         <TextBox.Text>

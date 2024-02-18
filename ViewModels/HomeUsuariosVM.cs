@@ -42,6 +42,15 @@ namespace WpfAppIntermodular.ViewModels
             p.Show();
         }
 
+        public async void DeleteUser()
+        {
+            if (EmpleadoSelecionado == null) return;
+
+            if (EmpleadoSelecionado.Email == null) return;
+
+            await apiService.EliminarUsuario(EmpleadoSelecionado.Email);
+        }
+
         public ObservableCollection<EmpleadoModel> Empleados
         {
             get { return _empleados; }

@@ -216,7 +216,7 @@ namespace wpfappintermodular.api
             // return true;
 
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
-            var response = await _httpClient.DeleteAsync($"/api/admin/guest/{email}");
+            var response = await _httpClient.DeleteAsync($"/api/admin/guest/delete/{email}");
             return response.IsSuccessStatusCode;
         }
 

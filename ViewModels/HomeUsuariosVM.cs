@@ -28,8 +28,18 @@ namespace WpfAppIntermodular.ViewModels
         {
             ShowEmployee();
             FilterListCommand = new RelayCommand(FilterEmpleados);
-            // EditUserCommand = new RelayCommand(EditUser);
+            EditUserCommand = new RelayCommand(EditUser);
             // DeleteUserCommand = new RelayCommand(DeleteUser, () => SelecteUser != null);
+        }
+
+        public void EditUser()
+        {
+            if (EmpleadoSelecionado == null)
+               return;
+
+            PerfilUsuario p = new PerfilUsuario(EmpleadoSelecionado);
+
+            p.Show();
         }
 
         public ObservableCollection<EmpleadoModel> Empleados

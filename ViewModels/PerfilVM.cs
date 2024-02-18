@@ -24,10 +24,10 @@ namespace WpfAppIntermodular.ViewModels
         public ICommand AtrasCommand { get; }
 
          
-        /*private async void Guardar()
+        private async void Guardar()
         {
             System.Windows.MessageBox.Show("EN METODO GUARDAR");
-            bool x = await apiService.UpdateUser(view.VName.Text, view.VSurname.Text, view.VEmail.Text, "");
+            bool x = await apiService.UpdateEmployee(view.VName.Text, view.VSurname.Text, view.VEmail.Text, "");
 
             if (x)
             {
@@ -37,7 +37,7 @@ namespace WpfAppIntermodular.ViewModels
                 System.Windows.MessageBox.Show("ALGO FALLO");
             }
             
-        }*/
+        }
 
    
         protected virtual void OnPropertyChanged(string propertyName)

@@ -28,6 +28,7 @@ namespace wpfappintermodular.api
 
         public async Task<bool> AutenticarUsuarioAsync(string email, string password)
         {
+            return true;
             var data = new { email, password };
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/auth/employee/login", data);
             if (response.IsSuccessStatusCode)

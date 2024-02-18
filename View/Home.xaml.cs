@@ -1,6 +1,7 @@
 ﻿
 using System.Windows;
 using WpfAppIntermodular.ViewModels;
+using WpfAppIntermodular.View;
 
 namespace WpfAppIntermodular
 {
@@ -50,6 +51,14 @@ namespace WpfAppIntermodular
         {
             PerfilUsuario perfil = new PerfilUsuario();
             perfil.ShowDialog();
+        }
+
+        private void Clientes_Click(object sender, RoutedEventArgs e)
+        {
+            Usuarios usuarios = new Usuarios();
+            usuarios.Show();
+            this.Close();
+            
         }
     }
 }

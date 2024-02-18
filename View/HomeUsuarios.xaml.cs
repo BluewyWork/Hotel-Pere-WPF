@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfAppIntermodular.Models;
+using WpfAppIntermodular.View;
 using WpfAppIntermodular.ViewModels;
 
 namespace WpfAppIntermodular
@@ -172,6 +173,13 @@ namespace WpfAppIntermodular
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             //ListBoxCustomers.ItemsSource = homeUsuariosVM.CustomersList;
+        }
+
+        private void Clientes_Click(object sender, RoutedEventArgs e)
+        {
+            Usuarios usuarios = new Usuarios();
+            usuarios.Show();
+            this.Close();
         }
     }
 }

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfAppIntermodular" xmlns:viewmodels="clr-namespace:WpfAppIntermodular.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:HomeUsuariosVM}"
+        xmlns:local="clr-namespace:WpfAppIntermodular.rsc" xmlns:viewmodels="clr-namespace:WpfAppIntermodular.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:HomeUsuariosVM}"
         mc:Ignorable="d" FontFamily="Montserrat"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
         Title="Home Usuarios" Height="550" Width="800">
@@ -42,7 +42,6 @@
                                 <Image Height="25" Source="../perfil.png" Margin="10 0 0 10"/>
                             </StackPanel>
                         </MenuItem.Header>
-
                         <MenuItem Header="Editar Perfil" Click="Editar_Click"/>
                         <MenuItem Header="Crear Usuario" Click="CrearUsuario_Click"/>
                         <MenuItem Header="Crear Empleado" Click="CrearEmpleado_Click"/>
@@ -50,14 +49,13 @@
                     </MenuItem>
                 </Menu>
             </DockPanel>
-
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="307*"></ColumnDefinition>
                 <ColumnDefinition Width="493*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel HorizontalAlignment="Left"  Orientation="Vertical" VerticalAlignment="Center" Height="436" Width="297" Margin="10,0,0,0">
+            <StackPanel Grid.Column="0" HorizontalAlignment="Left"  Orientation="Vertical" VerticalAlignment="Center" Height="436" Width="297" Margin="10,0,0,0">
                 <Label  Margin ="0 10 0 0" FontSize="30" FontWeight="Bold" Foreground="#35B697" >Buscador:</Label>
                 <DockPanel Margin="0 10">
                     <StackPanel Margin="10,10" Width="100">
@@ -73,15 +71,12 @@
                     <Label Content="Email" FontSize="16"/>
                     <TextBox x:Name="EmailTextBox" Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
                 </StackPanel>
-
                 <DockPanel  Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40 10 20 10" >
                     <Button Margin="0 10 0 0"  Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" 
                              Content="Buscar" Click="Button_Click"  >
                     </Button>
                     <Button Style="{StaticResource ButtonStyle}" FontWeight="Bold" Margin="30 10 0 0" Foreground="#35B697" Background="Transparent" BorderBrush="#35B697" Content="Limpiar" Click="Button_Click_3" />
-                    
                 </DockPanel>
-
                 <StackPanel Orientation="Horizontal">
                     <Button Style="{StaticResource ButtonStyle}" FontWeight="Bold" Margin="30 10 0 0" Foreground="#35B697" Background="Transparent" BorderBrush="#35B697" Content="Editar" Command="{Binding EditUserCommand}"  />
                     <Button Style="{StaticResource ButtonStyle}" FontWeight="Bold" Margin="30 10 0 0" Foreground="#35B697" Background="Transparent" BorderBrush="#35B697" Content="Eliminar" Command="{Binding DeleteUserCommand}"  />
@@ -89,31 +84,29 @@
             </StackPanel>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="53*"></RowDefinition>
-                    <RowDefinition Height="93*"></RowDefinition>
-                    <RowDefinition Height="93*"></RowDefinition>
-                    <RowDefinition Height="93*"></RowDefinition>
-                    <RowDefinition Height="93*"></RowDefinition>
+                    <RowDefinition Height="17*"></RowDefinition>
+                    <RowDefinition Height="73*"></RowDefinition>
                 </Grid.RowDefinitions>
-
-                <Label Grid.Row="0" FontFamily="Montserrat" Foreground="#35B697" FontSize="30" 
-                       FontWeight="Bold" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:
+                <Label Grid.Row="0" FontFamily="Montserrat" Foreground="#35B697" FontSize="30" Margin="0 15 0 0"
+                       FontWeight="Bold" >Resultados:
                 </Label>
-
-                <ListBox x:Name="ListBoxCustomers" Grid.Row="0" Grid.Column="0" Margin="0,0,0,10" Grid.RowSpan="4" SelectedItem="{Binding SelectedUser}" ItemsSource="{Binding CustomerList}">
+                <ListBox Grid.Row="1" x:Name="ListBoxCustomers"  Margin="0,10,0,98"  SelectedItem="{Binding EmpleadoSelecionado}" ItemsSource="{Binding Empleados}" MaxHeight="350">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <DockPanel Grid.ColumnSpan="2">
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Image Source="../logo_hotel_sin_fondo.png" Width="200px"></Image>
+                            <DockPanel >
+                                <Image Source="{Binding Image}" Width="80" ></Image>
+                                <StackPanel>
+                                    <Label Content="Nombre empleado" Style="{StaticResource labelReservas}"/>
+                                    <TextBox Text="{Binding Name}" Style="{StaticResource TBMain}"/>
                                 </StackPanel>
-
-                                <TextBlock Text="{Binding Name}"/>
-                                <TextBlock Text=" "></TextBlock>
-                                <TextBlock Text="{Binding Surname}"/>
-                                <TextBlock Text=" "/>
-                                <TextBlock Text="{Binding Email}"/>
-                                <Button Style="{StaticResource ButtonStyleHeader}" Content="Reservas" x:Name="Reserva" Click="Reserva_Click"/>
+                                <StackPanel>
+                                    <Label Content="Apellido empleado" Style="{StaticResource labelReservas}"/>
+                                    <TextBox Text="{Binding Surname}" Style="{StaticResource TBMain}"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <Label Content="Correo empleado" Style="{StaticResource labelReservas}"/>
+                                    <TextBox Text="{Binding Email}" Style="{StaticResource TBMain}"/>
+                                </StackPanel>
                             </DockPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

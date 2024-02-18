@@ -28,7 +28,6 @@ namespace wpfappintermodular.api
 
         public async Task<bool> AutenticarUsuarioAsync(string email, string password)
         {
-            return true;
             var data = new { email, password };
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/auth/employee/login", data);
             if (response.IsSuccessStatusCode)
@@ -165,46 +164,40 @@ namespace wpfappintermodular.api
 
         }
 
-        public async Task<List<UsuarioModel>> GetAllUsersApi()
+        public async Task<List<EmpleadoModel>> GetEmployeeApi()
         {
-
-
-            List<UsuarioModel> users = new List<UsuarioModel>()
-            {
-                new UsuarioModel() { Name = "John", Surname = "Doe", Email = "john@example.com", Password = "password1" },
-                new UsuarioModel() { Name = "Jane", Surname = "Smith", Email = "jane@example.com", Password = "password2" },
-            };
-
-            // return users;
-
             try
             {
+                List < EmpleadoModel> empleados = new List<EmpleadoModel>();
                 _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
-                var response = await _httpClient.GetAsync("/api/route");
+                var response = await _httpClient.GetAsync("/api/admin/employee");
 
-                if (!response.IsSuccessStatusCode)
-                    return new List<UsuarioModel>();
-
-                string responseBody = await response.Content.ReadAsStringAsync();
-                dynamic result = JObject.Parse(responseBody);
-                JArray usuarioArray = result.data;
-                var usuarios = JsonConvert.DeserializeObject<List<UsuarioModel>>(usuarioArray.ToString());
-
-                return usuarios ?? new List<UsuarioModel>();
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    dynamic result = JObject.Parse(responseBody);
+                    JArray empleadoArray = result.data;
+                    empleados = JsonConvert.DeserializeObject<List<EmpleadoModel>>(empleadoArray.ToString());
+                    return empleados;
+                }
+                else
+                {
+                    return empleados;
+                }    
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                return new List<UsuarioModel>();
+
+                Console.WriteLine($"Error: {e.Message}");
+                return null;
             }
         }
-        public async Task<Boolean> UpdateUser(string name, string surname, string email, string password)
+        public async Task<Boolean> UpdateEmployee(string name, string surname, string email, string password)
         {
-            // return true;
 
             var data = new {name, surname, email, password};
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
-            var response = await _httpClient.PutAsJsonAsync("/api/admin/guest", data);
+            var response = await _httpClient.PutAsJsonAsync("", data);
             var responseCode = response.EnsureSuccessStatusCode();
             if (responseCode.IsSuccessStatusCode)
             {

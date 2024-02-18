@@ -27,12 +27,8 @@ namespace WpfAppIntermodular
         public HomeUsuarios()
         {
             InitializeComponent();
-            
+            DataContext = new HomeUsuariosVM();
 
-            homeUsuariosVM = new HomeUsuariosVM(this);
-            DataContext = homeUsuariosVM;
-
-            ListBoxCustomers.ItemsSource = homeUsuariosVM.CustomersList;
         }
 
         private void Habitaciones_Click(object sender, RoutedEventArgs e)
@@ -175,7 +171,7 @@ namespace WpfAppIntermodular
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            ListBoxCustomers.ItemsSource = homeUsuariosVM.CustomersList;
+            //ListBoxCustomers.ItemsSource = homeUsuariosVM.CustomersList;
         }
     }
 }

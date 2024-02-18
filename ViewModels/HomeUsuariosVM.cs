@@ -1,10 +1,8 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using wpfappintermodular.api;
@@ -16,20 +14,39 @@ namespace WpfAppIntermodular.ViewModels
     class HomeUsuariosVM : INotifyPropertyChanged
     {
         private ApiService apiService = new ApiService();
-        public event PropertyChangedEventHandler PropertyChanged;
-        private ObservableCollection<UsuarioModel> _customers;
+        private ObservableCollection<EmpleadoModel> _empleados;
         private string _searchName;
         private string _searchSurname;
         private string _searchEmail;
-        private UsuarioModel _selectedUser;
-        private HomeUsuarios view;
-
+        private EmpleadoModel _empleadoSelecionado;
         public ICommand EditUserCommand { get; }
         public ICommand DeleteUserCommand { get; }
 
-        private void EditUser()
+        public HomeUsuariosVM()
         {
-            UsuarioModel x = (UsuarioModel)view.ListBoxCustomers.SelectedItem;
+            showEmployee();
+            //EditUserCommand = new RelayCommand(EditUser);
+            //DeleteUserCommand = new RelayCommand(DeleteUser, () => SelecteUser != null);
+        }
+
+        public ObservableCollection<EmpleadoModel> Empleados
+        {
+            get { return _empleados; }
+            set
+            {
+                if (_empleados != value)
+                {
+                    _empleados = value;
+                    OnPropertyChanged(nameof(Empleados));
+                }
+            }
+        }
+
+
+
+        /*private void EditUser()
+        {
+            UsuarioModel x = (UsuarioModel)ListBoxCustomers.SelectedItem;
 
             if (x == null)
             {
@@ -41,9 +58,9 @@ namespace WpfAppIntermodular.ViewModels
 
             PerfilUsuario p = new PerfilUsuario(x);
             p.Show();
-        }
+        }*/
 
-        private async void DeleteUser()
+        /*private async void DeleteUser()
         {
             if (SelecteUser == null )
             {
@@ -64,39 +81,27 @@ namespace WpfAppIntermodular.ViewModels
             {
                 MessageBox.Show("AlGO FALLO");
             }
-        }
+        }*/
 
-        public HomeUsuariosVM(HomeUsuarios x)
-        {
-            showUsers();
-            EditUserCommand = new RelayCommand(EditUser);
-            DeleteUserCommand = new RelayCommand(DeleteUser, () => SelecteUser != null);
-            view = x;
-        }
+       
 
-        private async void showUsers()
+        private async void showEmployee()
         {
-            List<UsuarioModel> c = await apiService.GetAllUsersApi();
-            CustomersList = new ObservableCollection<UsuarioModel>(c);
-        }
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public ObservableCollection<UsuarioModel> CustomersList
-        {
-            get { return _customers; }
-            set
+            try
             {
-                if (_customers != value)
-                {
-                    _customers = value;
-                    OnPropertyChanged(nameof(CustomersList));
-                }
+                List<EmpleadoModel> empleados = await apiService.GetEmployeeApi();
+                Empleados = new ObservableCollection<EmpleadoModel>(empleados);
             }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Error al mostrar empleados: {ex.Message}");
+            }
+            
         }
+
+        
+
+       
 
         public string SearchName
         {
@@ -137,17 +142,22 @@ namespace WpfAppIntermodular.ViewModels
             }
         }
 
-        public UsuarioModel SelecteUser
+        public EmpleadoModel EmpleadoSelecionado
         {
-            get { return _selectedUser; }
+            get { return _empleadoSelecionado; }
             set
             {
-                if (_selectedUser != value)
+                if (_empleadoSelecionado != value)
                 {
-                    _selectedUser = value;
-                    OnPropertyChanged(nameof(SelecteUser));
+                    _empleadoSelecionado = value;
+                    OnPropertyChanged(nameof(EmpleadoSelecionado));
                 }
             }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

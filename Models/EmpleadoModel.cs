@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace WpfAppIntermodular.Models
 {
     public class EmpleadoModel: INotifyPropertyChanged
     {
-        private string _name;
-        private bool _admin;
-        private string _password;
+        private string? _name;
+        private bool? _admin;
+        private string? _password;
         private string? _image;
-        private string _confirmPassword;
-        private string _email;
+        private string? _email;
 
-        public string Name
+        public string? Name
         {
             get { return _name; }
             set
@@ -28,7 +24,7 @@ namespace WpfAppIntermodular.Models
                 }
             }
         }
-        public string Image
+        public string? Image
         {
             get { return _image; }
             set
@@ -41,7 +37,7 @@ namespace WpfAppIntermodular.Models
             }
         }
 
-        public bool Admin
+        public bool? Admin
         {
             get { return _admin; }
             set
@@ -54,7 +50,7 @@ namespace WpfAppIntermodular.Models
             }
         }
 
-        public string Password
+        public string? Password
         {
             get { return _password; }
             set
@@ -66,21 +62,8 @@ namespace WpfAppIntermodular.Models
                 }
             }
         }
-        public string ConfirmPassword
-        {
-            get { return _confirmPassword; }
-            set
-            {
-                if (_confirmPassword != value)
-                {
-                    _confirmPassword = value;
-                    OnPropertyChanged(nameof(ConfirmPassword));
-                }
-            }
-        }
-            
 
-        public string Email
+        public string? Email
         {
             get { return _email; }
             set

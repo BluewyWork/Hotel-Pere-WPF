@@ -32,13 +32,7 @@ namespace WpfAppIntermodular
             homeUsuariosVM = new HomeUsuariosVM(this);
             DataContext = homeUsuariosVM;
 
-            List<UsuarioModel> users = new List<UsuarioModel>()
-            {
-                new UsuarioModel() { Name = "John", Surname = "Doe", Email = "john@example.com", Password = "password1" },
-                new UsuarioModel() { Name = "Jane", Surname = "Smith", Email = "jane@example.com", Password = "password2" },
-            };
-
-            ListBoxCustomers.ItemsSource = users;
+            ListBoxCustomers.ItemsSource = homeUsuariosVM.CustomersList;
         }
 
         private void Habitaciones_Click(object sender, RoutedEventArgs e)
@@ -85,11 +79,7 @@ namespace WpfAppIntermodular
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            List<UsuarioModel> users = new List<UsuarioModel>()
-            {
-                new UsuarioModel() { Name = "John", Surname = "Doe", Email = "john@example.com", Password = "password1" },
-                new UsuarioModel() { Name = "Jane", Surname = "Smith", Email = "jane@example.com", Password = "password2" },
-            };
+            List<UsuarioModel> users = ListBoxCustomers.ItemsSource.Cast<UsuarioModel>().ToList();
 
             if (!string.IsNullOrEmpty(NameTextBox.Text) || !string.IsNullOrEmpty(SurnameTextBox.Text) || !string.IsNullOrEmpty(EmailTextBox.Text))
             {
@@ -181,6 +171,11 @@ namespace WpfAppIntermodular
             UsuarioModel selectedItem = (UsuarioModel) ListBoxCustomers.SelectedItem;
 
             
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            ListBoxCustomers.ItemsSource = homeUsuariosVM.CustomersList;
         }
     }
 }

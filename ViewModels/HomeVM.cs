@@ -162,7 +162,7 @@ namespace WpfAppIntermodular.ViewModels
                 Console.WriteLine($"Error al buscar habitaciones: {ex.Message}");
             }
         }
-        private async void CreateRoom()
+        private void CreateRoom()
         {
             EditarHabitacion editarHabitacion = new EditarHabitacion();
             ventana.Close();

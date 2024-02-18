@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using wpfappintermodular.api;
 using WpfAppIntermodular.Models;
@@ -26,9 +27,19 @@ namespace WpfAppIntermodular.ViewModels
         public ICommand EditUserCommand { get; }
         public ICommand DeleteUserCommand { get; }
 
-        private async void EditUser()
+        private void EditUser()
         {
-            PerfilUsuario p = new PerfilUsuario(SelecteUser);
+            UsuarioModel x = (UsuarioModel)view.ListBoxCustomers.SelectedItem;
+
+            if (x == null)
+            {
+                System.Windows.MessageBox.Show("NULL");
+                return;
+            }
+
+            System.Windows.MessageBox.Show($"{x.Name}  {x.Email}");
+
+            PerfilUsuario p = new PerfilUsuario(x);
             p.Show();
         }
 
@@ -44,13 +55,21 @@ namespace WpfAppIntermodular.ViewModels
                 return;
             }
 
-            await apiService.EliminarUsuario(SelecteUser.Email);
+            bool xx = await apiService.EliminarUsuario(SelecteUser.Email);
+
+            if (xx)
+            {
+                MessageBox.Show("TODO BIE>N");
+            } else
+            {
+                MessageBox.Show("AlGO FALLO");
+            }
         }
 
         public HomeUsuariosVM(HomeUsuarios x)
         {
             showUsers();
-            EditUserCommand = new RelayCommand(EditUser, () => SelecteUser != null);
+            EditUserCommand = new RelayCommand(EditUser);
             DeleteUserCommand = new RelayCommand(DeleteUser, () => SelecteUser != null);
             view = x;
         }

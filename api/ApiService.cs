@@ -7,6 +7,7 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WpfAppIntermodular;
@@ -27,6 +28,7 @@ namespace wpfappintermodular.api
 
         public async Task<bool> AutenticarUsuarioAsync(string email, string password)
         {
+            return true;
             var data = new { email, password };
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/auth/employee/login", data);
             if (response.IsSuccessStatusCode)
@@ -165,10 +167,21 @@ namespace wpfappintermodular.api
 
         public async Task<List<UsuarioModel>> GetAllUsersApi()
         {
+
+
+            List<UsuarioModel> users = new List<UsuarioModel>()
+            {
+                new UsuarioModel() { Name = "John", Surname = "Doe", Email = "john@example.com", Password = "password1" },
+                new UsuarioModel() { Name = "Jane", Surname = "Smith", Email = "jane@example.com", Password = "password2" },
+            };
+
+            // return users;
+
             try
             {
                 _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
                 var response = await _httpClient.GetAsync("/api/route");
+
                 if (!response.IsSuccessStatusCode)
                     return new List<UsuarioModel>();
 
@@ -187,12 +200,31 @@ namespace wpfappintermodular.api
         }
         public async Task<Boolean> UpdateUser(string name, string surname, string email, string password)
         {
-            return true;
+            // return true;
+
+            var data = new {name, surname, email, password};
+            _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+            var response = await _httpClient.PutAsJsonAsync("/api/admin/guest", data);
+            var responseCode = response.EnsureSuccessStatusCode();
+            if (responseCode.IsSuccessStatusCode)
+            {
+                MessageBox.Show("El usuario se ha actualizado correctamente", "Ok");
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("El usuario no se ha podido actualizar", "Error");
+                return false;
+            }
         }
 
         public async Task<Boolean> EliminarUsuario(string email)
         {
-            return true;
+            // return true;
+
+            _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+            var response = await _httpClient.DeleteAsync($"/api/admin/guest/{email}");
+            return response.IsSuccessStatusCode;
         }
 
         public async Task<List<ReservasModel>> BuscarReservasApi(string checkInBuscador, string checkOutBuscador, string correoClienteBuscador)

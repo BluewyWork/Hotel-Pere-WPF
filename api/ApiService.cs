@@ -45,6 +45,11 @@ namespace wpfappintermodular.api
 
         public async Task<bool> UpdateRoomApi(string description, int number, double pricePerNight, int beds)
         {
+                if(description == null)
+            {
+                description = string.Empty;
+            }
+
             var data = new { number, description, pricePerNight, beds };
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
             var response = await _httpClient.PutAsJsonAsync("/api/admin/room/update", data);

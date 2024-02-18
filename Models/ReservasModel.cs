@@ -69,6 +69,19 @@ namespace WpfAppIntermodular.Models
             }
         }
 
+        public string? GuestSurname
+        {
+            get { return _guestSurname; }
+            set
+            {
+                if (_guestSurname != value)
+                {
+                    _guestSurname = value;
+                    OnPropertyChanged(nameof(GuestSurname));
+                }
+            }
+        }
+
         public double? PricePerNight
         {
             get { return _pricePerNight; }

@@ -147,6 +147,8 @@ namespace wpfappintermodular.api
             }
         }
 
+        
+
         public async Task<bool> DeleteRoomApi(int number)
         {
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
@@ -240,6 +242,26 @@ namespace wpfappintermodular.api
             return response.IsSuccessStatusCode;
         }
 
+        public async Task GuardarReservaApi(ReservasModel nuevaReserva)
+        {
+            var data = new { nuevaReserva.RoomNumber, nuevaReserva.GuestName, nuevaReserva.GuestSurname, nuevaReserva.GuestEmail, nuevaReserva.PricePerNight, nuevaReserva.CheckIn, nuevaReserva.CheckOut };
+            _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+            var response = await _httpClient.PostAsJsonAsync("/api/admin/reservation/create", data);
+            MessageBox.Show(response.ToString());
+            if (response.StatusCode == HttpStatusCode.Created)
+            {
+
+                MessageBox.Show("La reserva se ha creado correctamente", "OK", MessageBoxButton.OK);
+                
+            }
+            else
+            {
+                MessageBox.Show("Error al crear la reserva", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                
+            }
+
+        }
+
         public async Task<List<ReservasModel>> BuscarReservasApi(string checkInBuscador, string checkOutBuscador, string correoClienteBuscador)
         {
             HttpClient h = new HttpClient();
@@ -285,25 +307,7 @@ namespace wpfappintermodular.api
                 return false;
             }
         }
-        public async Task<bool> GuardarReservaApi(ReservasModel nuevaReserva)
-        {
-            var data = new {nuevaReserva};
-            _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
-            var response = await _httpClient.PostAsJsonAsync("$/api/admin/reservation/create/{id}", data);
-            MessageBox.Show(response.ToString());
-            if (response.StatusCode==HttpStatusCode.OK)
-            {
-
-                MessageBox.Show("La reserva se ha creado correctamente", "OK", MessageBoxButton.OK, MessageBoxImage.Information);
-                return true;
-            }
-            else
-            {
-                MessageBox.Show("Error al crear la reserva", "Error",  MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-
-        }
+        
         public async Task<bool> EditarReservaApi(ReservasModel reserva )
         {
             string[] checkInArray = reserva.CheckIn.Split("T");

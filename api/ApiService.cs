@@ -311,9 +311,6 @@ namespace wpfappintermodular.api
                 MessageBox.Show("Error al actualizar la reserva", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-
         }
-
-       
     }
 }

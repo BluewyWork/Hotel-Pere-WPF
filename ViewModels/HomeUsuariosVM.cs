@@ -1,12 +1,12 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using wpfappintermodular.api;
 using WpfAppIntermodular.Models;
+using wpfappintermodular.api;
 using WpfAppIntermodular.rsc;
 
 namespace WpfAppIntermodular.ViewModels
@@ -19,14 +19,17 @@ namespace WpfAppIntermodular.ViewModels
         private string _searchSurname;
         private string _searchEmail;
         private EmpleadoModel _empleadoSelecionado;
+
         public ICommand EditUserCommand { get; }
         public ICommand DeleteUserCommand { get; }
+        public ICommand FilterListCommand { get; }
 
         public HomeUsuariosVM()
         {
-            showEmployee();
-            //EditUserCommand = new RelayCommand(EditUser);
-            //DeleteUserCommand = new RelayCommand(DeleteUser, () => SelecteUser != null);
+            ShowEmployee();
+            FilterListCommand = new RelayCommand(FilterEmpleados);
+            // EditUserCommand = new RelayCommand(EditUser);
+            // DeleteUserCommand = new RelayCommand(DeleteUser, () => SelecteUser != null);
         }
 
         public ObservableCollection<EmpleadoModel> Empleados
@@ -42,66 +45,38 @@ namespace WpfAppIntermodular.ViewModels
             }
         }
 
-
-
-        /*private void EditUser()
+        public void FilterEmpleados()
         {
-            UsuarioModel x = (UsuarioModel)ListBoxCustomers.SelectedItem;
-
-            if (x == null)
-            {
-                System.Windows.MessageBox.Show("NULL");
+            if (Empleados == null)
                 return;
-            }
 
-            System.Windows.MessageBox.Show($"{x.Name}  {x.Email}");
+            IEnumerable<EmpleadoModel> filteredEmpleados = Empleados;
 
-            PerfilUsuario p = new PerfilUsuario(x);
-            p.Show();
-        }*/
+            if (!string.IsNullOrEmpty(_searchName))
+                filteredEmpleados = filteredEmpleados.Where(e => e.Name.Contains(_searchName));
 
-        /*private async void DeleteUser()
-        {
-            if (SelecteUser == null )
-            {
-                return;
-            }
+            if (!string.IsNullOrEmpty(_searchSurname))
+                filteredEmpleados = filteredEmpleados.Where(e => e.Surname.Contains(_searchSurname));
 
-            if (SelecteUser.Email == null)
-            {
-                return;
-            }
+            if (!string.IsNullOrEmpty(_searchEmail))
+                filteredEmpleados = filteredEmpleados.Where(e => e.Email.Contains(_searchEmail));
 
-            bool xx = await apiService.EliminarUsuario(SelecteUser.Email);
+            Empleados = new ObservableCollection<EmpleadoModel>(filteredEmpleados);
+        }
 
-            if (xx)
-            {
-                MessageBox.Show("TODO BIE>N");
-            } else
-            {
-                MessageBox.Show("AlGO FALLO");
-            }
-        }*/
-
-       
-
-        private async void showEmployee()
+        private async void ShowEmployee()
         {
             try
             {
                 List<EmpleadoModel> empleados = await apiService.GetEmployeeApi();
                 Empleados = new ObservableCollection<EmpleadoModel>(empleados);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error al mostrar empleados: {ex.Message}");
             }
-            
+
         }
-
-        
-
-       
 
         public string SearchName
         {
@@ -112,6 +87,7 @@ namespace WpfAppIntermodular.ViewModels
                 {
                     _searchName = value;
                     OnPropertyChanged(nameof(SearchName));
+                    FilterEmpleados();
                 }
             }
         }
@@ -125,6 +101,7 @@ namespace WpfAppIntermodular.ViewModels
                 {
                     _searchSurname = value;
                     OnPropertyChanged(nameof(SearchSurname));
+                    FilterEmpleados();
                 }
             }
         }
@@ -138,6 +115,7 @@ namespace WpfAppIntermodular.ViewModels
                 {
                     _searchEmail = value;
                     OnPropertyChanged(nameof(SearchEmail));
+                    FilterEmpleados();
                 }
             }
         }

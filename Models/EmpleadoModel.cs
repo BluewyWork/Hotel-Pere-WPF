@@ -7,10 +7,24 @@ namespace WpfAppIntermodular.Models
     public class EmpleadoModel: INotifyPropertyChanged
     {
         private string? _name;
+        private string? _surname;
         private bool? _admin;
         private string? _password;
         private string? _image;
         private string? _email;
+
+        public string? Surname
+        {
+            get { return _surname; }
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    OnPropertyChanged(nameof(Surname));
+                }
+            }
+        }
 
         public string? Name
         {

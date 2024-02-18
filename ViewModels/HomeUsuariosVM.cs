@@ -47,19 +47,17 @@ namespace WpfAppIntermodular.ViewModels
 
         public void FilterEmpleados()
         {
-            if (Empleados == null)
-                return;
 
             IEnumerable<EmpleadoModel> filteredEmpleados = Empleados;
 
-            if (!string.IsNullOrEmpty(_searchName))
-                filteredEmpleados = filteredEmpleados.Where(e => e.Name.Contains(_searchName));
+            if (!string.IsNullOrEmpty(SearchName))
+                filteredEmpleados = filteredEmpleados.Where(e => e.Name.Contains(SearchName));
 
-            if (!string.IsNullOrEmpty(_searchSurname))
-                filteredEmpleados = filteredEmpleados.Where(e => e.Surname.Contains(_searchSurname));
+            if (!string.IsNullOrEmpty(SearchSurname))
+                filteredEmpleados = filteredEmpleados.Where(e => e.Surname.Contains(SearchSurname));
 
-            if (!string.IsNullOrEmpty(_searchEmail))
-                filteredEmpleados = filteredEmpleados.Where(e => e.Email.Contains(_searchEmail));
+            if (!string.IsNullOrEmpty(SearchEmail))
+                filteredEmpleados = filteredEmpleados.Where(e => e.Email.Contains(SearchEmail));
 
             Empleados = new ObservableCollection<EmpleadoModel>(filteredEmpleados);
         }

@@ -18,9 +18,9 @@ namespace WpfAppIntermodular.Models
             get { return _surname; }
             set
             {
-                if (_name != value)
+                if (_surname != value)
                 {
-                    _name = value;
+                    _surname = value;
                     OnPropertyChanged(nameof(Surname));
                 }
             }

@@ -236,7 +236,7 @@ namespace wpfappintermodular.api
             // return true;
 
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
-            var response = await _httpClient.DeleteAsync($"/api/admin/guest/{email}");
+            var response = await _httpClient.DeleteAsync($"/api/admin/guest/delete/{email}");
             return response.IsSuccessStatusCode;
         }
 
@@ -331,9 +331,6 @@ namespace wpfappintermodular.api
                 MessageBox.Show("Error al actualizar la reserva", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-
         }
-
-       
     }
 }

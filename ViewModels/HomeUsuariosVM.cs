@@ -1,12 +1,12 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using wpfappintermodular.api;
 using WpfAppIntermodular.Models;
+using wpfappintermodular.api;
 using WpfAppIntermodular.rsc;
 
 namespace WpfAppIntermodular.ViewModels
@@ -19,14 +19,48 @@ namespace WpfAppIntermodular.ViewModels
         private string _searchSurname;
         private string _searchEmail;
         private EmpleadoModel _empleadoSelecionado;
+
         public ICommand EditUserCommand { get; }
         public ICommand DeleteUserCommand { get; }
+        public ICommand FilterListCommand { get; }
+        public ICommand LimpiarCommand { get; }
 
         public HomeUsuariosVM()
         {
-            showEmployee();
-            //EditUserCommand = new RelayCommand(EditUser);
-            //DeleteUserCommand = new RelayCommand(DeleteUser, () => SelecteUser != null);
+            ShowEmployee();
+            FilterListCommand = new RelayCommand(FilterEmpleados);
+            LimpiarCommand = new RelayCommand(limparCampos);
+            EditUserCommand = new RelayCommand(EditUser, () => EmpleadoSelecionado != null);
+            DeleteUserCommand = new RelayCommand(DeleteUser, () => EmpleadoSelecionado != null);
+        }
+
+        private void limparCampos()
+        {
+            SearchName = null;
+            SearchSurname = null;
+            SearchEmail = null;
+
+
+
+        }
+
+        public void EditUser()
+        {
+            if (EmpleadoSelecionado == null)
+               return;
+
+            PerfilUsuario p = new PerfilUsuario(EmpleadoSelecionado);
+
+            p.Show();
+        }
+
+        public async void DeleteUser()
+        {
+            if (EmpleadoSelecionado == null) return;
+
+            if (EmpleadoSelecionado.Email == null) return;
+
+            await apiService.EliminarUsuario(EmpleadoSelecionado.Email);
         }
 
         public ObservableCollection<EmpleadoModel> Empleados
@@ -42,66 +76,36 @@ namespace WpfAppIntermodular.ViewModels
             }
         }
 
-
-
-        /*private void EditUser()
+        public void FilterEmpleados()
         {
-            UsuarioModel x = (UsuarioModel)ListBoxCustomers.SelectedItem;
 
-            if (x == null)
-            {
-                System.Windows.MessageBox.Show("NULL");
-                return;
-            }
+            IEnumerable<EmpleadoModel> filteredEmpleados = Empleados;
 
-            System.Windows.MessageBox.Show($"{x.Name}  {x.Email}");
+            if (!string.IsNullOrEmpty(SearchName))
+                filteredEmpleados = filteredEmpleados.Where(e => e.Name.Contains(SearchName));
 
-            PerfilUsuario p = new PerfilUsuario(x);
-            p.Show();
-        }*/
+            if (!string.IsNullOrEmpty(SearchSurname))
+                filteredEmpleados = filteredEmpleados.Where(e => e.Surname.Contains(SearchSurname));
 
-        /*private async void DeleteUser()
-        {
-            if (SelecteUser == null )
-            {
-                return;
-            }
+            if (!string.IsNullOrEmpty(SearchEmail))
+                filteredEmpleados = filteredEmpleados.Where(e => e.Email.Contains(SearchEmail));
 
-            if (SelecteUser.Email == null)
-            {
-                return;
-            }
+            Empleados = new ObservableCollection<EmpleadoModel>(filteredEmpleados);
+        }
 
-            bool xx = await apiService.EliminarUsuario(SelecteUser.Email);
-
-            if (xx)
-            {
-                MessageBox.Show("TODO BIE>N");
-            } else
-            {
-                MessageBox.Show("AlGO FALLO");
-            }
-        }*/
-
-       
-
-        private async void showEmployee()
+        private async void ShowEmployee()
         {
             try
             {
                 List<EmpleadoModel> empleados = await apiService.GetEmployeeApi();
                 Empleados = new ObservableCollection<EmpleadoModel>(empleados);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error al mostrar empleados: {ex.Message}");
             }
-            
+
         }
-
-        
-
-       
 
         public string SearchName
         {
@@ -112,6 +116,7 @@ namespace WpfAppIntermodular.ViewModels
                 {
                     _searchName = value;
                     OnPropertyChanged(nameof(SearchName));
+                    FilterEmpleados();
                 }
             }
         }
@@ -125,6 +130,7 @@ namespace WpfAppIntermodular.ViewModels
                 {
                     _searchSurname = value;
                     OnPropertyChanged(nameof(SearchSurname));
+                    FilterEmpleados();
                 }
             }
         }
@@ -138,6 +144,7 @@ namespace WpfAppIntermodular.ViewModels
                 {
                     _searchEmail = value;
                     OnPropertyChanged(nameof(SearchEmail));
+                    FilterEmpleados();
                 }
             }
         }

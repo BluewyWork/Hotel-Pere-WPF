@@ -26,7 +26,7 @@ namespace WpfAppIntermodular
             InitializeComponent();
         }
 
-        public PerfilUsuario(UsuarioModel u)
+        public PerfilUsuario(EmpleadoModel u)
         {
             PerfilUsuarioVM r = new PerfilUsuarioVM(this);
             DataContext = r;

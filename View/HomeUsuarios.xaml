@@ -62,22 +62,22 @@
                 <DockPanel Margin="0 10">
                     <StackPanel Margin="10,10" Width="100">
                         <Label Content="Nombre" FontSize="16"/>
-                        <TextBox x:Name="NameTextBox" Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
+                        <TextBox x:Name="NameTextBox" Text="{Binding SearchName}" Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
                     </StackPanel>
                     <StackPanel Margin="10,10" Width="Auto">
                         <Label Content="Apellidos" FontSize="16"/>
-                        <TextBox x:Name="SurnameTextBox" Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
+                        <TextBox x:Name="SurnameTextBox" Text="{Binding SearchSurname}" Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
                     </StackPanel>
                 </DockPanel>
                 <StackPanel Margin="10,20" Width="Auto">
                     <Label Content="Email" FontSize="16"/>
-                    <TextBox x:Name="EmailTextBox" Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
+                    <TextBox x:Name="EmailTextBox" Text="{Binding SearchEmail}" Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
                 </StackPanel>
                 <DockPanel  Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40 10 20 10" >
                     <Button Margin="0 10 0 0"  Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" 
-                             Content="Buscar" Click="Button_Click"  >
+                             Content="Buscar" Command="{Binding FilterListCommand}"  >
                     </Button>
-                    <Button Style="{StaticResource ButtonStyle}" FontWeight="Bold" Margin="30 10 0 0" Foreground="#35B697" Background="Transparent" BorderBrush="#35B697" Content="Limpiar" Click="Button_Click_3" />
+                    <Button Style="{StaticResource ButtonStyle}" FontWeight="Bold" Margin="30 10 0 0" Foreground="#35B697" Background="Transparent" BorderBrush="#35B697" Content="Limpiar" Command="{Binding LimpiarCommand}" />
                 </DockPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button Style="{StaticResource ButtonStyle}" FontWeight="Bold" Margin="30 10 0 0" Foreground="#35B697" Background="Transparent" BorderBrush="#35B697" Content="Editar" Command="{Binding EditUserCommand}"  />

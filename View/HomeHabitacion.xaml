@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfAppIntermodular"
+        xmlns:local="clr-namespace:WpfAppIntermodular.rsc"
         mc:Ignorable="d" FontFamily="Montserrat"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
         Title="HomeHabitacion" Height="550" Width="800">
@@ -42,7 +42,6 @@
                                 <Image Height="25" Source="../perfil.png" Margin="10 0 0 10"/>
                             </StackPanel>
                         </MenuItem.Header>
-
                         <MenuItem Header="Editar Perfil" Click="Editar_Click"/>
                         <MenuItem Header="Crear Usuario" Click="CrearUsuario_Click"/>
                         <MenuItem Header="Crear Empleado" Click="CrearEmpleado_Click"/>
@@ -57,71 +56,93 @@
                 <ColumnDefinition Width="493*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid>
-                <StackPanel HorizontalAlignment="Left"  Orientation="Vertical" VerticalAlignment="Center" Height="436" Width="297" Margin="10,0,0,0">
+                <StackPanel   Height="436" Width="297" Margin="10,0,0,0">
                     <Label Style="{StaticResource LabelTitulo}" >Buscador:</Label>
-                    <StackPanel Orientation="Vertical" Margin="0 30 0 0">
-                        <Label>Número de Habitación</Label>
-                        <ComboBox Width="150" Margin="5 5 0 0" HorizontalAlignment="Left">
-                            <ComboBoxItem Background="White" IsSelected="True">101</ComboBoxItem>
-                            <ComboBoxItem Background="White">102</ComboBoxItem>
-                            <ComboBoxItem Background="White">103</ComboBoxItem>
-                        </ComboBox>
-                    </StackPanel>
-                    <StackPanel Margin="0 30 0 0">
-                        <Label>Caracteristicas</Label>
-                        <StackPanel Margin="5 0 0 0">
-                            <DockPanel Margin="0 10 0 0">
-                                <CheckBox>Cama sencilla</CheckBox>
-                                <CheckBox Margin="10 0 0 0">Cama Doble</CheckBox>
-                            </DockPanel>
-                            <DockPanel Margin="0 10 0 0">
-                                <CheckBox>Cuna</CheckBox>
-                                <CheckBox Margin="61 0 0 0">Sofá</CheckBox>
-                            </DockPanel>
+                    <StackPanel Width="195" >
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="FontSize" Value="16" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <StackPanel Margin="0 10 0 0" Width="190">
+                            <Label Content="Fecha de entrada" Width="182"/>
+                            <DatePicker SelectedDate= "{Binding CheckInBuscador, UpdateSourceTrigger=PropertyChanged}" Width="184" />
+                        </StackPanel>
+                        <StackPanel Margin="0 30 0 0" Width="198">
+                            <Label Content="Fecha de salida" Width="201" />
+                            <DatePicker SelectedDate= "{Binding CheckOutBuscador, UpdateSourceTrigger=PropertyChanged}" Height="26" Width="192"/>
+                        </StackPanel>
+                        <StackPanel Margin="0 30 0 50">
+                            <Label Content="Correo cliente"/>
+                            <TextBox Height="25">
+                                <Validation.ErrorTemplate>
+                                    <ControlTemplate>
+                                        <StackPanel>
+                                            <Border BorderThickness="2" BorderBrush="red" Margin="0 0 96 0">
+                                                <AdornedElementPlaceholder/>
+                                            </Border>
+                                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="red"  Margin="0 30 0 0"/>
+                                        </StackPanel>
+                                    </ControlTemplate>
+                                </Validation.ErrorTemplate>
+                                <Binding Path="CorreoClienteBuscador" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" StringFormat="{}{0:N2}">
+                                    <Binding.ValidationRules>
+                                        <local:ValidateEmail/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel Margin="0 30 0 0">
-                        <Label HorizontalAlignment="Left">¿Reservada?</Label>
-                        <DockPanel Margin="5 0 0 0">
-                            <RadioButton IsChecked="True" >Si</RadioButton>
-                            <RadioButton Margin="10 0 0 0" IsChecked="False" >No</RadioButton>
-                        </DockPanel>
-                    </StackPanel>
-                    <DockPanel Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"
-                               Margin="40 30 20 10" >
-                        <Button Style="{StaticResource ButtonStyle}" Command="{Binding BuscarHabitacionCommand}" Margin="0 10 0 0" Content="Buscar"/>
-
+                    <DockPanel Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left"
+                               Margin="40 30 20 10" Width="216" >
+                        <Button Style="{StaticResource ButtonStyle}" Command="{Binding BuscarReservaCommand}" Margin="0 10 0 0" Content="Buscar"/>
                         <Button Style="{StaticResource ButtonStyle}" Margin="30 10 0 0" Foreground="#35B697" FontWeight="Bold"
-                                Background="Transparent" BorderBrush="#35B697" BorderThickness="2" Content="Limpiar"/>
+                                Background="Transparent" BorderBrush="#35B697" BorderThickness="2" Content="Limpiar" Command="{Binding LimpiarReservaCommand}" Width="90"/>
                     </DockPanel>
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="73*"></RowDefinition>
-                    <RowDefinition Height="377*"></RowDefinition>
-
+                    <RowDefinition Height="22*"></RowDefinition>
+                    <RowDefinition Height="39*"></RowDefinition>
+                    <RowDefinition Height="164*"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Style="{StaticResource LabelTitulo}" Margin="37,9,-37,78" Grid.RowSpan="2">Resultados:</Label>
-                <ListBox Grid.Row="1" ItemsSource="{Binding Habitaciones}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <DockPanel Width="413" Height="76">
-                                <Image Source="{Binding Imagen}" Width="60"/>
-                                <StackPanel Margin="15 15 75 15">
-                                    <TextBlock Margin="0 5 0 0" HorizontalAlignment="Center" Text="{Binding Descripcion}"/>
-                                    <TextBlock Margin="0 5 0 0" FontSize="10" Foreground="#68EB9C" HorizontalAlignment="Center" Text="{Binding PrecioNoche}"/>
-                                </StackPanel>
-                                <Button Margin="0 5 0 0" Padding="10 0 10 0" Height="30" FontSize="10" Foreground="White"  
-                        HorizontalAlignment="Left" BorderBrush="Transparent" Background="#35B697" BorderThickness="2" VerticalAlignment="Center"
-                        Content="Editar habitación"/>
-                            </DockPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <Label Grid.Row="0" Style="{StaticResource LabelTitulo}" Margin="23,10,-23,77" Grid.RowSpan="3">Resultados:</Label>
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Reservas}" SelectedItem="{Binding ReservaSeleccionada}" MaxWidth="430" MaxHeight="330" Margin="-12,36,11,36" Grid.RowSpan="3">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nombre cliente" Binding="{Binding GuestName}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Correo cliente" Binding="{Binding GuestEmail}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Nº Hab" Binding="{Binding RoomNumber}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Precio noche" Binding="{Binding PricePerNight}" IsReadOnly="True"/>
+                        <DataGridTemplateColumn Header="CheckIn">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker SelectedDate="{Binding CheckIn, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="CheckOut">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker SelectedDate="{Binding CheckOut, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <DockPanel HorizontalAlignment="Right" Margin="0,262,16,4" Grid.Row="2" Width="245">
+                    <Button Content="Editar reserva" Background="Orchid"
+                            Style="{StaticResource ButtonStyle}" Margin="0 10 10 0" Width="110" Command="{Binding EditarReservaCommand}" />
+                    <Button Content="Eliminar reserva" 
+                            Style="{StaticResource ButtonStyle}" Background="Red" Margin="0 10 10 0" Width="110" Command="{Binding EliminarReservaCommand}" />
+                </DockPanel>
 
             </Grid>
         </Grid>
     </Grid>
-</Window>
+</Window>          
+                   
+                   
+                   
+                   

@@ -15,11 +15,13 @@ namespace WpfAppIntermodular.ViewModels
     {
         private ObservableCollection<HabitacionModel> _habitacionesHome;
         private ApiService apiService;
-        private bool? _reservadaBuscador = false;
         private int? _camasBuscador;
         private int[] _camasDisponibles= {1,2,3};
         private double? _precioNocheBuscador;
- 
+        private string? _checkInBuscador;
+        private string? _checkOutBuscador;
+
+
         private HabitacionModel _habitacionSeleccionada;
         private Home ventana;
         public ICommand EditarHabitacionCommand { get; }
@@ -61,19 +63,31 @@ namespace WpfAppIntermodular.ViewModels
                 }
             }
         }
-        public bool? ReservadaBuscador
+        public string? CheckInBuscador
         {
-            get { return _reservadaBuscador; }
+            get { return _checkInBuscador; }
             set
             {
-                if (_reservadaBuscador != value)
+                if (_checkInBuscador != value)
                 {
-                    _reservadaBuscador = value;
-                    OnPropertyChanged(nameof(ReservadaBuscador));
+                    _checkInBuscador = value;
+                    OnPropertyChanged(nameof(CheckInBuscador));
                 }
             }
         }
-        
+        public string? CheckOutBuscador
+        {
+            get { return _checkOutBuscador; }
+            set
+            {
+                if (_checkOutBuscador != value)
+                {
+                    _checkOutBuscador = value;
+                    OnPropertyChanged(nameof(CheckOutBuscador));
+                }
+            }
+        }
+
         public int? CamasBuscador
         {
             get { return _camasBuscador; }
@@ -135,7 +149,6 @@ namespace WpfAppIntermodular.ViewModels
                 }
             }
         }
-
         private async void MostrarHabitaciones()
         {
             try
@@ -159,14 +172,15 @@ namespace WpfAppIntermodular.ViewModels
         {
             CamasBuscador = null;
             PrecioNocheBuscador = null;
-            ReservadaBuscador= false;          
+            CheckInBuscador = null;
+            CheckOutBuscador=null;
         }
 
         private async void Buscar()
         {
             try
             {
-                List<HabitacionModel> habitaciones = await apiService.BuscarHabitaciones(ReservadaBuscador,PrecioNocheBuscador,CamasBuscador);
+                List<HabitacionModel> habitaciones = await apiService.BuscarHabitaciones(PrecioNocheBuscador,CamasBuscador, CheckInBuscador, CheckOutBuscador);
                 HabitacionesHome = new ObservableCollection<HabitacionModel>(habitaciones);
             }
             catch (Exception ex)

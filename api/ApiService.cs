@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows;
@@ -43,11 +42,11 @@ namespace wpfappintermodular.api
             }
         }
 
-        public async Task<bool> UpdateRoomApi(bool reserved, string section, int number, double pricePerNight, int beds, string image)
+        public async Task<bool> UpdateRoomApi(string description, int number, double pricePerNight, int beds)
         {
-            var data = new { number, section, pricePerNight, reserved, image, beds };
+            var data = new { number, description, pricePerNight, beds };
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
-            var response = await _httpClient.PutAsJsonAsync("/api/admin/room", data);
+            var response = await _httpClient.PutAsJsonAsync("/api/admin/room/update", data);
             var responseCode = response.EnsureSuccessStatusCode();
             if (responseCode.IsSuccessStatusCode)
             {
@@ -101,12 +100,13 @@ namespace wpfappintermodular.api
             }
         }
 
-        public async Task<bool> CreateRoomApi(string section, int number,
-            double pricePerNight, int beds, string image, bool reserved)
+        public async Task<bool> CreateRoomApi(string description, int number,
+            double pricePerNight, int beds)
         {
-            var data = new { number, section, pricePerNight, reserved, image, beds };
+            ReservedDays[] reservedDays = new ReservedDays[0];
+            var data = new { number, description, pricePerNight, beds, reservedDays };
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
-            var response = await _httpClient.PostAsJsonAsync("/api/admin/room", data);
+            var response = await _httpClient.PostAsJsonAsync("/api/admin/room/new", data);
 
             MessageBox.Show(response.ToString());
             if (!response.StatusCode.Equals("422"))
@@ -125,19 +125,20 @@ namespace wpfappintermodular.api
         public async Task<bool> DeleteRoomApi(int number)
         {
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
-            var response = await _httpClient.DeleteAsync($"/api/admin/room/{number}");
+            var response = await _httpClient.DeleteAsync($"/api/admin/room/delete/{number}");
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<List<HabitacionModel>> BuscarHabitaciones(bool? reservadaBuscador, double? precioBuscador, int? camasBuscador)
+        public async Task<List<HabitacionModel>> BuscarHabitaciones(double? precioBuscador, int? camasBuscador, string checkIn, string checkOut)
         {
             HttpClient h = new HttpClient();
             string longurl = _httpClient.BaseAddress + "api/admin/room/search?";
             var uriBuilder = new UriBuilder(longurl);
             var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-            if (camasBuscador != null) { query["bed"] = camasBuscador.ToString(); }
-            if (reservadaBuscador != null) { query["reserved"] = reservadaBuscador.ToString().ToLower(); }
-            if (precioBuscador != null) { query["price"] = precioBuscador.ToString(); }
+            if (camasBuscador != null) { query["beds"] = camasBuscador.ToString(); }
+            if (checkIn != null) { query["checkIn"] = checkIn.ToString(); }
+            if (checkOut != null) { query["checkOut"] = checkOut.ToString(); }
+            if (precioBuscador != null) { query["pricePerNight"] = precioBuscador.ToString(); }
             uriBuilder.Query = query.ToString();
             longurl = uriBuilder.ToString();
             List<HabitacionModel> habitaciones = new List<HabitacionModel>();
@@ -202,7 +203,7 @@ namespace wpfappintermodular.api
             uriBuilder.Query = query.ToString();
             longurl = uriBuilder.ToString();
             List<ReservasModel> reservas = new List<ReservasModel>();
-            //_httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+            _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
             var response = await _httpClient.GetAsync(longurl);
             if (response.IsSuccessStatusCode)
             {

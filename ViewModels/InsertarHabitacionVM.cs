@@ -152,11 +152,9 @@ namespace WpfAppIntermodular.ViewModels
             {
                 SelectedRoomNumber = habitacionSeleccionada.Number;
                 BedOptions = new int[] { 1, 2, 3 };
-                Reservada = habitacionSeleccionada.Reserved;
                 SelectedNumberOfBeds = habitacionSeleccionada.Beds;
                 RoomNumberOptions = listaNumeros;
                 PrecioNoche = habitacionSeleccionada.PricePerNight;
-                Descripcion = habitacionSeleccionada.Section;
                 IsEnable = false;
             }
         }
@@ -166,10 +164,10 @@ namespace WpfAppIntermodular.ViewModels
             apiService = new ApiService();
 
             bool actualizada = false;
-            if (Reservada.HasValue && SelectedRoomNumber.HasValue && PrecioNoche.HasValue && SelectedNumberOfBeds.HasValue)
+            if (SelectedRoomNumber.HasValue && PrecioNoche.HasValue && SelectedNumberOfBeds.HasValue)
             {
-                actualizada = await apiService.UpdateRoomApi(Reservada.Value, Descripcion, SelectedRoomNumber.Value,
-                    Math.Round(PrecioNoche.Value, 2), SelectedNumberOfBeds.Value, "urlImagen");
+                actualizada = await apiService.UpdateRoomApi( Descripcion, SelectedRoomNumber.Value,
+                    Math.Round(PrecioNoche.Value, 2), SelectedNumberOfBeds.Value);
                 if (actualizada)
                 {
                     Home home = new Home();
@@ -183,7 +181,7 @@ namespace WpfAppIntermodular.ViewModels
         {
             apiService = new ApiService();
             bool actualizada = await apiService.CreateRoomApi(Descripcion, (int)SelectedRoomNumber, Math.Round(PrecioNoche ?? 0, 2),
-                SelectedNumberOfBeds ?? 1, "url", (bool)Reservada);
+                SelectedNumberOfBeds ?? 1);
             if (actualizada)
             {
                 Home home = new Home();

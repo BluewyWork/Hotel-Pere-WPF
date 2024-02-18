@@ -10,13 +10,13 @@ namespace WpfAppIntermodular.Models
     {
 
         private string? __id;
-        private string? _customerName;
-        private string? _customerEmail;
+        private string? _guestName;
+        private string? _guestSurname;
+        private string? _guestEmail;
         private int? _roomNumber;
         private double? _pricePerNight;
-        private DateTime? _checkIn;
-        private DateTime? _checkOut;
-        private bool? _reserved;
+        private string? _checkIn;
+        private string? _checkOut;
 
         public string? _Id
         {
@@ -30,28 +30,28 @@ namespace WpfAppIntermodular.Models
                 }
             }
         }
-        public string? CustomerName
+        public string? GuestName
         {
-            get { return _customerName; }
+            get { return _guestName; }
             set
             {
-                if (_customerName != value)
+                if (_guestName != value)
                 {
-                    _customerName = value;
-                    OnPropertyChanged(nameof(CustomerName));
+                    _guestName = value;
+                    OnPropertyChanged(nameof(GuestName));
                 }
             }
         }
 
-        public string? CustomerEmail
+        public string? GuestEmail
         {
-            get { return _customerEmail; }
+            get { return _guestEmail; }
             set
             {
-                if (_customerEmail != value)
+                if (_guestEmail != value)
                 {
-                    _customerEmail = value;
-                    OnPropertyChanged(nameof(CustomerEmail));
+                    _guestEmail = value;
+                    OnPropertyChanged(nameof(GuestEmail));
                 }
             }
         }
@@ -82,7 +82,7 @@ namespace WpfAppIntermodular.Models
             }
         }
 
-        public DateTime? CheckIn
+        public string? CheckIn
         {
             get { return _checkIn; }
             set
@@ -94,7 +94,7 @@ namespace WpfAppIntermodular.Models
                 }
             }
         }
-        public DateTime? CheckOut
+        public string? CheckOut
         {
             get { return _checkOut; }
             set
@@ -103,19 +103,6 @@ namespace WpfAppIntermodular.Models
                 {
                     _checkOut = value;
                     OnPropertyChanged(nameof(CheckOut));
-                }
-            }
-        }
-
-        public bool? Reserved
-        {
-            get { return _reserved; }
-            set
-            {
-                if (_reserved != value)
-                {
-                    _reserved = value;
-                    OnPropertyChanged(nameof(Reserved));
                 }
             }
         }

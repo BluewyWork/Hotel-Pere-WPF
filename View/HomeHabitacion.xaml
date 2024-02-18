@@ -111,8 +111,8 @@
                 <Label Grid.Row="0" Style="{StaticResource LabelTitulo}" Margin="23,10,-23,77" Grid.RowSpan="3">Resultados:</Label>
                 <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Reservas}" SelectedItem="{Binding ReservaSeleccionada}" MaxWidth="430" MaxHeight="330" Margin="-12,36,11,36" Grid.RowSpan="3">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Nombre cliente" Binding="{Binding CustomerName}" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Correo cliente" Binding="{Binding CustomerEmail}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Nombre cliente" Binding="{Binding GuestName}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Correo cliente" Binding="{Binding GuestEmail}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Nº Hab" Binding="{Binding RoomNumber}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Precio noche" Binding="{Binding PricePerNight}" IsReadOnly="True"/>
                         <DataGridTemplateColumn Header="CheckIn">

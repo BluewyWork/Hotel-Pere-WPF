@@ -53,5 +53,11 @@ namespace WpfAppIntermodular
             mainWindow.Show();
             this.Close();
         }
+
+        private void Clientes_Click(object sender, RoutedEventArgs e)
+        {
+    
+
+        }
     }
 }

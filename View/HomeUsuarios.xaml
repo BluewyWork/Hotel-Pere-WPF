@@ -31,6 +31,8 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <Image Source="../logo_hotel_sin_fondo.png" Width="200px"></Image>
                 </StackPanel>
+             
+                <Button Style="{StaticResource ButtonStyleHeader}" x:Name="Clientes" Content="Clientes" Margin="25" Click="Clientes_Click"></Button>
                 <Button Style="{StaticResource ButtonStyleHeader}" Content="Usuarios"/>
                 <Button Style="{StaticResource ButtonStyleHeader}" Content="Habitaciones" x:Name="Reserva" Click="Reserva_Click"/>
                 <Button Style="{StaticResource ButtonStyleHeader}" Content="Reservas" x:Name="Habitaciones" Click="Habitaciones_Click"/>

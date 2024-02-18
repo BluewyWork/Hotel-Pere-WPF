@@ -51,5 +51,10 @@ namespace WpfAppIntermodular
             PerfilUsuario perfil = new PerfilUsuario();
             perfil.ShowDialog();
         }
+
+        private void Clientes_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

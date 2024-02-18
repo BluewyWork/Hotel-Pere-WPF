@@ -67,6 +67,26 @@ namespace wpfappintermodular.api
             }
         }
 
+        public async Task<List<UsuarioModel>> MostrarUsuarios()
+        {
+            List<UsuarioModel> usuarios = new List<UsuarioModel>();
+            _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+            var response = await _httpClient.GetAsync("/api/admin/tableGuest/all");
+            if (response.IsSuccessStatusCode)
+            {
+                string responseBody = await response.Content.ReadAsStringAsync();
+                dynamic result = JObject.Parse(responseBody);
+                JArray usuariosArray = result.data;
+                usuarios = JsonConvert.DeserializeObject<List<UsuarioModel>>(usuariosArray.ToString());
+                return usuarios;
+            }
+            else
+            {
+                MessageBox.Show("Error al mostrar los usuarios ", "Error");
+                return usuarios;
+            }
+        }
+
         public async Task<List<HabitacionModel>> MostrarHabitacionesApiAsync()
         {
             List<HabitacionModel> habitaciones = new List<HabitacionModel>();

@@ -141,11 +141,6 @@ namespace WpfAppIntermodular.ViewModels
                 if (borrada)
                 {
                     Reservas.Remove(ReservaSeleccionada);
-                    MessageBox.Show("La reserva se ha eliminado correctamente", "Ok");
-                }
-                else
-                {
-                    MessageBox.Show("No se ha podido eleminar", "Error");
                 }
             }
         }

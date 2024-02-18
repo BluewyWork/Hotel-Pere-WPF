@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -107,8 +108,6 @@ namespace wpfappintermodular.api
             var data = new { number, description, pricePerNight, beds, reservedDays };
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
             var response = await _httpClient.PostAsJsonAsync("/api/admin/room/new", data);
-
-            MessageBox.Show(response.ToString());
             if (!response.StatusCode.Equals("422"))
             {
 
@@ -197,15 +196,15 @@ namespace wpfappintermodular.api
             string longurl = _httpClient.BaseAddress + "api/admin/reservation/search?";
             var uriBuilder = new UriBuilder(longurl);
             var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-            if (checkInBuscador != null) { query["checkIn"] = checkInBuscador; }
-            if (checkOutBuscador != null) { query["checkOut"] = checkOutBuscador.Trim(); }
+            if (checkInBuscador != null) { query["checkIn"] = checkInBuscador.ToString(); }
+            if (checkOutBuscador != null) { query["checkOut"] = checkOutBuscador.ToString(); }
             if (correoClienteBuscador != null) { query["email"] = correoClienteBuscador; }
             uriBuilder.Query = query.ToString();
             longurl = uriBuilder.ToString();
             List<ReservasModel> reservas = new List<ReservasModel>();
-            _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+            h.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
             var response = await _httpClient.GetAsync(longurl);
-            if (response.IsSuccessStatusCode)
+            if (response.StatusCode == HttpStatusCode.OK)
             {
                 string responseBody = await response.Content.ReadAsStringAsync();
                 dynamic result = JObject.Parse(responseBody);
@@ -213,17 +212,28 @@ namespace wpfappintermodular.api
                 reservas = JsonConvert.DeserializeObject<List<ReservasModel>>(reservasArray.ToString());
                 return reservas;
             }
-            else
+            else if(response.StatusCode == HttpStatusCode.NotFound)
             {
-                MessageBox.Show("Error al mostrar las reservas ", "Error");
+                MessageBox.Show("No existen reservas con esos parametros ", "404", MessageBoxButton.OK, MessageBoxImage.Information);
                 return reservas;
             }
+            return reservas;
         }
         public async Task<bool> DeleteReservationApi(string? id)
         { 
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
             var response = await _httpClient.DeleteAsync($"/api/admin/reservation/delete/{id}");
-            return response.IsSuccessStatusCode;
+            if (response.StatusCode==HttpStatusCode.OK)
+            {
+
+                MessageBox.Show("La reserva se ha eliminado correctamente", "OK", MessageBoxButton.OK, MessageBoxImage.Information);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Error al eliminar la reserva", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
         }
         public async Task<bool> GuardarReservaApi(ReservasModel nuevaReserva)
         {
@@ -231,39 +241,44 @@ namespace wpfappintermodular.api
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
             var response = await _httpClient.PostAsJsonAsync("$/api/admin/reservation/create/{id}", data);
             MessageBox.Show(response.ToString());
-            if (response.StatusCode.Equals("200"))
+            if (response.StatusCode==HttpStatusCode.OK)
             {
 
-                MessageBox.Show("La reserva se ha creado correctamente", "Ok");
+                MessageBox.Show("La reserva se ha creado correctamente", "OK", MessageBoxButton.OK, MessageBoxImage.Information);
                 return true;
             }
             else
             {
-                MessageBox.Show("Error al crear la reserva", "Error");
+                MessageBox.Show("Error al crear la reserva", "Error",  MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
         }
         public async Task<bool> EditarReservaApi(ReservasModel reserva )
         {
+            string[] checkInArray = reserva.CheckIn.Split("T");
+            string checkIn = checkInArray[0];
+            string[] checkOutArray = reserva.CheckOut.Split("T");
+            string checkOut = checkOutArray[0];
+
             var data = new
             {
-                reserva.CheckIn,
-                reserva.CheckOut
+                checkIn,
+                checkOut
             };
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
-            var response = await _httpClient.PostAsJsonAsync($"api/admin/reservation/update{reserva._Id}", data);
+            var response = await _httpClient.PutAsJsonAsync($"api/admin/reservation/update/{reserva._Id}", data);
 
             MessageBox.Show(response.ToString());
-            if (!response.StatusCode.Equals("422"))
+            if (response.StatusCode== HttpStatusCode.OK)
             {
 
-                MessageBox.Show("La reserva se ha acctualizado correctamente", "Ok");
+                MessageBox.Show("La reserva se ha acctualizado correctamente", "OK", MessageBoxButton.OK, MessageBoxImage.Information);
                 return true;
             }
             else
             {
-                MessageBox.Show("Error al actualizar la reserva", "Error");
+                MessageBox.Show("Error al actualizar la reserva", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 

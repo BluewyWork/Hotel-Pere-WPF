@@ -150,7 +150,8 @@ namespace WpfAppIntermodular.ViewModels
             CheckInBuscador = null;
             CheckOutBuscador = null;
             CorreoClienteBuscador = null;
-          
+
+            MostrarReservas();
         }
 
         private async void BuscarReserva()

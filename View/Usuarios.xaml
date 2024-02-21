@@ -60,7 +60,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <DockPanel >
-                            <Image Source="{Binding Image}" Width="80" ></Image>
+                            <Image Source="{Binding Image}" Width="50" Height="50" ></Image>
                             <StackPanel>
                                 <Label Content="Nombre empleado" Style="{StaticResource labelReservas}"/>
                                 <TextBox Text="{Binding Name}" Style="{StaticResource TBMain}"/>

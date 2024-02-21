@@ -294,6 +294,8 @@ namespace WpfAppIntermodular.ViewModels
             PrecioNocheBuscador = null;
             CheckInBuscador = null;
             CheckOutBuscador=null;
+            MostrarHabitaciones();
+
         }
 
         private async void Buscar()

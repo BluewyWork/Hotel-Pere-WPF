@@ -252,7 +252,18 @@ namespace wpfappintermodular.api
             var data = new { nuevaReserva.RoomNumber, nuevaReserva.GuestName, nuevaReserva.GuestSurname, nuevaReserva.GuestEmail, nuevaReserva.PricePerNight, nuevaReserva.CheckIn, nuevaReserva.CheckOut };
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
             var response = await _httpClient.PostAsJsonAsync("/api/admin/reservation/create", data);
-            MessageBox.Show(response.ToString());
+
+            if(response.StatusCode == HttpStatusCode.Conflict)
+            {
+                MessageBox.Show("La habitacion ya esta reservada", "Error");
+            }
+
+            if (response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                MessageBox.Show("Algunos datos son errroneos", "Error");
+            }
+            
+         
             if (response.StatusCode == HttpStatusCode.Created)
             {
 

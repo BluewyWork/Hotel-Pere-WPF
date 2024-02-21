@@ -121,8 +121,6 @@
                     <Label Content="Numero de Habitacion"/>
                     <TextBox x:Name="NumeroHabitacion" Text="{Binding RoomNumber}" Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
 
-                    <Label Content="Precio por noche"/>
-                    <TextBox x:Name="PrecioNoche" Text="{Binding PricePerNight}" Padding="2" Height="30" FontSize="16" BorderThickness="1" BorderBrush="LightGray"/>
 
                     <Label Content="CheckIn" />
                     <DatePicker x:Name="CheckIn" SelectedDate="{Binding CheckIn}" Padding="2" Height="20" FontSize="14" BorderThickness="1" BorderBrush="LightGray"/>
@@ -130,7 +128,7 @@
                     <Label Content="CheckOut" />
                     <DatePicker x:Name="CheckOut" SelectedDate="{Binding CheckOut}" Padding="2" Height="20" FontSize="14" BorderThickness="1" BorderBrush="LightGray"/>
 
-                    <Button Style="{StaticResource ButtonStyle}" Margin="0 10 0 0" Command="{Binding CreateBookingCommand}" Content="Crear habitación"/>
+                    <Button Style="{StaticResource ButtonStyle}" Margin="0 10 0 0" Command="{Binding CreateBookingCommand}" Content="Crear reserva"/>
                 </StackPanel>
 
             </StackPanel>

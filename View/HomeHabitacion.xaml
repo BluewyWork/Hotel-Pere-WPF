@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfAppIntermodular.rsc"
         mc:Ignorable="d" FontFamily="Montserrat"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Title="HomeHabitacion" Height="550" Width="800">
+        Title="HomeHabitacion" Height="900" Width="900">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
@@ -57,7 +57,7 @@
                 <ColumnDefinition Width="493*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid>
-                <StackPanel   Height="436" Width="297" Margin="10,0,0,0">
+                <StackPanel   Height="436" Width="297" Margin="10,0,0,330">
                     <Label Style="{StaticResource LabelTitulo}" >Buscador:</Label>
                     <StackPanel Width="195" >
                         <StackPanel.Resources>
@@ -110,7 +110,7 @@
                     <RowDefinition Height="164*"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Style="{StaticResource LabelTitulo}" Margin="23,10,-23,77" Grid.RowSpan="3">Resultados:</Label>
-                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Reservas}" SelectedItem="{Binding ReservaSeleccionada}" MaxWidth="430" MaxHeight="330" Margin="-12,36,11,36" Grid.RowSpan="3">
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Reservas}" SelectedItem="{Binding ReservaSeleccionada}" MaxHeight="500" Margin="0 0 10 180" Grid.RowSpan="3" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Nombre cliente" Binding="{Binding GuestName}" IsReadOnly="True" />
                         <DataGridTextColumn Header="Correo cliente" Binding="{Binding GuestEmail}" IsReadOnly="True"/>
@@ -132,7 +132,7 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <DockPanel HorizontalAlignment="Right" Margin="0,262,16,4" Grid.Row="2" Width="245">
+                <DockPanel HorizontalAlignment="Right" Margin="0,348,0,150" Grid.Row="2" Width="245">
                     <Button Content="Editar reserva" Background="Orchid"
                             Style="{StaticResource ButtonStyle}" Margin="0 10 10 0" Width="110" Command="{Binding EditarReservaCommand}" />
                     <Button Content="Eliminar reserva" 

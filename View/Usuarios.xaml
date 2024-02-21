@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         FontFamily="Montserrat"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Title="Usuarios" Height="550" Width="800">
+        Title="Usuarios" Height="900" Width="900">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
@@ -28,6 +28,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            
+
             <DockPanel Grid.ColumnSpan="2">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <Image Source="../logo_hotel_sin_fondo.png" Width="200px"></Image>
@@ -53,15 +55,28 @@
             </DockPanel>
         </Grid>
         <Grid Grid.Row="1">
-            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Usuarios}" MaxWidth="430" MaxHeight="330" Margin="-12,36,11,36" Grid.RowSpan="3">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Apellido" Binding="{Binding Surname}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Correo" Binding="{Binding Email}" IsReadOnly="True">
-                    </DataGridTextColumn>
-                </DataGrid.Columns>
-                
-            </DataGrid>
+            <Label  Margin ="0 0 0 0" FontSize="30" FontWeight="Bold" Foreground="#35B697" >Clientes:</Label>
+            <ListBox x:Name="ListBoxCustomers"  Margin="10,35,21,265"    ItemsSource="{Binding Usuarios}" MaxHeight="700" Grid.RowSpan="2" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel >
+                            <Image Source="{Binding Image}" Width="80" ></Image>
+                            <StackPanel>
+                                <Label Content="Nombre empleado" Style="{StaticResource labelReservas}"/>
+                                <TextBox Text="{Binding Name}" Style="{StaticResource TBMain}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label Content="Apellido empleado" Style="{StaticResource labelReservas}"/>
+                                <TextBox Text="{Binding Surname}" Style="{StaticResource TBMain}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label Content="Correo empleado" Style="{StaticResource labelReservas}"/>
+                                <TextBox Text="{Binding Email}" Style="{StaticResource TBMain}"/>
+                            </StackPanel>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
 </Window>

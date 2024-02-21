@@ -303,6 +303,7 @@ namespace WpfAppIntermodular.ViewModels
             try
             {
                 List<HabitacionModel> habitaciones = await apiService.BuscarHabitaciones(PrecioNocheBuscador,CamasBuscador, CheckInBuscador, CheckOutBuscador);
+
                 HabitacionesHome = new ObservableCollection<HabitacionModel>(habitaciones);
             }
             catch (Exception ex)

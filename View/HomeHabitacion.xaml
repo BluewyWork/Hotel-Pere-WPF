@@ -32,7 +32,7 @@
                     <Image Source="../logo_hotel_sin_fondo.png" Width="200px"></Image>
                 </StackPanel>
                 <Button Style="{StaticResource ButtonStyleHeader}" x:Name="Clientes" Content="Clientes" Margin="25" Click="Clientes_Click"></Button>
-                <Button Style="{StaticResource ButtonStyleHeader}" x:Name="Usuarios" Content="Usuarios" Margin="25" Click="Usuarios_Click"></Button>
+                <Button Style="{StaticResource ButtonStyleHeader}" x:Name="Usuarios" Content="Empleados" Margin="25" Click="Usuarios_Click"></Button>
                 <Button Style="{StaticResource ButtonStyleHeader}" x:Name="Reservas" Content="Habitaciones" Click="Reserva_Click" ></Button>
                 <Button Style="{StaticResource ButtonStyleHeader}" Content="Reservas" ></Button>
                 <Menu Width="180" Background="Transparent" Margin="100 35 0 0">

@@ -147,7 +147,20 @@ namespace wpfappintermodular.api
             }
         }
 
-        
+        public async Task CreateEmployee(EmpleadoModel empleado)
+        {
+            var data = new { empleado.Name, empleado.Surname, empleado.Admin, empleado.Password, empleado.Email, empleado.Image };
+            _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
+            var response = await _httpClient.PostAsJsonAsync("/auth/employee/register", data);
+            if (response.StatusCode == HttpStatusCode.Created)
+            {
+                MessageBox.Show("El empleado se ha creado correctamente", "Ok");
+            }
+            else
+            {
+                MessageBox.Show("Error al crear el empleado", "Error");
+            }
+        }
 
         public async Task<bool> DeleteRoomApi(int number)
         {
@@ -256,24 +269,28 @@ namespace wpfappintermodular.api
             if(response.StatusCode == HttpStatusCode.Conflict)
             {
                 MessageBox.Show("La habitacion ya esta reservada", "Error");
+                return;
             }
 
             if (response.StatusCode == HttpStatusCode.BadRequest)
             {
                 MessageBox.Show("Algunos datos son errroneos", "Error");
+                return;
+
             }
-            
-         
+
+
             if (response.StatusCode == HttpStatusCode.Created)
             {
 
                 MessageBox.Show("La reserva se ha creado correctamente", "OK", MessageBoxButton.OK);
-                
+                return;
             }
             else
             {
                 MessageBox.Show("Error al crear la reserva", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                
+                return;
+
             }
 
         }

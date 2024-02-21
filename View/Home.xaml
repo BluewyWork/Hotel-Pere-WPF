@@ -43,8 +43,6 @@
                                 <Image Height="25" Source="../perfil.png" Margin="10 0 0 10"/>
                             </StackPanel>
                         </MenuItem.Header>
-                        <MenuItem Header="Editar Perfil" Click="Editar_Click"/>
-                        <MenuItem Header="Crear Usuario" Click="CrearUsuario_Click"/>
                         <MenuItem Header="Crear Empleado" Click="CrearEmpleado_Click"/>
                         <MenuItem Header="Cerrar Sesión" Click="Cerrar_Click"/>
                     </MenuItem>

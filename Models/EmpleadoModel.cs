@@ -13,6 +13,10 @@ namespace WpfAppIntermodular.Models
         private string? _image;
         private string? _email;
 
+        public EmpleadoModel()
+        {
+        }
+
         public string? Surname
         {
             get { return _surname; }

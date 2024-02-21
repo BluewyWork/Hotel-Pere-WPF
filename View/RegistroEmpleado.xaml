@@ -26,23 +26,33 @@
             <StackPanel>
                 <StackPanel Margin="40,20">
                     <Label Content="Nombre" FontSize="16"/>
-                    <TextBox Style="{StaticResource TextBoxForm}" Padding="2"/>
+                    <TextBox Style="{StaticResource TextBoxForm}"  Padding="2" Text="{Binding NameEmployee}"  />
                 </StackPanel>
                 <StackPanel Margin="40,20">
                     <Label Content="Apellidos" FontSize="16"/>
-                    <TextBox Padding="2" Style="{StaticResource TextBoxForm}"/>
+                    <TextBox Padding="2" Style="{StaticResource TextBoxForm}" Text="{Binding SurnameEmployee}" />
                 </StackPanel>
-                <StackPanel Margin="40,20">
+                <StackPanel Margin="40,0">
                     <Label Content="Email" FontSize="16"/>
-                    <TextBox Padding="2" Style="{StaticResource TextBoxForm}"/>
+                    <TextBox Padding="2" Style="{StaticResource TextBoxForm}" Text="{Binding EmailEmployee}" />
+                </StackPanel>
+                <StackPanel Margin="40,0">
+                    <Label Content="Imagen" FontSize="16"/>
+                    <TextBox Style="{StaticResource TextBoxForm}"  Text="{Binding ImageEmployee}"  />
+                </StackPanel>
+                <StackPanel  Margin="40,20">
+                    <Label>Password</Label>
+                    <TextBox Padding="2" Style="{StaticResource TextBoxForm}" Text="{Binding PasswordEmployee}"/>
+                </StackPanel>
+                <StackPanel>
+                    <CheckBox Content="Administrador" Margin="40,20" FontSize="16" IsChecked="{Binding AdminEmployee }"/>
                 </StackPanel>
             </StackPanel>
         </Border>
         <DockPanel Grid.Row="2" Margin="40 0 40 0">
             <Button  Style="{StaticResource ButtonStyle}" x:Name="Atras" Margin="0 5 20 10" Padding="10 0 10 0" 
                     Width="130" Background="Red" Content="Atras" Click="Atras_Click"  />
-            <Button Style="{StaticResource ButtonStyle}" x:Name="btnRegistrarEmpleado" HorizontalAlignment="Right"
-                    Margin="0 5 0 10" Padding="10 0 10 0" Width="130" Content="Registrar empleado" />
+            <Button Command="{Binding CrearEmpleado}" Style="{StaticResource ButtonStyle}" x:Name="btnRegistrarEmpleado" HorizontalAlignment="Right" Margin="0 5 0 10" Padding="10 0 10 0" Width="130" Content="Registrar empleado"    />
         </DockPanel>
     </Grid>
 </Window>

@@ -17,7 +17,7 @@ namespace WpfAppIntermodular.ViewModels
         {
             this.view = view;
             apiService = new ApiService(); 
-            //GuardarCommand = new RelayCommand(Guardar);
+            GuardarCommand = new RelayCommand(Guardar);
         }
 
         public ICommand GuardarCommand { get; }
@@ -26,17 +26,8 @@ namespace WpfAppIntermodular.ViewModels
          
         private async void Guardar()
         {
-            System.Windows.MessageBox.Show("EN METODO GUARDAR");
-            bool x = await apiService.UpdateEmployee(view.VName.Text, view.VSurname.Text, view.VEmail.Text, "");
-
-            if (x)
-            {
-                System.Windows.MessageBox.Show("TODO BIEN");
-            } else
-            {
-                System.Windows.MessageBox.Show("ALGO FALLO");
-            }
             
+             await apiService.UpdateEmployee(view.VName.Text, view.VSurname.Text, view.VEmail.Text);
         }
 
    

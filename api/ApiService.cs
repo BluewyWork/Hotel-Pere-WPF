@@ -214,22 +214,27 @@ namespace wpfappintermodular.api
                 return null;
             }
         }
-        public async Task<Boolean> UpdateEmployee(string name, string surname, string email, string password)
+        public async Task UpdateEmployee(string name, string surname, string email)
         {
 
-            var data = new {name, surname, email, password};
+            var data = new {name, surname, email};
             _httpClient.DefaultRequestHeaders.Add("Cookie", Settings1.Default.JWTTokenCookie);
-            var response = await _httpClient.PutAsJsonAsync("", data);
-            var responseCode = response.EnsureSuccessStatusCode();
-            if (responseCode.IsSuccessStatusCode)
+            var response = await _httpClient.PutAsJsonAsync("/api/admin/employee", data);
+
+            var responseCode = response.StatusCode;
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                MessageBox.Show("No tienes permisos para realizar esta acción", "Error");
+            }
+            
+            if (responseCode == HttpStatusCode.OK)
             {
                 MessageBox.Show("El usuario se ha actualizado correctamente", "Ok");
-                return true;
             }
             else
             {
                 MessageBox.Show("El usuario no se ha podido actualizar", "Error");
-                return false;
             }
         }
 

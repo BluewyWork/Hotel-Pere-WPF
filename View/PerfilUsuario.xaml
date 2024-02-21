@@ -38,7 +38,7 @@
                 </StackPanel>
                 <StackPanel Margin="40,20">
                     <Label Content="Email" FontSize="16"/>
-                    <TextBox x:Name="VEmail" Style="{StaticResource TextBoxForm}" Padding="2" />
+                    <TextBox IsEnabled="False" x:Name="VEmail" Style="{StaticResource TextBoxForm}" Padding="2" />
                 </StackPanel>
             </StackPanel>
         </Border>
